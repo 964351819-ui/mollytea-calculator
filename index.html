@@ -138,6 +138,9 @@
   .brk .bl.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:6px;color:var(--ink);font-weight:600}
   .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:24px;line-height:1.7}
   .disclaimer-note{display:block;max-width:980px;margin:7px auto 0;color:var(--sub);font-size:11px;line-height:1.65;opacity:.78}
+  .foot-note{max-width:1200px;margin:0 auto 6px;text-align:center}
+  .foot-note>summary{display:inline-block}
+  .foot-note-body{margin-top:7px;line-height:1.7}
 
   /* 模式切换 + 主题切换 */
   .modebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
@@ -583,14 +586,9 @@
   .margin{margin-top:8px;text-align:right;font-size:12.5px;color:var(--sub)}
   .margin b{font-weight:800}
   .margin b.good{color:var(--good)}.margin b.mid{color:var(--amber)}.margin b.bad{color:var(--warn)}
-  /* 完整版模块布局：三个区块可换序、可调整宽度，布局会记住 */
-  .full-layout-tip{font-size:12px;color:var(--sub);margin:0 0 10px;display:flex;justify-content:flex-end;align-items:center;gap:7px;min-height:30px}
-  .full-layout-tip .layout-note{margin-right:auto}
-  .layout-action{font:inherit;font-size:12px;color:var(--sub);background:transparent;border:1px solid var(--line);border-radius:7px;padding:5px 9px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
-  .layout-action:hover{color:var(--accent);border-color:var(--accent);background:var(--glow)}
-  .layout-action.layout-ok{color:var(--good);border-color:var(--good)}
+  /* 完整版固定三模块布局 */
   .full-modules{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;align-items:start}
-  .full-module{grid-column:span var(--module-span,12);position:relative;min-width:0;height:var(--module-height,auto);order:var(--module-order,0)}
+  .full-module{grid-column:span var(--module-span,12);min-width:0}
   .full-module>.card,.full-module>.results{margin-bottom:0}
   .full-module:not(.result-module)>.card{height:100%}
   .full-module.result-module{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:14px}
@@ -613,13 +611,9 @@
   .full-module[data-module="activity"] .activity-payments input.readout{font-size:19px}
   .full-module.result-module .verdict{margin-top:10px}
   .full-module.result-module .listbtn{margin-top:12px;margin-bottom:0}
-  .module-handle{position:absolute;z-index:2;right:10px;top:10px;width:26px;height:26px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--sub);font:16px/1 inherit;cursor:grab;opacity:.45;transition:opacity .15s,color .15s,border-color .15s}
-  .full-module:hover .module-handle,.module-handle:focus{opacity:1}.module-handle:hover{color:var(--accent);border-color:var(--accent)}.module-handle:active{cursor:grabbing}
-  .module-resizer{position:absolute;z-index:3;right:6px;bottom:6px;width:24px;height:24px;display:grid;place-items:center;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--sub);font-size:14px;line-height:1;cursor:nwse-resize;opacity:.55}
-  .full-module:hover .module-resizer{opacity:.8}.full-module.module-dragging{opacity:.45}.full-module.module-drop{outline:2px dashed var(--accent);outline-offset:3px}
   @media(min-width:981px){.full-module[data-module="params"]{--module-span:7}.full-module[data-module="activity"]{--module-span:5}.full-module[data-module="results"]{--module-span:12}}
   @media(min-width:981px){body:not(.exec) .wrap{max-width:min(97vw,1480px)}}
-  @media(max-width:980px){.full-layout-tip,.module-handle,.module-resizer{display:none}.full-modules{display:block}.full-module{margin-bottom:14px}.full-module:last-child{margin-bottom:0}.full-module[data-module="activity"] .acts{display:grid;grid-template-columns:1fr;grid-template-rows:none}.full-module[data-module="activity"] .act{height:auto}}
+  @media(max-width:980px){.full-modules{display:block}.full-module{margin-bottom:14px}.full-module:last-child{margin-bottom:0}.full-module[data-module="activity"] .acts{display:grid;grid-template-columns:1fr;grid-template-rows:none}.full-module[data-module="activity"] .act{height:auto}}
   @media(max-width:620px){.activity-payments{grid-template-columns:1fr}}
   /* 汇总版：成本 / 毛利率 列 */
   .exec-table td.tcost{color:var(--ink);font-weight:600;text-align:right}
@@ -720,15 +714,8 @@
     </div>
   </div>
 
-  <div class="full-layout-tip">
-    <span class="layout-note">布局：拖动模块右上角手柄换位置；拖动右下角斜线调整宽高</span>
-    <button id="saveLayoutTemplate" class="layout-action" type="button">保存为模板</button>
-    <button id="applyLayoutTemplate" class="layout-action" type="button">应用模板</button>
-    <button id="resetFullLayout" class="layout-action" type="button">恢复默认</button>
-  </div>
   <div id="fullModules" class="full-modules">
   <section class="full-module" data-module="params">
-    <button class="module-handle" type="button" draggable="true" title="拖动订单参数模块">⠿</button><span class="module-resizer" title="拖动调整模块宽高">⤢</span>
   <div class="card">
     <h2>订单参数</h2>
     <div class="grid" style="grid-template-columns:2fr 1fr;margin-bottom:14px">
@@ -799,7 +786,6 @@
 
   </section>
   <section class="full-module" data-module="activity">
-    <button class="module-handle" type="button" draggable="true" title="拖动活动成本模块">⠿</button><span class="module-resizer" title="拖动调整模块宽高">⤢</span>
   <div class="card">
     <h2>活动成本（商家出资 · 可叠加 · 金额可改）</h2>
     <div class="acts">
@@ -849,7 +835,6 @@
 
   </section>
   <section class="full-module result-module" data-module="results">
-    <button class="module-handle" type="button" draggable="true" title="拖动渠道结果模块">⠿</button><span class="module-resizer" title="拖动调整模块宽高">⤢</span>
   <div class="results">
     <div class="plat" id="platMT">
       <div class="phead mt">美团</div>
@@ -998,11 +983,16 @@
   </div>
 
   <div class="foot">
-    渠道口径：可单独选择直营、代理；同时勾选时，汇总版将直营统一展示在上方、代理统一展示在下方。到手率 = 到手价 ÷（外卖原价 + 打包费）。<br>
-    淘宝直营技术服务费：默认按成交价×7%×0.75计算，不设保底；费率可在订单参数中自定义。该板块因城定价，存在个体差异。<br>
-    美团代理配送费按 66 折、封顶成交价×40%；淘宝直营 75 折；淘宝代理运营服务费 18% 全包。<br>
-    折扣：成交价 = 原价×折扣，平台抽佣/客单加价按成交价算，折扣差价与活动出资均从到手价扣除；到手率分母 = 外卖原价 + 打包费。<br>
-    <span id="calcVersionStamp">计算口径 v3.0.4 · 更新于 2026-08-11</span>
+    <details class="calc-note foot-note">
+      <summary>计算口径说明</summary>
+      <div class="foot-note-body">
+        渠道口径：可单独选择直营、代理；同时勾选时，汇总版将直营统一展示在上方、代理统一展示在下方。到手率 = 到手价 ÷（外卖原价 + 打包费）。<br>
+        淘宝直营技术服务费：默认按成交价×7%×0.75计算，不设保底；费率可在订单参数中自定义。该板块因城定价，存在个体差异。<br>
+        美团代理配送费按 66 折、封顶成交价×40%；淘宝直营 75 折；淘宝代理运营服务费 18% 全包。<br>
+        折扣：成交价 = 原价×折扣，平台抽佣/客单加价按成交价算，折扣差价与活动出资均从到手价扣除；到手率分母 = 外卖原价 + 打包费。
+      </div>
+    </details>
+    <span id="calcVersionStamp">计算口径 v3.0.5 · 更新于 2026-08-11</span>
     <span class="disclaimer-note">免责声明：本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据。平台费率、活动规则及城市政策可能变化，请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</span>
   </div>
 </div>
@@ -1110,13 +1100,13 @@
 
         <section class="manual-section" id="manual-features">
           <h3>8. 功能清单</h3>
-          <div class="manual-tags"><span>亮色/深色模式</span><span>8 种主题色</span><span>自定义背景</span><span>导出分享版</span><span>完整版模块拖动与缩放</span><span>折扣/折后价切换</span><span>自动活动档位</span><span>费用明细</span><span>快速测算</span><span>批量导入产品</span><span>项目夹方案对比</span><span>测算校验中心</span><span>口径版本记录</span><span>显示列控制</span><span>列顺序调整</span><span>产品行排序</span><span>复制表格</span><span>XLSX 深度分析</span><span>导出 PDF</span><span>项目夹快照</span><span>项目搜索与排序</span><span>项目内实时编辑</span><span>手机/电脑响应式布局</span><span>本地自动保存</span></div>
+          <div class="manual-tags"><span>亮色/深色模式</span><span>8 种主题色</span><span>自定义背景</span><span>导出分享版</span><span>折扣/折后价切换</span><span>自动活动档位</span><span>费用明细</span><span>快速测算</span><span>批量导入产品</span><span>项目夹方案对比</span><span>测算校验中心</span><span>口径版本记录</span><span>显示列控制</span><span>列顺序调整</span><span>产品行排序</span><span>复制表格</span><span>XLSX 深度分析</span><span>导出 PDF</span><span>项目夹快照</span><span>项目搜索与排序</span><span>项目内实时编辑</span><span>手机/电脑响应式布局</span><span>本地自动保存</span></div>
           <h4>推荐工作流</h4><ol><li>在完整版建立标准参数；产品较多时下载模板并批量导入。</li><li>在汇总版运行“测算校验”，先修正阻断问题，再处理复核提醒。</li><li>将确认中的清单保存为方案，调整价格、折扣或活动后在项目夹进行对比。</li><li>确认方案后存入项目夹，复制业务表格或导出分析表格。</li></ol>
         </section>
 
         <section class="manual-section" id="manual-data">
           <h3>9. 数据保存、分享与导出</h3>
-          <ul><li><b>本地保存：</b>输入、产品清单、项目夹、方案、主题和布局保存在当前浏览器本机，不会自动上传。</li><li><b>批量导入：</b>CSV/TSV 可离线读取；XLSX/XLS 需要联网加载 Excel 解析组件。导入前会先预览，确认后才追加。</li><li><b>方案记录：</b>从项目夹进入方案对比；保存产品清单、平台和渠道口径，可随时恢复，对比结果同时标记当前计算版本。</li><li><b>发送原 HTML：</b>接收者得到的是发送当时的文件版本；你以后继续修改自己的文件，对方不会自动更新。</li><li><b>导出分享版：</b>会绑定导出时的主题色和当前自定义背景，接收者直接打开即可看到相同视觉。</li><li><b>复制表格：</b>输出制表符格式，可直接粘贴到 Excel、飞书表格等工具。</li><li><b>分析表格：</b>输出 XLSX，包含明细、汇总、平台对比、标签和经营诊断等分析内容。</li><li><b>项目夹：</b>保存的是当前清单快照；每个项目的显示列和渠道选择独立，不应影响其他项目。</li><li><b>口径版本：</b>工具底部及本说明书最下方显示当前版本。以后调整费率、档位、公式或功能时，说明书与更新记录必须同步修改。</li></ul>
+          <ul><li><b>本地保存：</b>输入、产品清单、项目夹、方案和主题等偏好保存在当前浏览器本机，不会自动上传。</li><li><b>批量导入：</b>CSV/TSV 可离线读取；XLSX/XLS 需要联网加载 Excel 解析组件。导入前会先预览，确认后才追加。</li><li><b>方案记录：</b>从项目夹进入方案对比；保存产品清单、平台和渠道口径，可随时恢复，对比结果同时标记当前计算版本。</li><li><b>发送原 HTML：</b>接收者得到的是发送当时的文件版本；你以后继续修改自己的文件，对方不会自动更新。</li><li><b>导出分享版：</b>会绑定导出时的主题色和当前自定义背景，接收者直接打开即可看到相同视觉。</li><li><b>复制表格：</b>输出制表符格式，可直接粘贴到 Excel、飞书表格等工具。</li><li><b>分析表格：</b>输出 XLSX，包含明细、汇总、平台对比、标签和经营诊断等分析内容。</li><li><b>项目夹：</b>保存的是当前清单快照；每个项目的显示列和渠道选择独立，不应影响其他项目。</li><li><b>口径版本：</b>工具底部及本说明书最下方显示当前版本。以后调整费率、档位、公式或功能时，说明书与更新记录必须同步修改。</li></ul>
         </section>
 
         <section class="manual-section" id="manual-notice">
@@ -3323,11 +3313,13 @@ function editInFull(p){
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ===== 完整版模块布局：拖动换序、右下角调整宽度 =====
-// v2：清除旧版尺寸记录，避免早期拖动留下的过大高度造成空白。
+// ===== 完整版固定三模块布局 =====
+// 保留历史函数名以兼容旧版本调用，但不再读取或应用用户自定义布局。
 const FULL_LAYOUT_STORE = "daoshoulv_full_module_layout_v2";
 const FULL_LAYOUT_TEMPLATE_STORE = "daoshoulv_full_module_layout_template_v1";
 function initFullModuleLayout(){
+  return;
+  /* 旧版布局逻辑保留在历史代码结构中，不再执行。 */
   const box = $("fullModules");
   if(!box || box._layoutBound) return;
   box._layoutBound = true;
@@ -3440,9 +3432,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.4";
+const CALC_VERSION = "v3.0.5";
 const CALC_UPDATED = "2026-08-11";
 const CALC_CHANGELOG = [
+  {version:"v3.0.5",date:"2026-08-11",items:["计算口径说明改为默认收起，按需展开查看","固定完整版三模块构图，移除模块拖动、缩放及相关提示"]},
   {version:"v3.0.4",date:"2026-08-11",items:["新增低干扰免责声明，提示人工复核并以平台实际规则和结算为准","同步补充说明书中的使用提醒"]},
   {version:"v3.0.3",date:"2026-08-11",items:["移除汇总版测算校验按钮后的问题数字，仅保留状态圆点","问题数量继续在校验窗口内展示"]},
   {version:"v3.0.2",date:"2026-08-11",items:["为批量导入产品入口补充统一风格图标","同步维护说明书版本记录"]},
