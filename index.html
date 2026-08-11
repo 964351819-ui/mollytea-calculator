@@ -587,10 +587,10 @@
   .margin b{font-weight:800}
   .margin b.good{color:var(--good)}.margin b.mid{color:var(--amber)}.margin b.bad{color:var(--warn)}
   /* 完整版固定三模块布局 */
-  .full-modules{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;align-items:start}
+  .full-modules{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;align-items:stretch}
   .full-module{grid-column:span var(--module-span,12);min-width:0}
   .full-module>.card,.full-module>.results{margin-bottom:0}
-  .full-module:not(.result-module)>.card{height:100%}
+  .full-module:not(.result-module)>.card{height:100%;box-sizing:border-box}
   .full-module.result-module{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:14px}
   /* 订单参数与活动成本在被拉高时，内部内容自动均匀铺开 */
   .full-module[data-module="params"]>.card{display:flex;flex-direction:column;justify-content:space-between}
@@ -992,7 +992,7 @@
         折扣：成交价 = 原价×折扣，平台抽佣/客单加价按成交价算，折扣差价与活动出资均从到手价扣除；到手率分母 = 外卖原价 + 打包费。
       </div>
     </details>
-    <span id="calcVersionStamp">计算口径 v3.0.5 · 更新于 2026-08-11</span>
+    <span id="calcVersionStamp">计算口径 v3.0.6 · 更新于 2026-08-11</span>
     <span class="disclaimer-note">免责声明：本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据。平台费率、活动规则及城市政策可能变化，请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</span>
   </div>
 </div>
@@ -3432,9 +3432,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.5";
+const CALC_VERSION = "v3.0.6";
 const CALC_UPDATED = "2026-08-11";
 const CALC_CHANGELOG = [
+  {version:"v3.0.6",date:"2026-08-11",items:["固定布局下订单参数与活动成本自动等高，底边保持对齐","消除活动成本模块下方多余空隙，保留原三模块构图"]},
   {version:"v3.0.5",date:"2026-08-11",items:["计算口径说明改为默认收起，按需展开查看","固定完整版三模块构图，移除模块拖动、缩放及相关提示"]},
   {version:"v3.0.4",date:"2026-08-11",items:["新增低干扰免责声明，提示人工复核并以平台实际规则和结算为准","同步补充说明书中的使用提醒"]},
   {version:"v3.0.3",date:"2026-08-11",items:["移除汇总版测算校验按钮后的问题数字，仅保留状态圆点","问题数量继续在校验窗口内展示"]},
