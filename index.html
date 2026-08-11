@@ -894,7 +894,7 @@
           <div class="et-main">测算看板 · 产品明细</div>
         </div>
         <div class="et-right">
-          <div class="exec-actions"><button id="validateMainBtn" class="validate-main" type="button" title="检查当前输入和汇总列表"><span class="validate-dot"></span><span>测算校验</span><span id="validateMainCount" class="validate-count">0</span></button><button id="toolToggle" class="tool-toggle-btn" type="button">工具 <span class="caret">▾</span></button></div>
+          <div class="exec-actions"><button id="validateMainBtn" class="validate-main" type="button" title="检查当前输入和汇总列表"><span class="validate-dot"></span><span>测算校验</span></button><button id="toolToggle" class="tool-toggle-btn" type="button">工具 <span class="caret">▾</span></button></div>
           <div class="tool-panel" id="toolPanel">
             <button id="copyBtn" class="copybtn" type="button">复制表格</button>
             <button id="shotBtn" class="copybtn" type="button">分析表格</button>
@@ -1001,7 +1001,7 @@
     淘宝直营技术服务费：默认按成交价×7%×0.75计算，不设保底；费率可在订单参数中自定义。该板块因城定价，存在个体差异。<br>
     美团代理配送费按 66 折、封顶成交价×40%；淘宝直营 75 折；淘宝代理运营服务费 18% 全包。<br>
     折扣：成交价 = 原价×折扣，平台抽佣/客单加价按成交价算，折扣差价与活动出资均从到手价扣除；到手率分母 = 外卖原价 + 打包费。<br>
-    <span id="calcVersionStamp">计算口径 v3.0.2 · 更新于 2026-08-11</span>
+    <span id="calcVersionStamp">计算口径 v3.0.3 · 更新于 2026-08-11</span>
   </div>
 </div>
 
@@ -3438,9 +3438,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.2";
+const CALC_VERSION = "v3.0.3";
 const CALC_UPDATED = "2026-08-11";
 const CALC_CHANGELOG = [
+  {version:"v3.0.3",date:"2026-08-11",items:["移除汇总版测算校验按钮后的问题数字，仅保留状态圆点","问题数量继续在校验窗口内展示"]},
   {version:"v3.0.2",date:"2026-08-11",items:["为批量导入产品入口补充统一风格图标","同步维护说明书版本记录"]},
   {version:"v3.0.1",date:"2026-08-11",items:["测算校验移至汇总版主操作区并实时显示问题数","方案对比移入项目夹","版本与更新记录并入说明书底部","移除实际结算复盘功能","同步调整说明书与入口层级"]},
   {version:"v3.0.0",date:"2026-08-11",items:["新增 Excel/CSV 批量导入与导入前预览","新增多方案保存、恢复和并排对比","新增测算校验中心","新增计算口径版本与更新记录","同步完善产品说明书"]},
@@ -3531,9 +3532,8 @@ function validationIssues(){
 }
 function renderValidation(){const issues=validationIssues(),err=issues.filter(x=>x.level==="error").length,warn=issues.length-err;openWorkflow("测算校验中心","集中检查缺失字段、无效折扣、口径偏差、重复产品和负毛利。",'<div class="wf-grid"><div class="wf-card"><h3>阻断问题</h3><p><b style="font-size:22px;color:var(--warn)">'+err+'</b> 项</p></div><div class="wf-card"><h3>复核提醒</h3><p><b style="font-size:22px;color:var(--amber)">'+warn+'</b> 项</p></div><div class="wf-card"><h3>检查范围</h3><p>完整版当前输入＋汇总列表 '+products.length+' 个产品</p></div></div>'+(issues.length?'<div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>级别</th><th>位置</th><th>问题与建议</th></tr></thead><tbody>'+issues.map(x=>'<tr><td><span class="wf-badge '+x.level+'">'+(x.level==='error'?'需修正':'需复核')+'</span></td><td>'+x.where+'</td><td>'+escapeHtml(x.msg)+'</td></tr>').join('')+'</tbody></table></div>':'<div class="wf-empty"><span class="wf-badge ok">检查通过</span><p>没有发现明显问题，可以进入方案比较或导出。</p></div>'));}
 function updateValidationBadge(){
-  const btn=$("validateMainBtn"),count=$("validateMainCount"); if(!btn||!count)return;
+  const btn=$("validateMainBtn"); if(!btn)return;
   const issues=validationIssues(),errors=issues.filter(x=>x.level==="error").length;
-  count.textContent=issues.length?String(issues.length):"通过";
   btn.classList.toggle("has-error",errors>0);btn.classList.toggle("has-warn",!errors&&issues.length>0);
   btn.title=errors?errors+" 个问题需要修正":issues.length?issues.length+" 项需要复核":"当前检查通过";
 }
