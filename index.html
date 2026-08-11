@@ -137,6 +137,7 @@
   .brk .bl.sub{padding-left:12px;color:var(--sub);opacity:.85}
   .brk .bl.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:6px;color:var(--ink);font-weight:600}
   .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:24px;line-height:1.7}
+  .disclaimer-note{display:block;max-width:980px;margin:7px auto 0;color:var(--sub);font-size:11px;line-height:1.65;opacity:.78}
 
   /* 模式切换 + 主题切换 */
   .modebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
@@ -1001,7 +1002,8 @@
     淘宝直营技术服务费：默认按成交价×7%×0.75计算，不设保底；费率可在订单参数中自定义。该板块因城定价，存在个体差异。<br>
     美团代理配送费按 66 折、封顶成交价×40%；淘宝直营 75 折；淘宝代理运营服务费 18% 全包。<br>
     折扣：成交价 = 原价×折扣，平台抽佣/客单加价按成交价算，折扣差价与活动出资均从到手价扣除；到手率分母 = 外卖原价 + 打包费。<br>
-    <span id="calcVersionStamp">计算口径 v3.0.3 · 更新于 2026-08-11</span>
+    <span id="calcVersionStamp">计算口径 v3.0.4 · 更新于 2026-08-11</span>
+    <span class="disclaimer-note">免责声明：本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据。平台费率、活动规则及城市政策可能变化，请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</span>
   </div>
 </div>
 
@@ -1119,7 +1121,7 @@
 
         <section class="manual-section" id="manual-notice">
           <h3>10. 使用提醒</h3>
-          <ul><li>结果用于方案预估和内部比较，不替代平台账单结算。</li><li>淘宝直营技术服务费因城定价，默认 7% 仅为工具预设，请按当地实际政策修改。</li><li>平台费率、活动档位、配送规则发生变化时，应先更新工具口径再批量测算。</li><li>输入负数、折后价高于原价或缺少打包费会导致结果失真；打包费为 0 时也应明确填写 0。</li><li>比较产品时，请确保距离、时段、活动与渠道口径一致。</li><li>毛利只扣除了产品成本与周边订货价，未包含房租、人工、水电、损耗、税费等经营费用。</li></ul>
+          <ul><li>结果用于方案预估和内部比较，不替代平台账单结算。</li><li>本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据；请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</li><li>淘宝直营技术服务费因城定价，默认 7% 仅为工具预设，请按当地实际政策修改。</li><li>平台费率、活动档位、配送规则发生变化时，应先更新工具口径再批量测算。</li><li>输入负数、折后价高于原价或缺少打包费会导致结果失真；打包费为 0 时也应明确填写 0。</li><li>比较产品时，请确保距离、时段、活动与渠道口径一致。</li><li>毛利只扣除了产品成本与周边订货价，未包含房租、人工、水电、损耗、税费等经营费用。</li></ul>
           <div class="manual-callout"><b>建议复核顺序：</b>先核对价格与折扣 → 再核对活动出资/补贴 → 再看平台费用明细 → 最后判断到手率和毛利率。</div>
         </section>
         <section class="manual-section" id="manual-version">
@@ -3438,9 +3440,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.3";
+const CALC_VERSION = "v3.0.4";
 const CALC_UPDATED = "2026-08-11";
 const CALC_CHANGELOG = [
+  {version:"v3.0.4",date:"2026-08-11",items:["新增低干扰免责声明，提示人工复核并以平台实际规则和结算为准","同步补充说明书中的使用提醒"]},
   {version:"v3.0.3",date:"2026-08-11",items:["移除汇总版测算校验按钮后的问题数字，仅保留状态圆点","问题数量继续在校验窗口内展示"]},
   {version:"v3.0.2",date:"2026-08-11",items:["为批量导入产品入口补充统一风格图标","同步维护说明书版本记录"]},
   {version:"v3.0.1",date:"2026-08-11",items:["测算校验移至汇总版主操作区并实时显示问题数","方案对比移入项目夹","版本与更新记录并入说明书底部","移除实际结算复盘功能","同步调整说明书与入口层级"]},
