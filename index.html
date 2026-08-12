@@ -155,10 +155,9 @@
   .brk .bl.sub{padding-left:12px;color:var(--sub);opacity:.85}
   .brk .bl.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:6px;color:var(--ink);font-weight:600}
   .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:24px;line-height:1.7}
-  .disclaimer-note{display:block;max-width:980px;margin:7px auto 0;color:var(--sub);font-size:11px;line-height:1.65;opacity:.78}
-  .foot-note{max-width:1200px;margin:0 auto 6px;text-align:center}
-  .foot-note>summary{display:inline-block}
-  .foot-note-body{margin-top:7px;line-height:1.7}
+  .disclaimer-note{margin:7px 0 18px 48px;color:var(--sub);font-size:10.5px;line-height:1.5;text-align:left;
+    white-space:nowrap;opacity:.78}
+  @media(max-width:760px){.disclaimer-note{margin:6px 0 14px;white-space:normal}}
 
   /* 模式切换 + 主题切换 */
   .modebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
@@ -610,7 +609,7 @@
   .full-module>.card,.full-module>.results{margin-bottom:0}
   .full-module:not(.result-module){display:flex;flex-direction:column;align-self:stretch}
   .full-module:not(.result-module)>.card{height:auto;min-height:0;flex:1 1 auto;box-sizing:border-box}
-  .full-module.result-module{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .full-module.result-module{background:transparent;border:0;border-radius:0;padding:0}
   /* 订单参数与活动成本在被拉高时，内部内容自动均匀铺开 */
   .full-module[data-module="params"]>.card{display:flex;flex-direction:column;justify-content:space-between}
   .full-module[data-module="params"]>.card>.grid{flex:0 0 auto}
@@ -630,7 +629,13 @@
   .full-module[data-module="activity"] .activity-payments input.readout{font-size:19px}
   .full-module.result-module .verdict{margin-top:10px}
   .full-module.result-module .listbtn{margin-top:12px;margin-bottom:0}
-  @media(min-width:981px){.full-module[data-module="params"]{--module-span:7}.full-module[data-module="activity"]{--module-span:5}.full-module[data-module="results"]{--module-span:12}}
+  /* 桌面端统一使用 1:1 双列：顶部录入卡与下方平台卡共享同一中轴和边界。 */
+  @media(min-width:981px){
+    .full-modules{gap:14px}
+    .full-module[data-module="params"],.full-module[data-module="activity"]{--module-span:6}
+    .full-module[data-module="results"]{--module-span:12}
+    .full-module.result-module .results{gap:14px}
+  }
   @media(min-width:981px){body:not(.exec) .wrap{max-width:min(97vw,1480px)}}
   @media(max-width:980px){.full-modules{display:block}.full-module{margin-bottom:14px}.full-module:last-child{margin-bottom:0}.full-module[data-module="activity"] .acts{display:grid;grid-template-columns:1fr;grid-template-rows:none}.full-module[data-module="activity"] .act{height:auto}}
   @media(max-width:620px){.activity-payments{grid-template-columns:1fr}}
@@ -732,6 +737,7 @@
       <h1>茉莉奶白 · 测算看板</h1>
     </div>
   </div>
+  <div class="disclaimer-note" role="note">免责声明：测算结果仅供经营分析与方案预估参考，请对关键输入和结果进行二次人工复核，最终以平台官方规则及实际结算为准。</div>
 
   <div id="fullModules" class="full-modules">
   <section class="full-module" data-module="params">
@@ -1002,17 +1008,7 @@
   </div>
 
   <div class="foot">
-    <details class="calc-note foot-note">
-      <summary>计算口径说明</summary>
-      <div class="foot-note-body">
-        渠道口径：可单独选择直营、代理；同时勾选时，汇总版将直营统一展示在上方、代理统一展示在下方。到手率 = 到手价 ÷（外卖原价 + 打包费）。<br>
-        淘宝直营技术服务费：默认按成交价×7%×0.75计算，不设保底；费率可在订单参数中自定义。该板块因城定价，存在个体差异。<br>
-        美团代理配送费按 66 折、封顶成交价×40%；淘宝直营 75 折；淘宝代理运营服务费 18% 全包。<br>
-        折扣：成交价 = 原价×折扣，平台抽佣/客单加价按成交价算，折扣差价与活动出资均从到手价扣除；到手率分母 = 外卖原价 + 打包费。
-      </div>
-    </details>
-    <span id="calcVersionStamp">计算口径 v3.0.8 · 更新于 2026-08-11</span>
-    <span class="disclaimer-note">免责声明：本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据。平台费率、活动规则及城市政策可能变化，请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</span>
+    <span id="calcVersionStamp">计算口径 v3.0.11 · 更新于 2026-08-12</span>
   </div>
 </div>
 
@@ -3451,9 +3447,12 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.8";
-const CALC_UPDATED = "2026-08-11";
+const CALC_VERSION = "v3.0.11";
+const CALC_UPDATED = "2026-08-12";
 const CALC_CHANGELOG = [
+  {version:"v3.0.11",date:"2026-08-12",items:["标题下免责声明精简为单行灰色小字，移除边框和标签","删除完整版页尾重复的计算口径说明，详细口径统一在说明书中维护"]},
+  {version:"v3.0.10",date:"2026-08-12",items:["将免责声明移至主标题下方，以低干扰复核提示条呈现","限制正文阅读宽度并改为左对齐，优化桌面端与移动端阅读体验"]},
+  {version:"v3.0.9",date:"2026-08-12",items:["完整版顶部订单参数与活动成本改为等宽等高的 1:1 双列布局","顶部录入模块与下方美团、淘宝闪购结果模块统一左右边界、中轴和间距"]},
   {version:"v3.0.8",date:"2026-08-11",items:["修复 Safari 对自动高度网格内百分比高度解析不一致导致的活动卡片底部空白","改用跨浏览器一致的 Flex 撑满方式，保证顶部两块白色卡片底边对齐"]},
   {version:"v3.0.7",date:"2026-08-11",items:["在线固定网址访问时自动绕过旧 HTML 缓存并获取最新版本","加载完成后恢复干净网址，本地 HTML 使用方式保持不变"]},
   {version:"v3.0.6",date:"2026-08-11",items:["固定布局下订单参数与活动成本自动等高，底边保持对齐","消除活动成本模块下方多余空隙，保留原三模块构图"]},
