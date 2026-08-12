@@ -193,11 +193,12 @@
   .swatch .swname{display:none}
   .bg-divider{height:1px;background:var(--line);margin:16px 0 14px}
   .bg-title{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--sub);margin-bottom:10px}
-  .bg-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.bg-upload,.bg-clear,.bg-export{height:36px;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;background:var(--field);font:inherit;font-size:12px;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 10px;transition:border-color .15s,color .15s;white-space:nowrap}
-  .bg-upload:hover,.bg-clear:hover,.bg-export:hover{border-color:var(--accent);color:var(--accent)}
-  .bg-clear,.bg-export{display:none;color:var(--sub)}.bg-clear.show,.bg-export.show{display:flex}
-  .bg-clear.show{grid-column:1/-1}
-  .bg-status{font-size:10.5px;line-height:1.5;color:var(--sub);margin-top:9px;min-height:15px;white-space:normal}
+  .bg-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .bg-actions.has-background{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bg-upload,.bg-clear{height:36px;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;background:var(--field);font:inherit;font-size:12px;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 12px;transition:border-color .15s,color .15s;white-space:nowrap}
+  .bg-upload:hover,.bg-clear:hover{border-color:var(--accent);color:var(--accent)}
+  .bg-clear{display:none;color:var(--sub)}.bg-clear.show{display:flex}
+  .bg-status{font-size:10.5px;line-height:1.5;color:var(--sub);margin-top:8px;min-height:15px;white-space:normal}
   .segbar{display:inline-flex;gap:2px;padding:3px;background:var(--field);border:1px solid var(--line);border-radius:9px}
   .segbar button{font:inherit;font-size:13px;font-weight:500;padding:7px 16px;border-radius:7px;cursor:pointer;
     border:none;background:transparent;color:var(--sub);transition:color .15s,background .15s}
@@ -714,7 +715,6 @@
           <div class="bg-title">自定义背景</div>
           <div class="bg-actions">
             <label class="bg-upload">上传照片<input id="bgUpload" type="file" accept="image/*" hidden></label>
-            <button id="bgExport" class="bg-export" type="button">导出分享版</button>
             <button id="bgClear" class="bg-clear" type="button">恢复灰底</button>
           </div>
           <label id="bgTreatmentWrap" class="bg-treatment"><span>背景呈现</span><select id="bgTreatment"><option value="original">原图</option><option value="soft">柔化</option><option value="deep">深度柔化</option></select></label>
@@ -1008,7 +1008,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.11 · 更新于 2026-08-12</span>
+    <span id="calcVersionStamp">计算口径 v3.0.12 · 更新于 2026-08-12</span>
   </div>
 </div>
 
@@ -1115,13 +1115,13 @@
 
         <section class="manual-section" id="manual-features">
           <h3>8. 功能清单</h3>
-          <div class="manual-tags"><span>亮色/深色模式</span><span>8 种主题色</span><span>自定义背景</span><span>导出分享版</span><span>折扣/折后价切换</span><span>自动活动档位</span><span>费用明细</span><span>快速测算</span><span>批量导入产品</span><span>项目夹方案对比</span><span>测算校验中心</span><span>口径版本记录</span><span>显示列控制</span><span>列顺序调整</span><span>产品行排序</span><span>复制表格</span><span>XLSX 深度分析</span><span>导出 PDF</span><span>项目夹快照</span><span>项目搜索与排序</span><span>项目内实时编辑</span><span>手机/电脑响应式布局</span><span>本地自动保存</span></div>
+          <div class="manual-tags"><span>亮色/深色模式</span><span>8 种主题色</span><span>自定义背景</span><span>折扣/折后价切换</span><span>自动活动档位</span><span>费用明细</span><span>快速测算</span><span>批量导入产品</span><span>项目夹方案对比</span><span>测算校验中心</span><span>口径版本记录</span><span>显示列控制</span><span>列顺序调整</span><span>产品行排序</span><span>复制表格</span><span>XLSX 深度分析</span><span>导出 PDF</span><span>项目夹快照</span><span>项目搜索与排序</span><span>项目内实时编辑</span><span>手机/电脑响应式布局</span><span>本地自动保存</span></div>
           <h4>推荐工作流</h4><ol><li>在完整版建立标准参数；产品较多时下载模板并批量导入。</li><li>在汇总版运行“测算校验”，先修正阻断问题，再处理复核提醒。</li><li>将确认中的清单保存为方案，调整价格、折扣或活动后在项目夹进行对比。</li><li>确认方案后存入项目夹，复制业务表格或导出分析表格。</li></ol>
         </section>
 
         <section class="manual-section" id="manual-data">
           <h3>9. 数据保存、分享与导出</h3>
-          <ul><li><b>本地保存：</b>输入、产品清单、项目夹、方案和主题等偏好保存在当前浏览器本机，不会自动上传。</li><li><b>在线更新：</b>通过固定网址访问时会自动绕过旧页面缓存并获取最新发布版本；本地 HTML 打开不受影响。</li><li><b>批量导入：</b>CSV/TSV 可离线读取；XLSX/XLS 需要联网加载 Excel 解析组件。导入前会先预览，确认后才追加。</li><li><b>方案记录：</b>从项目夹进入方案对比；保存产品清单、平台和渠道口径，可随时恢复，对比结果同时标记当前计算版本。</li><li><b>发送原 HTML：</b>接收者得到的是发送当时的文件版本；你以后继续修改自己的文件，对方不会自动更新。</li><li><b>导出分享版：</b>会绑定导出时的主题色和当前自定义背景，接收者直接打开即可看到相同视觉。</li><li><b>复制表格：</b>输出制表符格式，可直接粘贴到 Excel、飞书表格等工具。</li><li><b>分析表格：</b>输出 XLSX，包含明细、汇总、平台对比、标签和经营诊断等分析内容。</li><li><b>项目夹：</b>保存的是当前清单快照；每个项目的显示列和渠道选择独立，不应影响其他项目。</li><li><b>口径版本：</b>工具底部及本说明书最下方显示当前版本。以后调整费率、档位、公式或功能时，说明书与更新记录必须同步修改。</li></ul>
+          <ul><li><b>本地保存：</b>输入、产品清单、项目夹、方案和主题等偏好保存在当前浏览器本机，不会自动上传。</li><li><b>在线更新：</b>通过固定网址访问时会自动绕过旧页面缓存并获取最新发布版本；本地 HTML 打开不受影响。</li><li><b>批量导入：</b>CSV/TSV 可离线读取；XLSX/XLS 需要联网加载 Excel 解析组件。导入前会先预览，确认后才追加。</li><li><b>方案记录：</b>从项目夹进入方案对比；保存产品清单、平台和渠道口径，可随时恢复，对比结果同时标记当前计算版本。</li><li><b>发送原 HTML：</b>接收者得到的是发送当时的文件版本；你以后继续修改自己的文件，对方不会自动更新。</li><li><b>复制表格：</b>输出制表符格式，可直接粘贴到 Excel、飞书表格等工具。</li><li><b>分析表格：</b>输出 XLSX，包含明细、汇总、平台对比、标签和经营诊断等分析内容。</li><li><b>项目夹：</b>保存的是当前清单快照；每个项目的显示列和渠道选择独立，不应影响其他项目。</li><li><b>口径版本：</b>工具底部及本说明书最下方显示当前版本。以后调整费率、档位、公式或功能时，说明书与更新记录必须同步修改。</li></ul>
         </section>
 
         <section class="manual-section" id="manual-notice">
@@ -2341,7 +2341,6 @@ function applyTheme(t){
   $("btnTheme").title = "主题：" + THEME_NAME[t] + "（点击切换）";
   try{ localStorage.setItem(THEME_KEY, t); }catch(e){}
 }
-// 分享版优先采用导出时绑定的主题，保证接收者打开时与导出者所见一致。
 let _theme = document.documentElement.dataset.bundledTheme || localStorage.getItem(THEME_KEY) || "auto";
 if(!THEMES.includes(_theme)) _theme = "auto";
 applyTheme(_theme);
@@ -2427,13 +2426,13 @@ function applyBackgroundTreatment(value, save=true){
   if(save) try{localStorage.setItem(BG_TREATMENT_KEY,_bgTreatment)}catch(_){}
 }
 function setCustomBackground(src, save=true){
-  const root = document.documentElement, clear = $("bgClear"), exportBtn = $("bgExport"), treatment = $("bgTreatmentWrap"), status = $("bgStatus");
+  const root = document.documentElement, clear = $("bgClear"), actions = document.querySelector(".bg-actions"), treatment = $("bgTreatmentWrap"), status = $("bgStatus");
   customBackgroundSrc = src || "";
   if(src){
     root.style.setProperty("--custom-bg", 'url("'+src+'")');
     root.dataset.hasBackground="true";
     if(clear) clear.classList.add("show");
-    if(exportBtn) exportBtn.classList.add("show");
+    if(actions) actions.classList.add("has-background");
     if(treatment) treatment.classList.add("show");
     if(status) status.textContent = "背景已应用 · 仅保存在本机";
     if(save) try{ localStorage.setItem(CUSTOM_BG_KEY,src); }catch(_){ if(status) status.textContent="背景已应用 · 图片过大，无法保存"; }
@@ -2441,7 +2440,7 @@ function setCustomBackground(src, save=true){
     root.style.removeProperty("--custom-bg");
     delete root.dataset.hasBackground;
     if(clear) clear.classList.remove("show");
-    if(exportBtn) exportBtn.classList.remove("show");
+    if(actions) actions.classList.remove("has-background");
     if(treatment) treatment.classList.remove("show");
     if(status) status.textContent = "未设置";
     if(save) try{ localStorage.removeItem(CUSTOM_BG_KEY); }catch(_){}
@@ -2476,21 +2475,6 @@ applyBackgroundTreatment(_bgTreatment, false);
 $("bgUpload").addEventListener("change", e=>{ uploadCustomBackground(e.target.files&&e.target.files[0]); e.target.value=""; });
 $("bgClear").addEventListener("click", ()=>setCustomBackground(""));
 $("bgTreatment").addEventListener("change", e=>applyBackgroundTreatment(e.target.value));
-$("bgExport").addEventListener("click", ()=>{
-  const status=$("bgStatus"), src=customBackgroundSrc;
-  if(!src){ if(status) status.textContent="请先上传一张背景照片"; return; }
-  const clone=document.documentElement.cloneNode(true);
-  clone.dataset.bundledBg=src;
-  clone.dataset.bundledTheme=_theme;
-  clone.dataset.bundledAccent=_accent;
-  clone.dataset.bundledBgTreatment=_bgTreatment;
-  const blob=new Blob(["<!doctype html>\n",clone.outerHTML],{type:"text/html;charset=utf-8"});
-  const url=URL.createObjectURL(blob), link=document.createElement("a");
-  link.href=url; link.download="茉莉奶白·测算看板-已绑定背景.html";
-  document.body.appendChild(link); link.click(); link.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  if(status) status.textContent="已导出分享版 · 发此文件即可";
-});
 document.addEventListener("click", (e)=>{
   const p = $("accentPanel");
   if(!p || !p.classList.contains("open")) return;
@@ -3447,9 +3431,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.11";
+const CALC_VERSION = "v3.0.12";
 const CALC_UPDATED = "2026-08-12";
 const CALC_CHANGELOG = [
+  {version:"v3.0.12",date:"2026-08-12",items:["移除导出分享版功能及相关入口和说明","重新整理自定义背景面板：未设置时单按钮，应用背景后上传与恢复操作并列展示"]},
   {version:"v3.0.11",date:"2026-08-12",items:["标题下免责声明精简为单行灰色小字，移除边框和标签","删除完整版页尾重复的计算口径说明，详细口径统一在说明书中维护"]},
   {version:"v3.0.10",date:"2026-08-12",items:["将免责声明移至主标题下方，以低干扰复核提示条呈现","限制正文阅读宽度并改为左对齐，优化桌面端与移动端阅读体验"]},
   {version:"v3.0.9",date:"2026-08-12",items:["完整版顶部订单参数与活动成本改为等宽等高的 1:1 双列布局","顶部录入模块与下方美团、淘宝闪购结果模块统一左右边界、中轴和间距"]},
