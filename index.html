@@ -457,7 +457,8 @@
   .col-toggles .tg-label{color:var(--sub);font-weight:600;font-size:12px}
   .col-toggles .tg-sep{width:1px;align-self:stretch;background:var(--line);margin:0 2px}
   .rcell{font-size:16px;font-weight:800;color:var(--ink);white-space:nowrap}
-  .rcell.good,.rcell.mid,.rcell.bad{color:var(--warn)}
+  .exec-table td.col-rate,.exec-table td.col-profit{color:var(--warn);font-weight:800}
+  .exec-table td.col-margin,.exec-table td.col-margin.good,.exec-table td.col-margin.mid,.exec-table td.col-margin.bad{color:var(--ink)}
   .delc{width:36px}
   .delrow{border:none;background:transparent;color:var(--sub);font-size:14px;cursor:pointer;padding:6px;border-radius:6px;line-height:1}
   .delrow:hover{color:var(--warn);background:var(--rowhover)}
@@ -1010,7 +1011,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.13 · 更新于 2026-08-12</span>
+    <span id="calcVersionStamp">计算口径 v3.0.14 · 更新于 2026-08-13</span>
   </div>
 </div>
 
@@ -3433,9 +3434,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.13";
-const CALC_UPDATED = "2026-08-12";
+const CALC_VERSION = "v3.0.14";
+const CALC_UPDATED = "2026-08-13";
 const CALC_CHANGELOG = [
+  {version:"v3.0.14",date:"2026-08-13",items:["汇总版到手率与毛利统一使用红色重点标记","毛利率恢复普通文字色，避免与毛利重点标记混淆"]},
   {version:"v3.0.13",date:"2026-08-12",items:["网站版接入 Cloudflare 匿名访问统计，可查看访问量、访客趋势、设备、地区与页面性能","统计不读取测算输入或本地数据；本地 HTML 保持离线且不启用访问统计"]},
   {version:"v3.0.12",date:"2026-08-12",items:["移除导出分享版功能及相关入口和说明","重新整理自定义背景面板：未设置时单按钮，应用背景后上传与恢复操作并列展示"]},
   {version:"v3.0.11",date:"2026-08-12",items:["标题下免责声明精简为单行灰色小字，移除边框和标签","删除完整版页尾重复的计算口径说明，详细口径统一在说明书中维护"]},
