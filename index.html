@@ -87,6 +87,29 @@
   input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--field);
     color:var(--ink);font-size:15px;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
   input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+  /* 产品名称候选：使用看板自有浮层，替代无法定制的浏览器原生 datalist。 */
+  .product-suggest{display:none;position:fixed;z-index:11000;overflow:hidden;
+    width:min(520px,calc(100vw - 24px));max-height:min(340px,calc(100vh - 24px));
+    border:1px solid color-mix(in srgb,var(--line) 82%,var(--accent));border-radius:14px;
+    background:color-mix(in srgb,var(--card) 96%,transparent);color:var(--ink);
+    box-shadow:0 18px 54px rgba(33,24,20,.16),0 2px 10px rgba(33,24,20,.08);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transform-origin:top center}
+  .product-suggest.open{display:block;animation:productSuggestIn .14s ease-out}
+  @keyframes productSuggestIn{from{opacity:0;transform:translateY(-5px) scale(.99)}to{opacity:1;transform:none}}
+  .product-suggest-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:9px 12px 6px;color:var(--sub);font-size:10.5px}
+  .product-suggest-head b{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.04em}
+  .product-suggest-list{max-height:250px;overflow:auto;padding:3px 6px 6px;overscroll-behavior:contain}
+  .product-option{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;
+    width:100%;padding:9px 10px;border:0;border-radius:9px;background:transparent;color:var(--ink);
+    font:inherit;text-align:left;cursor:pointer;transition:background .12s,color .12s}
+  .product-option:hover,.product-option.active{background:var(--glow)}
+  .product-option.active{box-shadow:inset 2px 0 0 var(--accent)}
+  .product-option-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px;font-weight:650}
+  .product-option-meta{display:flex;align-items:center;gap:8px;color:var(--sub);font-size:10.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .product-option-meta span+span::before{content:"·";margin-right:8px;color:var(--line-strong)}
+  .product-suggest-foot{padding:7px 12px;border-top:1px solid var(--line);color:var(--sub);font-size:10.5px;line-height:1.4}
+  @media(max-width:560px){.product-option{grid-template-columns:1fr;gap:2px}.product-option-meta{font-size:10px}.product-suggest-head span{display:none}}
   input.big{font-size:24px;font-weight:700;padding:6px 14px;letter-spacing:-.01em}
   /* 只读结果（实付）：做成结果卡片，和可填输入明确区分 */
   .payout-field{background:var(--card-2);border:1px solid var(--line);border-radius:12px;
@@ -749,7 +772,7 @@
     <div class="grid" style="grid-template-columns:2fr 1fr;margin-bottom:14px">
       <div>
         <label>产品名称（本单备注，可选）</label>
-        <input id="prodName" type="text" placeholder="如：茉莉奶白双杯套餐（大杯）" value="">
+        <input id="prodName" type="text" placeholder="输入产品名称自动带出价格与成本" value="" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="productSuggest" aria-expanded="false">
       </div>
       <div>
         <label>产品成本（元）</label>
@@ -926,7 +949,7 @@
       <div class="exec-quickbar" id="execQuickbar">
         <div class="qbar-head"><div class="qbar-label"><button id="qToggle" class="qbar-caret" type="button" aria-label="展开快速测算" aria-expanded="false">▸</button><strong>快速测算</strong></div><span>汇总版快捷录入 · 与完整版使用同一套计算口径</span><button id="qAddToList" class="qbar-add" type="button">加入汇总列表</button></div>
         <div class="qbar-row params">
-          <div class="qfield"><label>产品名称</label><input id="q_prodName" type="text" placeholder="产品名称"></div>
+          <div class="qfield"><label>产品名称</label><input id="q_prodName" type="text" placeholder="输入名称自动带出" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="productSuggest" aria-expanded="false"></div>
           <div class="qfield"><label>外卖原价</label><input id="q_price" type="number" min="0" step="0.01"></div>
           <div class="qfield"><label>堂食原价</label><input id="q_priceDine" type="number" min="0" step="0.01" placeholder="选填"></div>
           <div class="qfield"><label>产品成本</label><input id="q_cost" type="number" min="0" step="0.01" placeholder="选填"></div>
@@ -1011,9 +1034,11 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.14 · 更新于 2026-08-13</span>
+    <span id="calcVersionStamp">计算口径 v3.0.17 · 更新于 2026-08-20</span>
   </div>
 </div>
+
+<div class="product-suggest" id="productSuggest" role="listbox" aria-label="产品名称候选"></div>
 
 <div class="manual-overlay" id="manualOverlay" aria-hidden="true">
   <div class="manual-dialog" role="dialog" aria-modal="true" aria-labelledby="manualTitle">
@@ -1036,7 +1061,7 @@
         <section class="manual-section" id="manual-input">
           <h3>2. 输入字段怎么填</h3>
           <div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>字段</th><th>用途</th><th>填写建议</th></tr></thead><tbody>
-            <tr><td>产品名称</td><td>区分商品、套餐或规格。</td><td>建议使用“产品名＋规格/组合”，便于汇总和导出后识别。</td></tr>
+            <tr><td>产品名称</td><td>区分商品、套餐或规格；内置产品可自动带出堂食原价、外卖原价与产品成本。</td><td>可输入一个或多个完整产品名称；多个产品按字段求和。自动结果仍可手动修改，未收录的名称保持价格与成本为空。</td></tr>
             <tr><td>外卖原价</td><td>折扣、活动门槛、到手和平台费用的核心价格。</td><td>填写外卖端展示原价，不是折后价。</td></tr>
             <tr><td>堂食原价</td><td>用于展示堂食实付及外卖/堂食价格对照。</td><td>不参与平台佣金和到手价计算。</td></tr>
             <tr><td>打包费</td><td>计入订单金额、活动门槛与到手率分母。</td><td>必填；没有打包费时填写 0。</td></tr>
@@ -1046,6 +1071,15 @@
             <tr><td>配送距离 / 时段</td><td>决定不同平台和渠道的配送加价。</td><td>按实际预估配送半径与下单时段选择。</td></tr>
             <tr><td>淘宝直营技术费率</td><td>淘宝直营技术服务费的城市差异参数。</td><td>默认 7%，支持小数；实际因城、因店可能不同。</td></tr>
           </tbody></table></div>
+          <h4>产品资料自动带出</h4>
+          <ol>
+            <li><b>搜索与选择：</b>在完整版或汇总版快速测算的“产品名称”中输入文字，候选框会显示匹配产品及其堂食原价、外卖原价和产品成本；可点击候选，或用方向键选择后按回车确认。</li>
+            <li><b>自动填充：</b>选择或输入一个已收录的完整产品名称后，系统会自动填写堂食原价、外卖原价和产品成本；候选框随后自动收起。</li>
+            <li><b>组合求和：</b>名称中包含两个或更多已收录产品时，各字段分别求和。建议使用“＋”连接产品；输入“＋”后可继续搜索下一个产品。</li>
+            <li><b>缺失与未知：</b>若组合中任一产品缺少某个字段，该字段保持空白；未收录的名称不会显示价格或成本。</li>
+            <li><b>允许修改：</b>自动带出的数值只是录入辅助，堂食原价、外卖原价和产品成本都可以继续手动修改；再次修改产品名称时会重新匹配。</li>
+          </ol>
+          <div class="manual-callout"><b>组合示例：</b>输入“针王橘子＋茉莉奶白（中杯）”，自动显示堂食原价 35 元、外卖原价 38 元、产品成本 11.13 元。</div>
         </section>
 
         <section class="manual-section" id="manual-core">
@@ -1113,7 +1147,7 @@
 
         <section class="manual-section" id="manual-summary">
           <h3>7. 汇总版怎么用</h3>
-          <ul><li><b>快速测算：</b>在汇总版顶部直接录入，与完整版共用同一套计算逻辑；点击“加入汇总列表”生成产品行。</li><li><b>测算校验：</b>汇总版右上角会实时显示问题数量；点击后集中查看阻断问题与复核提醒。</li><li><b>渠道字段：</b>可选美团、淘宝、直营、代理。多产品同时选择直营和代理时，直营统一在上、代理统一在下。</li><li><b>经营字段：</b>按需要显示或隐藏列；配送距离、时段和打包费默认隐藏，可随时打开。</li><li><b>直接编辑：</b>双击可编辑字段即可修改，结果会立即重算；点击活动、佣金或到手价后的信息图标查看明细。</li><li><b>排序与复制：</b>支持调整产品顺序和列顺序；复制表格会包含当前显示列及“直营/代理”渠道口径。</li><li><b>平均行：</b>分别展示直营和代理的平均结果，便于横向判断。</li></ul>
+          <ul><li><b>快速测算：</b>在汇总版顶部直接录入，与完整版共用同一套计算逻辑；输入已收录的完整产品名称会自动带出价格与成本，多个产品名称会自动求和；点击“加入汇总列表”生成产品行。</li><li><b>测算校验：</b>汇总版右上角会实时显示问题数量；点击后集中查看阻断问题与复核提醒。</li><li><b>渠道字段：</b>可选美团、淘宝、直营、代理。多产品同时选择直营和代理时，直营统一在上、代理统一在下。</li><li><b>经营字段：</b>按需要显示或隐藏列；配送距离、时段和打包费默认隐藏，可随时打开。</li><li><b>直接编辑：</b>双击可编辑字段即可修改，结果会立即重算；点击活动、佣金或到手价后的信息图标查看明细。</li><li><b>排序与复制：</b>支持调整产品顺序和列顺序；复制表格会包含当前显示列及“直营/代理”渠道口径。</li><li><b>平均行：</b>分别展示直营和代理的平均结果，便于横向判断。</li></ul>
         </section>
 
         <section class="manual-section" id="manual-features">
@@ -2260,6 +2294,145 @@ function restore(){
     if(el.type==="checkbox") el.checked = !!d[el.id];
     else el.value = d[el.id];
   });
+}
+
+// ---- 产品资料库：输入完整产品名称后自动带出价格与成本；组合名称按字段求和 ----
+const PRODUCT_CATALOG = [
+  ["针王橘子",19,21,6.5],
+  ["针王奶霜橘子",21,23,6.55],
+  ["白兰与树番茄(首创)",20,22,7.02,["白兰与树番茄"]],
+  ["单丛奶霜苹果",20,22,6.47],
+  ["单丛与苹果（奇兰）",15,17,4.6],
+  ["单丛与苹果（凤凰）",15,17,5.76],
+  ["单丛与苹果杏",18,20,5.62],
+  ["针王苹果（中杯）",19,20,7.04],
+  ["针王苹果（大杯）",22,23,7.22],
+  ["针王葡萄（中杯）",19,20,6.58],
+  ["针王葡萄（大杯）",22,23,7.16],
+  ["开心果茉莉椰",20,22,8.02],
+  ["开心加倍茉莉椰",null,22,8.31],
+  ["白兰（中杯）",17,18,6.66],
+  ["白兰（大杯）",21,22,8.61],
+  ["抹茶白兰",23,24,9.59],
+  ["开心小兰花",21,22,8.03],
+  ["抹茶茉莉咸酪乳",21,22,6.92],
+  ["针王香柠",19,21,8.7],
+  ["针王香柠椰",20,22,9.11],
+  ["冰淇淋针王香柠椰",23,25,9.84],
+  ["薄巧碎碎奶昔",19,21,5.66],
+  ["茉莉薄巧",20,22,6.55],
+  ["茉莉薄巧奶芙",22,24,7.66],
+  ["针王蜜桃",19,21,6.26],
+  ["针王芭乐",19,21,6.38],
+  ["抹茶奶油芭乐",22,24,7.18],
+  ["茉莉杨枝甘露",21,22,6.93],
+  ["茉莉奶油芭乐",21,23,7.41],
+  ["针王葡萄咸酪乳",21,22,7.39],
+  ["针王苹果咸酪乳",21,23,6.9],
+  ["针王苹果（热）",19,20,7.78],
+  ["针王葡萄（热）",19,20,7.31],
+  ["栀香龙眼马蹄",null,23,7.39],
+  ["抹茶针王",23,24,9.56],
+  ["抹茶栀子咸酪乳",22,23,7.08],
+  ["抹茶白兰咸酪乳",23,24,8.75],
+  ["茉莉奶白（中杯）",16,17,4.63],
+  ["茉莉奶白（大杯）",20,22,5.82],
+  ["茉莉针王（中杯）",17,18,6.62]
+].map(([name,dine,price,cost,aliases=[]])=>({name,dine,price,cost,aliases}));
+const normalizeProductName = value => String(value||"").normalize("NFKC").toLowerCase().replace(/[\s·•・+＋、,，/／&＆;；:：|｜—–_\-()（）【】\[\]]/g,"");
+const PRODUCT_PATTERNS = PRODUCT_CATALOG.flatMap(item=>[item.name,...item.aliases].map(name=>({item,key:normalizeProductName(name)}))).sort((a,b)=>b.key.length-a.key.length);
+function matchCatalogProducts(value){
+  const text=normalizeProductName(value); if(!text) return [];
+  const occupied=Array(text.length).fill(false), found=[];
+  PRODUCT_PATTERNS.forEach(({item,key})=>{
+    let from=0,at;
+    while(key && (at=text.indexOf(key,from))!==-1){
+      const end=at+key.length;
+      if(!occupied.slice(at,end).some(Boolean)){
+        for(let i=at;i<end;i++) occupied[i]=true;
+        found.push({item,at});
+      }
+      from=Math.max(end,at+1);
+    }
+  });
+  return found.sort((a,b)=>a.at-b.at).map(x=>x.item);
+}
+const catalogNumber = value => Number.isFinite(value) ? String(Math.round(value*100)/100) : "";
+function applyProductCatalog(value){
+  const matched=matchCatalogProducts(value);
+  [["price","price"],["priceDine","dine"],["cost","cost"]].forEach(([id,key])=>{
+    const input=$(id); if(!input) return;
+    input.value=matched.length && matched.every(item=>Number.isFinite(item[key]))
+      ? catalogNumber(matched.reduce((sum,item)=>sum+item[key],0)) : "";
+  });
+  compute(); persist(); syncQuickFromFull();
+}
+let productSuggestInput=null, productSuggestItems=[], productSuggestActive=-1;
+const productTail = value => String(value||"").split(/[+＋、,，/／&＆;；|｜]/).pop().trim();
+function closeProductSuggest(){
+  const host=$("productSuggest"); if(host) host.classList.remove("open");
+  productSuggestInput?.setAttribute("aria-expanded","false");
+  productSuggestInput?.removeAttribute("aria-activedescendant");
+  productSuggestInput=null; productSuggestItems=[]; productSuggestActive=-1;
+}
+function positionProductSuggest(){
+  const host=$("productSuggest"),input=productSuggestInput;
+  if(!host?.classList.contains("open")||!input) return;
+  const rect=input.getBoundingClientRect();
+  const width=Math.min(520,Math.max(rect.width,360),window.innerWidth-24);
+  const left=Math.max(12,Math.min(rect.left,window.innerWidth-width-12));
+  host.style.width=width+"px"; host.style.left=left+"px"; host.style.top=(rect.bottom+7)+"px";
+  if(rect.bottom+7+host.offsetHeight>window.innerHeight-12 && rect.top>host.offsetHeight+20){
+    host.style.top=Math.max(12,rect.top-host.offsetHeight-7)+"px";
+  }
+}
+function setProductSuggestActive(index){
+  const host=$("productSuggest"); if(!host||!productSuggestItems.length) return;
+  productSuggestActive=(index+productSuggestItems.length)%productSuggestItems.length;
+  host.querySelectorAll(".product-option").forEach((el,i)=>el.classList.toggle("active",i===productSuggestActive));
+  const active=host.querySelector('.product-option[data-index="'+productSuggestActive+'"]');
+  if(active){ active.scrollIntoView({block:"nearest"}); productSuggestInput?.setAttribute("aria-activedescendant",active.id); }
+}
+function renderProductSuggest(input){
+  const host=$("productSuggest"),query=normalizeProductName(productTail(input.value));
+  if(!host||!query||PRODUCT_PATTERNS.some(p=>p.key===query)){ closeProductSuggest(); return; }
+  const seen=new Set();
+  productSuggestItems=PRODUCT_PATTERNS.filter(p=>p.key.includes(query)).sort((a,b)=>{
+    const aStart=a.key.startsWith(query)?0:1,bStart=b.key.startsWith(query)?0:1;
+    return aStart-bStart||a.key.length-b.key.length;
+  }).map(p=>p.item).filter(item=>{if(seen.has(item.name))return false;seen.add(item.name);return true;}).slice(0,7);
+  if(!productSuggestItems.length){ closeProductSuggest(); return; }
+  productSuggestInput?.setAttribute("aria-expanded","false"); productSuggestInput=input; productSuggestActive=-1;
+  host.innerHTML='<div class="product-suggest-head"><b>匹配产品</b><span>'+productSuggestItems.length+' 条候选</span></div><div class="product-suggest-list">'+
+    productSuggestItems.map((item,i)=>'<button class="product-option" id="productSuggestOption'+i+'" data-index="'+i+'" type="button" role="option"><span class="product-option-name">'+escapeHtml(item.name)+'</span><span class="product-option-meta"><span>堂食 '+(Number.isFinite(item.dine)?'¥'+catalogNumber(item.dine):'—')+'</span><span>外卖 ¥'+catalogNumber(item.price)+'</span><span>成本 ¥'+catalogNumber(item.cost)+'</span></span></button>').join("")+
+    '</div><div class="product-suggest-foot">点击或按回车选择 · 输入“＋”可继续添加组合产品</div>';
+  host.classList.add("open"); input.setAttribute("aria-expanded","true"); positionProductSuggest();
+}
+function chooseProductSuggestion(index){
+  const input=productSuggestInput,item=productSuggestItems[index]; if(!input||!item) return;
+  const raw=input.value,parts=raw.split(/[+＋、,，/／&＆;；|｜]/),prefix=parts.slice(0,-1).join(" + ").trim();
+  input.value=prefix?prefix+" + "+item.name:item.name;
+  input.dispatchEvent(new Event("input",{bubbles:true})); input.focus(); closeProductSuggest();
+}
+function initProductCatalog(){
+  const host=$("productSuggest");
+  [$("prodName"),$("q_prodName")].forEach(input=>{
+    if(!input) return;
+    input.addEventListener("input",()=>{applyProductCatalog(input.value);renderProductSuggest(input);});
+    input.addEventListener("focus",()=>renderProductSuggest(input));
+    input.addEventListener("blur",()=>setTimeout(()=>{if(document.activeElement!==input)closeProductSuggest();},100));
+    input.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){closeProductSuggest();return;}
+      if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+        if(!host?.classList.contains("open")) renderProductSuggest(input);
+        if(productSuggestItems.length){e.preventDefault();setProductSuggestActive(productSuggestActive+(e.key==="ArrowDown"?1:-1));}
+      }else if(e.key==="Enter"&&productSuggestActive>=0){e.preventDefault();chooseProductSuggestion(productSuggestActive);}
+    });
+  });
+  host?.addEventListener("pointerdown",e=>{const option=e.target.closest(".product-option");if(!option)return;e.preventDefault();chooseProductSuggestion(+option.dataset.index);});
+  host?.addEventListener("pointerover",e=>{const option=e.target.closest(".product-option");if(option)setProductSuggestActive(+option.dataset.index);});
+  document.addEventListener("pointerdown",e=>{if(!e.target.closest("#productSuggest,#prodName,#q_prodName"))closeProductSuggest();});
+  window.addEventListener("resize",positionProductSuggest);window.addEventListener("scroll",positionProductSuggest,true);
 }
 
 // 汇总版快捷测算栏与完整版字段双向同步，避免两套输入产生不同口径。
@@ -3434,9 +3607,12 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.14";
-const CALC_UPDATED = "2026-08-13";
+const CALC_VERSION = "v3.0.17";
+const CALC_UPDATED = "2026-08-20";
 const CALC_CHANGELOG = [
+  {version:"v3.0.17",date:"2026-08-20",items:["说明书新增“产品资料自动带出”专节，完整说明搜索选择、自动填充、组合求和、缺失字段和手动修改规则","补充双产品组合的价格与成本求和示例"]},
+  {version:"v3.0.16",date:"2026-08-20",items:["完整版与汇总版的产品名称候选改为看板自有浮层，替代尺寸突兀的浏览器原生列表","候选项同步展示堂食原价、外卖原价和产品成本，支持鼠标、方向键与回车选择","组合产品录入时仅搜索当前名称片段，完整匹配后自动收起候选框"]},
+  {version:"v3.0.15",date:"2026-08-20",items:["内置 40 款产品的堂食原价、外卖原价与产品成本资料，输入完整名称即可自动带出","产品名称包含多个已收录产品时按字段自动求和，自动结果仍支持手动修改","完整版与汇总版快速测算同步支持产品资料匹配；资料缺失或名称未收录时对应字段保持空白"]},
   {version:"v3.0.14",date:"2026-08-13",items:["汇总版到手率与毛利统一使用红色重点标记","毛利率恢复普通文字色，避免与毛利重点标记混淆"]},
   {version:"v3.0.13",date:"2026-08-12",items:["网站版接入 Cloudflare 匿名访问统计，可查看访问量、访客趋势、设备、地区与页面性能","统计不读取测算输入或本地数据；本地 HTML 保持离线且不启用访问统计"]},
   {version:"v3.0.12",date:"2026-08-12",items:["移除导出分享版功能及相关入口和说明","重新整理自定义背景面板：未设置时单按钮，应用背景后上传与恢复操作并列展示"]},
@@ -3553,6 +3729,7 @@ initFullModuleLayout();
 restore();
 initDiscountModes();
 initQuickBar();
+initProductCatalog();
 if(!$("mode-mt").checked && !$("mode-tb").checked) $("mode-mt").checked = true;
 platFilter = $("mode-mt").checked && $("mode-tb").checked ? "both" : $("mode-mt").checked ? "mt" : "tb";
 loadColOrder();
