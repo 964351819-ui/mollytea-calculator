@@ -87,6 +87,7 @@
   input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--field);
     color:var(--ink);font-size:15px;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
   input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+  input::placeholder{color:var(--sub);font-family:inherit;font-size:14px;font-weight:400;letter-spacing:0;opacity:.5}
   /* 产品名称候选：使用看板自有浮层，替代无法定制的浏览器原生 datalist。 */
   .product-suggest{display:none;position:fixed;z-index:11000;overflow:hidden;
     width:min(520px,calc(100vw - 24px));max-height:min(340px,calc(100vh - 24px));
@@ -1061,7 +1062,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.18 · 更新于 2026-08-20</span>
+    <span id="calcVersionStamp">计算口径 v3.0.20 · 更新于 2026-08-20</span>
   </div>
 </div>
 
@@ -3711,9 +3712,11 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.18";
+const CALC_VERSION = "v3.0.20";
 const CALC_UPDATED = "2026-08-20";
 const CALC_CHANGELOG = [
+  {version:"v3.0.20",date:"2026-08-20",items:["统一产品名称、成本、订货价、打包费和价格输入框的灰色占位文字","完整版与汇总版统一使用相同字体、14px 字号、常规字重和灰度"]},
+  {version:"v3.0.19",date:"2026-08-20",items:["优化完整版与汇总版数值输入框的选填提示，改为更轻、更小的辅助文字层级","避免大号金额输入样式同步放大占位文字，提升订单参数区的视觉协调度"]},
   {version:"v3.0.18",date:"2026-08-20",items:["配送距离与下单时段改为看板自有选择浮层，完整版和汇总版同步使用","自定义选择框支持当前项标记、鼠标选择、方向键、回车及明暗主题，并自动避开屏幕边缘","说明书同步补充距离和时段的选择与双向同步方式"]},
   {version:"v3.0.17",date:"2026-08-20",items:["说明书新增“产品资料自动带出”专节，完整说明搜索选择、自动填充、组合求和、缺失字段和手动修改规则","补充双产品组合的价格与成本求和示例"]},
   {version:"v3.0.16",date:"2026-08-20",items:["完整版与汇总版的产品名称候选改为看板自有浮层，替代尺寸突兀的浏览器原生列表","候选项同步展示堂食原价、外卖原价和产品成本，支持鼠标、方向键与回车选择","组合产品录入时仅搜索当前名称片段，完整匹配后自动收起候选框"]},
