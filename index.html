@@ -81,7 +81,7 @@
   .grid{display:grid;gap:14px}
   .g3{grid-template-columns:repeat(3,1fr)}
   .g4{grid-template-columns:repeat(4,1fr)}
-  .g4 input,.g4 select{height:50px}
+  .g4 input,.g4 select,.g4 .smart-select-button{height:50px}
   @media(max-width:620px){.g3{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}}
   label{display:block;font-size:12px;color:var(--sub);margin-bottom:6px;font-weight:500}
   input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--field);
@@ -110,6 +110,33 @@
   .product-option-meta span+span::before{content:"·";margin-right:8px;color:var(--line-strong)}
   .product-suggest-foot{padding:7px 12px;border-top:1px solid var(--line);color:var(--sub);font-size:10.5px;line-height:1.4}
   @media(max-width:560px){.product-option{grid-template-columns:1fr;gap:2px}.product-option-meta{font-size:10px}.product-suggest-head span{display:none}}
+  /* 配送距离 / 下单时段：保留原 select 作为数据源，以统一风格按钮和浮层完成选择。 */
+  .smart-select-source{display:none!important}
+  .smart-select-button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;height:50px;
+    padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);
+    font:inherit;font-size:15px;text-align:left;cursor:pointer;outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+  .smart-select-button:hover{border-color:var(--line-strong);background:color-mix(in srgb,var(--field) 88%,var(--card))}
+  .smart-select-button:focus,.smart-select-button.open{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+  .smart-select-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .smart-select-caret{width:7px;height:7px;flex:none;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+    color:var(--sub);transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+  .smart-select-button.open .smart-select-caret{transform:rotate(225deg) translate(-1px,-1px);color:var(--accent)}
+  .field-picker{display:none;position:fixed;z-index:11010;overflow:hidden;width:min(380px,calc(100vw - 24px));
+    max-height:min(360px,calc(100vh - 24px));border:1px solid color-mix(in srgb,var(--line) 82%,var(--accent));border-radius:14px;
+    background:color-mix(in srgb,var(--card) 96%,transparent);color:var(--ink);box-shadow:0 18px 54px rgba(33,24,20,.16),0 2px 10px rgba(33,24,20,.08);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transform-origin:top center}
+  .field-picker.open{display:block;animation:productSuggestIn .14s ease-out}
+  .field-picker-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 7px;color:var(--sub);font-size:10.5px}
+  .field-picker-head b{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.04em}
+  .field-picker-list{padding:3px 6px 7px;overflow:auto}
+  .field-picker-option{display:grid;grid-template-columns:minmax(0,1fr) auto 18px;align-items:center;gap:10px;width:100%;
+    padding:10px;border:0;border-radius:9px;background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:background .12s}
+  .field-picker-option:hover,.field-picker-option.active{background:var(--glow)}
+  .field-picker-option.active{box-shadow:inset 2px 0 0 var(--accent)}
+  .field-picker-name{font-size:13.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .field-picker-meta{color:var(--sub);font-size:10.5px;white-space:nowrap}
+  .field-picker-check{color:transparent;font-size:14px;font-weight:800;text-align:center}
+  .field-picker-option.selected .field-picker-check{color:var(--accent)}
   input.big{font-size:24px;font-weight:700;padding:6px 14px;letter-spacing:-.01em}
   /* 只读结果（实付）：做成结果卡片，和可填输入明确区分 */
   .payout-field{background:var(--card-2);border:1px solid var(--line);border-radius:12px;
@@ -324,7 +351,7 @@
   /* 两段平台区域：每段包含一个会员/红包项与一个减配项，内部以细分隔线区分。 */
   .qbar-row.activities{grid-template-columns:repeat(2,minmax(650px,1fr));min-width:1320px;margin-top:10px}
   .qact-group{display:grid;grid-template-columns:minmax(430px,1.65fr) minmax(180px,.65fr);min-width:0;border:1px solid var(--line);border-radius:9px;background:var(--field);overflow:hidden}
-  .qfield{min-width:0}.qfield label{font-size:10.5px;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qfield input,.qfield select{width:100%;height:34px;padding:5px 8px;font-size:13px;border-radius:8px}
+  .qfield{min-width:0}.qfield label{font-size:10.5px;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qfield input,.qfield select,.qfield .smart-select-button{width:100%;height:34px;padding:5px 8px;font-size:13px;border-radius:8px}
   .disc-label{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}.disc-mode{margin-left:5px;padding:0;border:0;background:transparent;color:var(--accent);font:inherit;font-size:10.5px;cursor:pointer;white-space:nowrap}.disc-mode:hover{text-decoration:underline}
   .qact{display:flex;align-items:center;gap:5px;min-width:0;height:42px;padding:5px 8px;border:0;border-radius:0;background:transparent;white-space:nowrap}
   .qact + .qact{border-left:1px solid var(--line)}
@@ -1034,11 +1061,12 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.17 · 更新于 2026-08-20</span>
+    <span id="calcVersionStamp">计算口径 v3.0.18 · 更新于 2026-08-20</span>
   </div>
 </div>
 
 <div class="product-suggest" id="productSuggest" role="listbox" aria-label="产品名称候选"></div>
+<div class="field-picker" id="fieldPicker" role="listbox" aria-label="字段选项"></div>
 
 <div class="manual-overlay" id="manualOverlay" aria-hidden="true">
   <div class="manual-dialog" role="dialog" aria-modal="true" aria-labelledby="manualTitle">
@@ -1068,7 +1096,7 @@
             <tr><td>产品成本</td><td>用于毛利和毛利率计算。</td><td>填写该商品的直接产品成本。</td></tr>
             <tr><td>周边订货价</td><td>作为额外成本计入毛利。</td><td>套餐含杯套、冰箱贴等周边时填写；无则留空。</td></tr>
             <tr><td>折扣 / 折后价</td><td>两种输入方式可切换，系统最终统一换算为折扣率。</td><td>折扣支持 0.85、8.5、85 三种写法；折后价不得高于外卖原价。</td></tr>
-            <tr><td>配送距离 / 时段</td><td>决定不同平台和渠道的配送加价。</td><td>按实际预估配送半径与下单时段选择。</td></tr>
+            <tr><td>配送距离 / 时段</td><td>决定不同平台和渠道的配送加价。</td><td>点击看板自定义选择框设置；支持鼠标、方向键与回车。完整版和汇总版会自动同步。</td></tr>
             <tr><td>淘宝直营技术费率</td><td>淘宝直营技术服务费的城市差异参数。</td><td>默认 7%，支持小数；实际因城、因店可能不同。</td></tr>
           </tbody></table></div>
           <h4>产品资料自动带出</h4>
@@ -2395,6 +2423,7 @@ function setProductSuggestActive(index){
 }
 function renderProductSuggest(input){
   const host=$("productSuggest"),query=normalizeProductName(productTail(input.value));
+  closeSmartSelectPicker();
   if(!host||!query||PRODUCT_PATTERNS.some(p=>p.key===query)){ closeProductSuggest(); return; }
   const seen=new Set();
   productSuggestItems=PRODUCT_PATTERNS.filter(p=>p.key.includes(query)).sort((a,b)=>{
@@ -2435,6 +2464,79 @@ function initProductCatalog(){
   window.addEventListener("resize",positionProductSuggest);window.addEventListener("scroll",positionProductSuggest,true);
 }
 
+// ---- 配送距离 / 下单时段：自定义选择浮层，原 select 继续负责数据、计算与本地保存 ----
+const SMART_SELECT_CONFIG={
+  distSel:{title:"选择配送距离",kind:"distance"},timeSel:{title:"选择下单时段",kind:"time"},
+  q_distSel:{title:"选择配送距离",kind:"distance"},q_timeSel:{title:"选择下单时段",kind:"time"}
+};
+const smartSelectButtons=new Map();
+let smartPickerSource=null,smartPickerButton=null,smartPickerItems=[],smartPickerActive=-1;
+function smartOptionMeta(source,option){
+  if(SMART_SELECT_CONFIG[source.id].kind==="distance") return option.value==="2"?"基础配送半径":"约 "+option.value+" 公里";
+  return ({day:"日间",t21:"夜间",t0_2:"深夜",t2_3:"深夜",t3_6:"凌晨"})[option.value]||"时段";
+}
+function refreshSmartSelects(){
+  smartSelectButtons.forEach((button,source)=>{
+    const label=source.options[source.selectedIndex]?.textContent||"请选择";
+    button.querySelector(".smart-select-label").textContent=label;
+    button.setAttribute("aria-label",(SMART_SELECT_CONFIG[source.id]?.title||"选择")+"，当前 "+label);
+  });
+}
+function closeSmartSelectPicker(){
+  const host=$("fieldPicker");if(host)host.classList.remove("open");
+  smartPickerButton?.classList.remove("open");smartPickerButton?.setAttribute("aria-expanded","false");smartPickerButton?.removeAttribute("aria-activedescendant");
+  smartPickerSource=null;smartPickerButton=null;smartPickerItems=[];smartPickerActive=-1;
+}
+function positionSmartSelectPicker(){
+  const host=$("fieldPicker"),button=smartPickerButton,source=smartPickerSource;if(!host?.classList.contains("open")||!button||!source)return;
+  const rect=button.getBoundingClientRect(),minWidth=SMART_SELECT_CONFIG[source.id].kind==="time"?320:260;
+  const width=Math.min(420,Math.max(rect.width,minWidth),window.innerWidth-24),left=Math.max(12,Math.min(rect.left,window.innerWidth-width-12));
+  host.style.width=width+"px";host.style.left=left+"px";host.style.top=(rect.bottom+7)+"px";
+  if(rect.bottom+7+host.offsetHeight>window.innerHeight-12&&rect.top>host.offsetHeight+20)host.style.top=Math.max(12,rect.top-host.offsetHeight-7)+"px";
+}
+function setSmartPickerActive(index){
+  const host=$("fieldPicker");if(!host||!smartPickerItems.length)return;
+  smartPickerActive=(index+smartPickerItems.length)%smartPickerItems.length;
+  host.querySelectorAll(".field-picker-option").forEach((el,i)=>el.classList.toggle("active",i===smartPickerActive));
+  const active=host.querySelector('.field-picker-option[data-index="'+smartPickerActive+'"]');
+  if(active){active.scrollIntoView({block:"nearest"});smartPickerButton?.setAttribute("aria-activedescendant",active.id);}
+}
+function renderSmartSelectPicker(source,button){
+  const host=$("fieldPicker"),config=SMART_SELECT_CONFIG[source.id];if(!host||!config)return;
+  closeProductSuggest();if(smartPickerButton&&smartPickerButton!==button)closeSmartSelectPicker();
+  smartPickerSource=source;smartPickerButton=button;smartPickerItems=[...source.options];smartPickerActive=Math.max(0,source.selectedIndex);
+  host.setAttribute("aria-label",config.title);
+  host.innerHTML='<div class="field-picker-head"><b>'+config.title+'</b><span>'+smartPickerItems.length+' 个选项</span></div><div class="field-picker-list">'+smartPickerItems.map((option,i)=>
+    '<button class="field-picker-option'+(i===source.selectedIndex?' selected':'')+'" id="fieldPickerOption'+i+'" data-index="'+i+'" type="button" role="option" aria-selected="'+(i===source.selectedIndex)+'"><span class="field-picker-name">'+escapeHtml(option.textContent)+'</span><span class="field-picker-meta">'+escapeHtml(smartOptionMeta(source,option))+'</span><span class="field-picker-check">✓</span></button>'
+  ).join("")+'</div>';
+  host.classList.add("open");button.classList.add("open");button.setAttribute("aria-expanded","true");positionSmartSelectPicker();setSmartPickerActive(smartPickerActive);
+}
+function chooseSmartPickerOption(index){
+  const source=smartPickerSource,button=smartPickerButton;if(!source||!button||!smartPickerItems[index])return;
+  source.selectedIndex=index;source.dispatchEvent(new Event("change",{bubbles:true}));refreshSmartSelects();button.focus();closeSmartSelectPicker();
+}
+function initSmartSelects(){
+  const host=$("fieldPicker");
+  Object.keys(SMART_SELECT_CONFIG).forEach(id=>{
+    const source=$(id);if(!source||source.dataset.smartSelect)return;source.dataset.smartSelect="1";source.classList.add("smart-select-source");source.setAttribute("aria-hidden","true");source.tabIndex=-1;
+    const button=document.createElement("button");button.type="button";button.id=id+"_button";button.className="smart-select-button";button.setAttribute("aria-haspopup","listbox");button.setAttribute("aria-controls","fieldPicker");button.setAttribute("aria-expanded","false");
+    button.innerHTML='<span class="smart-select-label"></span><span class="smart-select-caret" aria-hidden="true"></span>';source.insertAdjacentElement("afterend",button);smartSelectButtons.set(source,button);
+    button.addEventListener("click",()=>{if(smartPickerButton===button&&host?.classList.contains("open"))closeSmartSelectPicker();else renderSmartSelectPicker(source,button);});
+    button.addEventListener("keydown",e=>{
+      const open=smartPickerButton===button&&host?.classList.contains("open");
+      if(e.key==="Escape"&&open){e.preventDefault();closeSmartSelectPicker();return;}
+      if((e.key==="Enter"||e.key===" ")&&open){e.preventDefault();chooseSmartPickerOption(smartPickerActive);return;}
+      if((e.key==="ArrowDown"||e.key==="ArrowUp")&&open){e.preventDefault();setSmartPickerActive(smartPickerActive+(e.key==="ArrowDown"?1:-1));return;}
+      if(!open&&(e.key==="Enter"||e.key===" "||e.key==="ArrowDown"||e.key==="ArrowUp")){e.preventDefault();renderSmartSelectPicker(source,button);}
+    });
+    button.addEventListener("blur",()=>setTimeout(()=>{if(smartPickerButton===button&&document.activeElement!==button)closeSmartSelectPicker();},100));
+  });
+  host?.addEventListener("pointerdown",e=>{const option=e.target.closest(".field-picker-option");if(!option)return;e.preventDefault();chooseSmartPickerOption(+option.dataset.index);});
+  host?.addEventListener("pointerover",e=>{const option=e.target.closest(".field-picker-option");if(option)setSmartPickerActive(+option.dataset.index);});
+  document.addEventListener("pointerdown",e=>{if(!e.target.closest("#fieldPicker,.smart-select-button"))closeSmartSelectPicker();});
+  window.addEventListener("resize",positionSmartSelectPicker);window.addEventListener("scroll",positionSmartSelectPicker,true);refreshSmartSelects();
+}
+
 // 汇总版快捷测算栏与完整版字段双向同步，避免两套输入产生不同口径。
 const QUICK_FIELD_MAP = {
   q_prodName:"prodName", q_price:"price", q_priceDine:"priceDine", q_cost:"cost", q_wholesale:"wholesale", q_packFee:"packFee",
@@ -2449,6 +2551,7 @@ function syncQuickFromFull(){
     if(q.type==="checkbox") q.checked=f.checked; else q.value=f.value;
   });
   Object.entries(QUICK_LEVEL_MAP).forEach(([qid,fid])=>{ const q=$(qid),f=$(fid); if(q&&f) q.value=f.value; });
+  refreshSmartSelects();
 }
 function syncFullFromQuick(q){
   if(QUICK_LEVEL_MAP[q.id]){
@@ -2459,7 +2562,7 @@ function syncFullFromQuick(q){
   const fid=QUICK_FIELD_MAP[q.id], f=fid&&$(fid); if(!f) return;
   if(q.type==="checkbox") f.checked=q.checked; else f.value=q.value;
   // 不在每次键入时把值反写给快捷栏，否则浏览器会把临时输入的“3.”清空，导致无法连续输入小数。
-  compute(); persist();
+  compute(); persist(); refreshSmartSelects();
 }
 function initQuickBar(){
   const bar=$("execQuickbar"); if(!bar||bar._bound) return; bar._bound=true;
@@ -2488,6 +2591,7 @@ document.querySelectorAll("input,select").forEach(el=>{
 
 // ---- 完整版 / 汇总版 切换 ----
 function setMode(m){
+  closeSmartSelectPicker();closeProductSuggest();
   const exec = m==="exec";
   document.body.classList.toggle("exec", exec);
   $("btnFull").classList.toggle("active", !exec);
@@ -3607,9 +3711,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.17";
+const CALC_VERSION = "v3.0.18";
 const CALC_UPDATED = "2026-08-20";
 const CALC_CHANGELOG = [
+  {version:"v3.0.18",date:"2026-08-20",items:["配送距离与下单时段改为看板自有选择浮层，完整版和汇总版同步使用","自定义选择框支持当前项标记、鼠标选择、方向键、回车及明暗主题，并自动避开屏幕边缘","说明书同步补充距离和时段的选择与双向同步方式"]},
   {version:"v3.0.17",date:"2026-08-20",items:["说明书新增“产品资料自动带出”专节，完整说明搜索选择、自动填充、组合求和、缺失字段和手动修改规则","补充双产品组合的价格与成本求和示例"]},
   {version:"v3.0.16",date:"2026-08-20",items:["完整版与汇总版的产品名称候选改为看板自有浮层，替代尺寸突兀的浏览器原生列表","候选项同步展示堂食原价、外卖原价和产品成本，支持鼠标、方向键与回车选择","组合产品录入时仅搜索当前名称片段，完整匹配后自动收起候选框"]},
   {version:"v3.0.15",date:"2026-08-20",items:["内置 40 款产品的堂食原价、外卖原价与产品成本资料，输入完整名称即可自动带出","产品名称包含多个已收录产品时按字段自动求和，自动结果仍支持手动修改","完整版与汇总版快速测算同步支持产品资料匹配；资料缺失或名称未收录时对应字段保持空白"]},
@@ -3730,6 +3835,7 @@ restore();
 initDiscountModes();
 initQuickBar();
 initProductCatalog();
+initSmartSelects();
 if(!$("mode-mt").checked && !$("mode-tb").checked) $("mode-mt").checked = true;
 platFilter = $("mode-mt").checked && $("mode-tb").checked ? "both" : $("mode-mt").checked ? "mt" : "tb";
 loadColOrder();
