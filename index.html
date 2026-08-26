@@ -1062,7 +1062,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.20 · 更新于 2026-08-20</span>
+    <span id="calcVersionStamp">计算口径 v3.0.21 · 更新于 2026-08-26</span>
   </div>
 </div>
 
@@ -2585,6 +2585,9 @@ function initQuickBar(){
 }
 // 事件绑定
 document.querySelectorAll("input,select").forEach(el=>{
+  // 汇总版快捷栏由 syncFullFromQuick 专门负责：若这里先计算，会在同步前
+  // 按完整版旧档位回写，从而把刚选择的“自定义”和手填金额立即覆盖掉。
+  if(el.closest("#execQuickbar")) return;
   const handler = ()=>{ compute(); persist(); };
   el.addEventListener("input", handler);
   el.addEventListener("change", handler);
@@ -3712,9 +3715,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.20";
-const CALC_UPDATED = "2026-08-20";
+const CALC_VERSION = "v3.0.21";
+const CALC_UPDATED = "2026-08-26";
 const CALC_CHANGELOG = [
+  {version:"v3.0.21",date:"2026-08-26",items:["修复汇总版美团神会员与淘宝爆红包选择自定义后被自动档位立即覆盖的问题","自定义模式下的商家出资和平台补贴现可正常点击、连续输入，并实时同步至完整版"]},
   {version:"v3.0.20",date:"2026-08-20",items:["统一产品名称、成本、订货价、打包费和价格输入框的灰色占位文字","完整版与汇总版统一使用相同字体、14px 字号、常规字重和灰度"]},
   {version:"v3.0.19",date:"2026-08-20",items:["优化完整版与汇总版数值输入框的选填提示，改为更轻、更小的辅助文字层级","避免大号金额输入样式同步放大占位文字，提升订单参数区的视觉协调度"]},
   {version:"v3.0.18",date:"2026-08-20",items:["配送距离与下单时段改为看板自有选择浮层，完整版和汇总版同步使用","自定义选择框支持当前项标记、鼠标选择、方向键、回车及明暗主题，并自动避开屏幕边缘","说明书同步补充距离和时段的选择与双向同步方式"]},
