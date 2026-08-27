@@ -734,6 +734,7 @@
   .manual-callout{margin:12px 0;padding:11px 13px;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:var(--glow);color:var(--sub);font-size:12.5px;line-height:1.7}.manual-callout b{color:var(--ink)}
   .manual-formula{margin:8px 0;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink);font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.65}
   .manual-tablewrap{overflow:auto;margin:10px 0}.manual-table{width:100%;min-width:620px;border-collapse:collapse;font-size:12px}.manual-table th,.manual-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.6}.manual-table th{background:var(--field);color:var(--sub);font-weight:600}.manual-table td{color:var(--sub)}.manual-table td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+  .manual-catalog{margin-top:14px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);overflow:hidden}.manual-catalog>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650;user-select:none}.manual-catalog>summary::-webkit-details-marker{display:none}.manual-catalog>summary::before{content:"›";display:grid;place-items:center;width:19px;height:19px;flex:none;border-radius:50%;background:var(--glow);color:var(--accent);font-size:17px;line-height:1;transition:transform .16s}.manual-catalog[open]>summary::before{transform:rotate(90deg)}.manual-catalog>summary span{margin-left:auto;color:var(--sub);font-size:11.5px;font-weight:500}.manual-catalog-body{padding:0 14px 12px;border-top:1px solid var(--line)}.manual-catalog .manual-table{min-width:560px}.manual-catalog .manual-table th:nth-child(n+2),.manual-catalog .manual-table td:nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums}
   .manual-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.manual-tags span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--card-2);color:var(--sub);font-size:11.5px}
   @media(max-width:760px){.manual-overlay{padding:0}.manual-dialog{width:100%;height:100vh;max-height:none;border:0;border-radius:0}.manual-head{padding:17px 18px 14px}.manual-layout{grid-template-columns:1fr}.manual-nav{display:flex;gap:4px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:9px 12px}.manual-nav .manual-nav-title{display:none}.manual-nav a{white-space:nowrap}.manual-content{padding:20px 18px 38px}.manual-steps{grid-template-columns:1fr}}
   /* 独立工作流中心：批量导入 / 方案对比 / 校验 / 实际复盘 / 版本 */
@@ -1062,7 +1063,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.21 · 更新于 2026-08-26</span>
+    <span id="calcVersionStamp">计算口径 v3.0.23 · 更新于 2026-08-27</span>
   </div>
 </div>
 
@@ -1078,7 +1079,7 @@
     <div class="manual-layout">
       <nav class="manual-nav" aria-label="说明书目录">
         <div class="manual-nav-title">目录</div>
-        <a href="#manual-start">快速上手</a><a href="#manual-input">输入字段</a><a href="#manual-core">核心口径</a><a href="#manual-fees">平台费用</a><a href="#manual-activity">活动与档位</a><a href="#manual-profit">实付与毛利</a><a href="#manual-summary">汇总版</a><a href="#manual-features">功能清单</a><a href="#manual-data">数据与分享</a><a href="#manual-notice">使用提醒</a><a href="#manual-version">版本记录</a>
+        <a href="#manual-start">快速上手</a><a href="#manual-input">输入字段</a><a href="#manual-catalog">产品资料库</a><a href="#manual-core">核心口径</a><a href="#manual-fees">平台费用</a><a href="#manual-activity">活动与档位</a><a href="#manual-profit">实付与毛利</a><a href="#manual-summary">汇总版</a><a href="#manual-features">功能清单</a><a href="#manual-data">数据与分享</a><a href="#manual-notice">使用提醒</a><a href="#manual-version">版本记录</a>
       </nav>
       <main class="manual-content">
         <section class="manual-section" id="manual-start">
@@ -1109,6 +1110,10 @@
             <li><b>允许修改：</b>自动带出的数值只是录入辅助，堂食原价、外卖原价和产品成本都可以继续手动修改；再次修改产品名称时会重新匹配。</li>
           </ol>
           <div class="manual-callout"><b>组合示例：</b>输入“针王橘子＋茉莉奶白（中杯）”，自动显示堂食原价 35 元、外卖原价 38 元、产品成本 11.13 元。</div>
+          <details class="manual-catalog" id="manual-catalog">
+            <summary>产品价格与成本资料库 <span id="manualCatalogCount">点击展开</span></summary>
+            <div class="manual-catalog-body" id="manualCatalogBody"></div>
+          </details>
         </section>
 
         <section class="manual-section" id="manual-core">
@@ -1237,7 +1242,8 @@ const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
 let manualLastFocus = null;
 function openManual(){
   const overlay=$("manualOverlay"); if(!overlay) return;
-  renderManualVersion();
+  renderManualVersion(); renderManualCatalog();
+  const catalog=$("manual-catalog"); if(catalog) catalog.open=false;
   manualLastFocus=document.activeElement;
   overlay.classList.add("open"); overlay.setAttribute("aria-hidden","false");
   document.body.classList.add("manual-open");
@@ -1255,12 +1261,22 @@ $("manualClose")?.addEventListener("click",closeManual);
 $("manualOverlay")?.addEventListener("click",e=>{if(e.target===$("manualOverlay")) closeManual();});
 document.querySelectorAll(".manual-nav a").forEach(a=>a.addEventListener("click",e=>{
   e.preventDefault(); const target=document.querySelector(a.getAttribute("href"));
+  if(target?.matches("details")) target.open=true;
   target?.scrollIntoView({behavior:"smooth",block:"start"});
 }));
 document.addEventListener("keydown",e=>{if(e.key==="Escape" && $("manualOverlay")?.classList.contains("open")) closeManual();});
 function renderManualVersion(){
   const host=$("manualVersionList"); if(!host || typeof CALC_CHANGELOG==="undefined") return;
   host.innerHTML='<div class="manual-callout"><b>当前计算口径 '+CALC_VERSION+'</b> · 更新于 '+CALC_UPDATED+'</div>'+CALC_CHANGELOG.map(v=>'<div class="wf-version"><time>'+v.date+'</time><div><b>'+v.version+(v.version===CALC_VERSION?' · 当前版本':'')+'</b><ul>'+v.items.map(x=>'<li>'+x+'</li>').join('')+'</ul></div></div>').join('');
+}
+function renderManualCatalog(){
+  const host=$("manualCatalogBody"), count=$("manualCatalogCount");
+  if(!host || typeof PRODUCT_CATALOG==="undefined") return;
+  if(count) count.textContent=PRODUCT_CATALOG.length+" 款产品 · 点击展开";
+  if(host.dataset.rendered==="1") return;
+  const money=v=>v==null?"—":Number(v).toFixed(2).replace(/\.00$/,"").replace(/(\.\d)0$/,"$1");
+  host.innerHTML='<div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>产品名称</th><th>堂食原价</th><th>外卖原价</th><th>产品成本</th></tr></thead><tbody>'+PRODUCT_CATALOG.map(item=>'<tr><td>'+escapeHtml(item.name)+'</td><td>'+money(item.dine)+'</td><td>'+money(item.price)+'</td><td>'+money(item.cost)+'</td></tr>').join('')+'</tbody></table></div><div class="manual-callout"><b>说明：</b>“—”表示该产品暂未录入对应价格；资料自动带出后仍可在测算区手动修改。</div>';
+  host.dataset.rendered="1";
 }
 // 折扣防呆：0.85 / 8.5 / 85 都识别成 0.85；>100 视为无效；返回 {d, bad}
 function parseDisc(v){
@@ -3715,9 +3731,11 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.21";
-const CALC_UPDATED = "2026-08-26";
+const CALC_VERSION = "v3.0.23";
+const CALC_UPDATED = "2026-08-27";
 const CALC_CHANGELOG = [
+  {version:"v3.0.23",date:"2026-08-27",items:["产品价格与成本资料库设置为默认折叠状态，每次重新打开说明书时自动收起","保留标题和目录入口的点击展开功能"]},
+  {version:"v3.0.22",date:"2026-08-27",items:["说明书新增默认折叠的产品价格与成本资料库，可点击查看全部已录入产品","资料表直接读取测算工具内置产品数据，同步展示堂食原价、外卖原价和产品成本，避免重复维护不一致"]},
   {version:"v3.0.21",date:"2026-08-26",items:["修复汇总版美团神会员与淘宝爆红包选择自定义后被自动档位立即覆盖的问题","自定义模式下的商家出资和平台补贴现可正常点击、连续输入，并实时同步至完整版"]},
   {version:"v3.0.20",date:"2026-08-20",items:["统一产品名称、成本、订货价、打包费和价格输入框的灰色占位文字","完整版与汇总版统一使用相同字体、14px 字号、常规字重和灰度"]},
   {version:"v3.0.19",date:"2026-08-20",items:["优化完整版与汇总版数值输入框的选填提示，改为更轻、更小的辅助文字层级","避免大号金额输入样式同步放大占位文字，提升订单参数区的视觉协调度"]},
