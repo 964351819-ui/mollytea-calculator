@@ -56,6 +56,14 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
+  html.front-gate-locked{overflow:hidden}
+  html.front-gate-locked body>*:not(#frontAccessGate){visibility:hidden}
+  #frontAccessGate{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#2d2927;background:radial-gradient(circle at 15% 10%,#f4dfd5 0,transparent 38%),radial-gradient(circle at 90% 10%,#f7e8bd 0,transparent 36%),#f7f4f1;visibility:visible!important}
+  #frontAccessGate[hidden]{display:none!important}
+  .front-gate-card{width:min(430px,100%);padding:40px 36px;border:1px solid rgba(255,255,255,.88);border-radius:28px;background:rgba(255,255,255,.95);box-shadow:0 24px 70px rgba(68,43,31,.16);backdrop-filter:blur(18px)}
+  .front-gate-brand{margin-bottom:10px;color:#d64a72;font-size:13px;font-weight:800;letter-spacing:.16em}.front-gate-title{margin:0 0 10px;font-size:25px;line-height:1.35}.front-gate-title::before{content:"";display:inline-block;width:5px;height:22px;margin-right:10px;border-radius:9px;background:#b47a4b;vertical-align:-4px}
+  .front-gate-desc{margin:0 0 28px;color:#817773;font-size:14px;line-height:1.7}.front-gate-label{display:block;margin-bottom:9px;color:#615956;font-size:14px;font-weight:650}.front-gate-password-wrap{position:relative}.front-gate-input{width:100%;height:52px;padding:0 52px 0 16px;border:1px solid #eadfd9;border-radius:15px;outline:none;background:#f8f6f4;color:#2d2927;font-size:16px}.front-gate-input:focus{border-color:#ca8c61;box-shadow:0 0 0 4px rgba(202,140,97,.14);background:#fff}.front-gate-eye{position:absolute;top:50%;right:8px;display:grid;width:40px;height:40px;padding:0;transform:translateY(-50%);place-items:center;border:0;border-radius:11px;background:transparent;color:#8d837e;cursor:pointer}.front-gate-eye:hover{background:#eee9e5;color:#574f4b}.front-gate-eye:focus-visible{outline:2px solid #ca8c61;outline-offset:1px}.front-gate-eye svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.front-gate-eye .eye-off{display:none}.front-gate-eye.is-visible .eye-on{display:none}.front-gate-eye.is-visible .eye-off{display:block}
+  .front-gate-hint{margin:12px 0 0;color:#9a918d;font-size:12px;line-height:1.5}.front-gate-error{display:none;margin:0 0 16px;padding:11px 13px;border-radius:12px;color:#b22c4d;background:#fff0f3;font-size:13px}.front-gate-error.show{display:block}.front-gate-btn{width:100%;height:52px;margin-top:16px;border:0;border-radius:15px;color:#fff;background:linear-gradient(135deg,#d84972,#c94369);font-size:16px;font-weight:750;cursor:pointer;box-shadow:0 10px 24px rgba(211,70,108,.24)}.front-gate-foot{margin:18px 0 0;text-align:center;font-size:12px;color:#9a918d}
   body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
        color:var(--ink);-webkit-font-smoothing:antialiased;padding:34px 20px 80px;
        background-color:var(--bg);background-image:var(--custom-bg,none);background-size:cover;background-position:center;background-attachment:fixed;transition:background-color .2s,color .2s}
@@ -745,10 +753,79 @@
   .wf-field{display:grid;gap:5px}.wf-field label{font-size:11px;color:var(--sub)}.wf-field input,.wf-field select,.wf-field textarea{width:100%;min-width:0;padding:8px 9px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink);font:inherit;font-size:12.5px}.wf-field textarea{min-height:70px;resize:vertical}.wf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.wf-card{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card-2)}.wf-card h3{margin:0 0 6px;font-size:14px}.wf-card p{margin:4px 0;color:var(--sub);font-size:12px;line-height:1.65}.wf-note{padding:10px 12px;border-left:3px solid var(--accent);background:var(--glow);color:var(--sub);font-size:12px;line-height:1.65}.wf-empty{padding:28px;text-align:center;color:var(--sub);font-size:13px}
   .wf-tablewrap{overflow:auto;margin-top:12px}.wf-table{width:100%;min-width:760px;border-collapse:collapse;font-size:12px}.wf-table th,.wf-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}.wf-table th{background:var(--field);color:var(--sub);font-weight:600}.wf-table input{width:92px;height:32px;padding:4px 7px;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:inherit;font-size:12px}.wf-table .neg{color:var(--warn);font-weight:700}.wf-table .pos{color:var(--good);font-weight:700}
   .wf-badge{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;font-size:10.5px;font-weight:700}.wf-badge.error{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent)}.wf-badge.warn{color:var(--amber);background:color-mix(in srgb,var(--amber) 10%,transparent)}.wf-badge.ok{color:var(--good);background:color-mix(in srgb,var(--good) 10%,transparent)}
-  .wf-scenario{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card-2);margin-top:8px}.wf-scenario input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent)}.wf-scenario-main{flex:1;min-width:0}.wf-scenario-main b{display:block;font-size:13px}.wf-scenario-main span{display:block;color:var(--sub);font-size:11px}.wf-version{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.wf-version time{color:var(--sub);font-size:11px}.wf-version b{display:block;font-size:13px}.wf-version ul{margin:5px 0 0;padding-left:17px;color:var(--sub);font-size:12px;line-height:1.7}
+  .wf-scenario{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card-2);margin-top:8px}.wf-scenario input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent)}.wf-scenario-main{flex:1;min-width:0}.wf-scenario-main b{display:block;font-size:13px}.wf-scenario-main span{display:block;color:var(--sub);font-size:11px}.manual-version-fold{margin-top:10px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);overflow:hidden}.manual-version-fold>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650;user-select:none}.manual-version-fold>summary::-webkit-details-marker{display:none}.manual-version-fold>summary::before{content:"›";display:grid;width:19px;height:19px;flex:none;place-items:center;border-radius:50%;background:var(--glow);color:var(--accent);font-size:17px;line-height:1;transition:transform .16s}.manual-version-fold[open]>summary::before{transform:rotate(90deg)}.manual-version-fold>summary span{margin-left:auto;color:var(--sub);font-size:11.5px;font-weight:500}.manual-version-body{padding:0 14px 8px;border-top:1px solid var(--line)}.wf-version{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.wf-version:last-child{border-bottom:0}.wf-version time{color:var(--sub);font-size:11px}.wf-version b{display:block;font-size:13px}.wf-version ul{margin:5px 0 0;padding-left:17px;color:var(--sub);font-size:12px;line-height:1.7}
   @media(max-width:760px){.workflow-overlay{padding:0}.workflow-dialog{width:100%;height:100vh;max-height:none;border:0;border-radius:0}.workflow-body{padding:18px}.wf-grid{grid-template-columns:1fr}}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"])[data-has-background][data-bg-treatment="soft"] body::before{background:rgba(18,17,17,.38)}:root:not([data-theme="light"])[data-has-background][data-bg-treatment="deep"] body::before{background:rgba(18,17,17,.62)}}
 </style>
+
+<div id="frontAccessGate" role="dialog" aria-modal="true" aria-labelledby="frontGateTitle">
+  <div class="front-gate-card">
+    <div class="front-gate-brand">MOLLY TEA · 茉莉奶白</div>
+    <h1 class="front-gate-title" id="frontGateTitle">内部访问验证</h1>
+    <p class="front-gate-desc">请输入公司内部访问密码。验证成功后，当前浏览器将在 30 天内保持登录。</p>
+    <div class="front-gate-error" id="frontGateError">访问密码不正确，请重新输入。</div>
+    <form id="frontGateForm">
+      <label class="front-gate-label" for="frontGatePassword">访问密码</label>
+      <div class="front-gate-password-wrap">
+        <input class="front-gate-input" id="frontGatePassword" type="password" autocomplete="current-password" required autofocus>
+        <button class="front-gate-eye" id="frontGateEye" type="button" aria-label="显示密码" aria-pressed="false" title="显示密码">
+          <svg class="eye-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg>
+          <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 3 18 18M10.6 6.1A10 10 0 0 1 12 6c6 0 9.5 6 9.5 6a15.4 15.4 0 0 1-2.2 2.8M6.5 6.5C4 8.2 2.5 12 2.5 12s3.5 6 9.5 6a9.4 9.4 0 0 0 3.2-.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+        </button>
+      </div>
+      <div class="front-gate-hint">密码提示：茉莉奶白-企业邮箱默认密码</div>
+      <button class="front-gate-btn" type="submit">进入测算工具</button>
+    </form>
+    <div class="front-gate-foot">仅限公司内部授权人员使用</div>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY="mollytea_front_gate_until_v1";
+  var THIRTY_DAYS=30*24*60*60*1000;
+  var SALT="mollytea-calculator-front-gate-v1";
+  var EXPECTED_HASH="bf1be29e6261a75f52b7b0b62e8bf31888b5c415b723eade9f0ed0e992df2555";
+  var root=document.documentElement;
+  root.classList.add("front-gate-locked");
+  function unlock(){
+    root.classList.remove("front-gate-locked");
+    var gate=document.getElementById("frontAccessGate");
+    if(gate) gate.hidden=true;
+  }
+  try{
+    if(Number(localStorage.getItem(STORAGE_KEY)||0)>Date.now()){unlock();return;}
+  }catch(e){}
+  async function derive(value){
+    var enc=new TextEncoder();
+    var key=await crypto.subtle.importKey("raw",enc.encode(value),"PBKDF2",false,["deriveBits"]);
+    var bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(SALT),iterations:180000,hash:"SHA-256"},key,256);
+    return Array.from(new Uint8Array(bits)).map(function(b){return b.toString(16).padStart(2,"0")}).join("");
+  }
+  document.addEventListener("DOMContentLoaded",function(){
+    var form=document.getElementById("frontGateForm"),input=document.getElementById("frontGatePassword"),error=document.getElementById("frontGateError"),eye=document.getElementById("frontGateEye");
+    eye.addEventListener("click",function(){
+      var visible=input.type==="text";
+      input.type=visible?"password":"text";
+      eye.classList.toggle("is-visible",!visible);
+      eye.setAttribute("aria-pressed",String(!visible));
+      eye.setAttribute("aria-label",visible?"显示密码":"隐藏密码");
+      eye.title=visible?"显示密码":"隐藏密码";
+      input.focus();
+    });
+    form.addEventListener("submit",async function(event){
+      event.preventDefault();
+      var button=form.querySelector(".front-gate-btn");button.disabled=true;button.textContent="正在验证…";
+      try{
+        if(await derive(input.value)===EXPECTED_HASH){
+          try{localStorage.setItem(STORAGE_KEY,String(Date.now()+THIRTY_DAYS));}catch(e){}
+          input.value="";unlock();
+        }else{error.classList.add("show");input.select();}
+      }catch(e){error.textContent="当前浏览器无法完成验证，请更换最新版浏览器。";error.classList.add("show");}
+      button.disabled=false;button.textContent="进入测算工具";
+    });
+  });
+})();
+</script>
 
 <div class="wrap">
   <div class="hero-deco" aria-hidden="true">
@@ -1063,7 +1140,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.23 · 更新于 2026-08-27</span>
+    <span id="calcVersionStamp">计算口径 v3.0.26 · 更新于 2026-08-28</span>
   </div>
 </div>
 
@@ -1244,6 +1321,7 @@ function openManual(){
   const overlay=$("manualOverlay"); if(!overlay) return;
   renderManualVersion(); renderManualCatalog();
   const catalog=$("manual-catalog"); if(catalog) catalog.open=false;
+  const versionFold=$("manualVersionFold"); if(versionFold) versionFold.open=false;
   manualLastFocus=document.activeElement;
   overlay.classList.add("open"); overlay.setAttribute("aria-hidden","false");
   document.body.classList.add("manual-open");
@@ -1267,7 +1345,7 @@ document.querySelectorAll(".manual-nav a").forEach(a=>a.addEventListener("click"
 document.addEventListener("keydown",e=>{if(e.key==="Escape" && $("manualOverlay")?.classList.contains("open")) closeManual();});
 function renderManualVersion(){
   const host=$("manualVersionList"); if(!host || typeof CALC_CHANGELOG==="undefined") return;
-  host.innerHTML='<div class="manual-callout"><b>当前计算口径 '+CALC_VERSION+'</b> · 更新于 '+CALC_UPDATED+'</div>'+CALC_CHANGELOG.map(v=>'<div class="wf-version"><time>'+v.date+'</time><div><b>'+v.version+(v.version===CALC_VERSION?' · 当前版本':'')+'</b><ul>'+v.items.map(x=>'<li>'+x+'</li>').join('')+'</ul></div></div>').join('');
+  host.innerHTML='<div class="manual-callout"><b>当前计算口径 '+CALC_VERSION+'</b> · 更新于 '+CALC_UPDATED+'</div><details class="manual-version-fold" id="manualVersionFold"><summary>查看版本更新记录<span>'+CALC_CHANGELOG.length+' 个版本 · 点击展开</span></summary><div class="manual-version-body">'+CALC_CHANGELOG.map(v=>'<div class="wf-version"><time>'+v.date+'</time><div><b>'+v.version+(v.version===CALC_VERSION?' · 当前版本':'')+'</b><ul>'+v.items.map(x=>'<li>'+x+'</li>').join('')+'</ul></div></div>').join('')+'</div></details>';
 }
 function renderManualCatalog(){
   const host=$("manualCatalogBody"), count=$("manualCatalogCount");
@@ -3731,9 +3809,12 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.23";
-const CALC_UPDATED = "2026-08-27";
+const CALC_VERSION = "v3.0.26";
+const CALC_UPDATED = "2026-08-28";
 const CALC_CHANGELOG = [
+  {version:"v3.0.26",date:"2026-08-28",items:["版本记录改为一个总折叠开关，默认隐藏全部版本明细，展开后一次查看完整更新记录","产品资料库继续保持默认折叠，并在每次打开说明书时恢复收起状态"]},
+  {version:"v3.0.25",date:"2026-08-28",items:["说明书版本记录改为逐个版本折叠展示，默认全部收起，点击版本标题查看详情","每次打开说明书时，产品资料库与版本记录均恢复默认折叠状态"]},
+  {version:"v3.0.24",date:"2026-08-28",items:["原 GitHub 固定网址新增前端访问密码门，验证成功后当前浏览器 30 天内免重复输入","密码输入框增加显示/隐藏按钮，便于用户核对输入内容","访问密码仅以 PBKDF2 派生校验值写入页面；前端保护用于日常访问限制，后续可升级服务器端验证"]},
   {version:"v3.0.23",date:"2026-08-27",items:["产品价格与成本资料库设置为默认折叠状态，每次重新打开说明书时自动收起","保留标题和目录入口的点击展开功能"]},
   {version:"v3.0.22",date:"2026-08-27",items:["说明书新增默认折叠的产品价格与成本资料库，可点击查看全部已录入产品","资料表直接读取测算工具内置产品数据，同步展示堂食原价、外卖原价和产品成本，避免重复维护不一致"]},
   {version:"v3.0.21",date:"2026-08-26",items:["修复汇总版美团神会员与淘宝爆红包选择自定义后被自动档位立即覆盖的问题","自定义模式下的商家出资和平台补贴现可正常点击、连续输入，并实时同步至完整版"]},
