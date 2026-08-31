@@ -662,7 +662,7 @@
     background:var(--accent);border:none;border-radius:10px;padding:12px;cursor:pointer;transition:opacity .15s}
   .listbtn:hover{opacity:.9}
   .listbtn.done{background:var(--good)}
-  /* 毛利率（完整版结果卡） */
+  /* 外卖毛利率（完整版结果卡） */
   .margin{margin-top:8px;text-align:right;font-size:12.5px;color:var(--sub)}
   .margin b{font-weight:800}
   .margin b.good{color:var(--good)}.margin b.mid{color:var(--amber)}.margin b.bad{color:var(--warn)}
@@ -702,7 +702,7 @@
   @media(min-width:981px){body:not(.exec) .wrap{max-width:min(97vw,1480px)}}
   @media(max-width:980px){.full-modules{display:block}.full-module{margin-bottom:14px}.full-module:last-child{margin-bottom:0}.full-module[data-module="activity"] .acts{display:grid;grid-template-columns:1fr;grid-template-rows:none}.full-module[data-module="activity"] .act{height:auto}}
   @media(max-width:620px){.activity-payments{grid-template-columns:1fr}}
-  /* 汇总版：成本 / 毛利率 列 */
+  /* 汇总版：成本 / 外卖毛利率 列 */
   .exec-table td.tcost{color:var(--ink);font-weight:600;text-align:right}
   .exec-table th.col-cost,.exec-table th.col-margin{text-align:right}
   .exec-table.hide-cost .col-cost{display:none}
@@ -882,7 +882,7 @@
       </div>
       <div>
         <label>产品成本（元）</label>
-        <input id="cost" type="number" min="0" step="0.01" value="" inputmode="decimal" placeholder="填成本算毛利率">
+        <input id="cost" type="number" min="0" step="0.01" value="" inputmode="decimal" placeholder="填成本算外卖毛利率">
       </div>
       <div>
         <label>周边订货价（元）</label>
@@ -1091,8 +1091,8 @@
           <label><input type="checkbox" id="tg-dinepay" checked>堂食实付</label>
           <label><input type="checkbox" id="tg-cost" checked>产品成本</label>
           <label><input type="checkbox" id="tg-wholesale" checked>周边订货价</label>
-          <label><input type="checkbox" id="tg-profit" checked>毛利</label>
-          <label><input type="checkbox" id="tg-margin" checked>毛利率</label>
+          <label><input type="checkbox" id="tg-profit" checked>外卖毛利</label>
+          <label><input type="checkbox" id="tg-margin" checked>外卖毛利率</label>
           <span class="tg-sep"></span>
           <span class="tg-label">渠道字段</span>
           <label><input type="checkbox" id="mode-mt" checked>美团</label>
@@ -1123,8 +1123,8 @@
               <th class="col-dinepay">堂食实付</th>
               <th class="col-cost">产品成本</th>
               <th class="col-wholesale">周边订货价</th>
-              <th class="col-profit dh">毛利</th>
-              <th class="col-margin dh">毛利率</th>
+              <th class="col-profit dh">外卖毛利</th>
+              <th class="col-margin dh">外卖毛利率</th>
               <th class="delc"></th>
             </tr>
           </thead>
@@ -1140,7 +1140,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.26 · 更新于 2026-08-28</span>
+    <span id="calcVersionStamp">计算口径 v3.0.27 · 更新于 2026-08-31</span>
   </div>
 </div>
 
@@ -1150,19 +1150,19 @@
 <div class="manual-overlay" id="manualOverlay" aria-hidden="true">
   <div class="manual-dialog" role="dialog" aria-modal="true" aria-labelledby="manualTitle">
     <header class="manual-head">
-      <div><div class="manual-kicker">MOLLY TEA · USER GUIDE</div><h2 id="manualTitle">茉莉奶白·测算看板说明书</h2><p>从单品测算到多产品复盘，统一理解输入、费用、到手与毛利口径。</p></div>
+      <div><div class="manual-kicker">MOLLY TEA · USER GUIDE</div><h2 id="manualTitle">茉莉奶白·测算看板说明书</h2><p>从单品测算到多产品复盘，统一理解输入、费用、到手与外卖毛利口径。</p></div>
       <button class="manual-close" id="manualClose" type="button" aria-label="关闭说明书">×</button>
     </header>
     <div class="manual-layout">
       <nav class="manual-nav" aria-label="说明书目录">
         <div class="manual-nav-title">目录</div>
-        <a href="#manual-start">快速上手</a><a href="#manual-input">输入字段</a><a href="#manual-catalog">产品资料库</a><a href="#manual-core">核心口径</a><a href="#manual-fees">平台费用</a><a href="#manual-activity">活动与档位</a><a href="#manual-profit">实付与毛利</a><a href="#manual-summary">汇总版</a><a href="#manual-features">功能清单</a><a href="#manual-data">数据与分享</a><a href="#manual-notice">使用提醒</a><a href="#manual-version">版本记录</a>
+        <a href="#manual-start">快速上手</a><a href="#manual-input">输入字段</a><a href="#manual-catalog">产品资料库</a><a href="#manual-core">核心口径</a><a href="#manual-fees">平台费用</a><a href="#manual-activity">活动与档位</a><a href="#manual-profit">实付与外卖毛利</a><a href="#manual-summary">汇总版</a><a href="#manual-features">功能清单</a><a href="#manual-data">数据与分享</a><a href="#manual-notice">使用提醒</a><a href="#manual-version">版本记录</a>
       </nav>
       <main class="manual-content">
         <section class="manual-section" id="manual-start">
-          <h3>1. 快速上手</h3><p>这个工具用于估算美团、淘宝闪购在直营与代理口径下的商家到手价、到手率和毛利表现。建议先完成一笔单品测算，再加入汇总列表进行横向比较。</p>
+          <h3>1. 快速上手</h3><p>这个工具用于估算美团、淘宝闪购在直营与代理口径下的商家到手价、到手率和外卖毛利表现。建议先完成一笔单品测算，再加入汇总列表进行横向比较。</p>
           <div class="manual-steps"><div class="manual-step"><i>1</i><b>填写订单</b><span>输入外卖原价、打包费、折扣、距离和时段；成本类字段按需填写。</span></div><div class="manual-step"><i>2</i><b>选择活动</b><span>勾选神会员、爆红包或减配；标准档位自动匹配，自定义档位可手填。</span></div><div class="manual-step"><i>3</i><b>查看与汇总</b><span>核对平台费用明细，点击“加入汇总列表”，比较多产品与多渠道结果。</span></div></div>
-          <div class="manual-callout"><b>最少必填：</b>外卖原价与打包费。若要看毛利，请继续填写产品成本；如包含周边物料，再填写周边订货价。</div>
+          <div class="manual-callout"><b>最少必填：</b>外卖原价与打包费。若要看外卖毛利，请继续填写产品成本；如包含周边物料，再填写周边订货价。</div>
         </section>
 
         <section class="manual-section" id="manual-input">
@@ -1172,8 +1172,8 @@
             <tr><td>外卖原价</td><td>折扣、活动门槛、到手和平台费用的核心价格。</td><td>填写外卖端展示原价，不是折后价。</td></tr>
             <tr><td>堂食原价</td><td>用于展示堂食实付及外卖/堂食价格对照。</td><td>不参与平台佣金和到手价计算。</td></tr>
             <tr><td>打包费</td><td>计入订单金额、活动门槛与到手率分母。</td><td>必填；没有打包费时填写 0。</td></tr>
-            <tr><td>产品成本</td><td>用于毛利和毛利率计算。</td><td>填写该商品的直接产品成本。</td></tr>
-            <tr><td>周边订货价</td><td>作为额外成本计入毛利。</td><td>套餐含杯套、冰箱贴等周边时填写；无则留空。</td></tr>
+            <tr><td>产品成本</td><td>用于外卖毛利和外卖毛利率计算。</td><td>填写该商品的直接产品成本。</td></tr>
+            <tr><td>周边订货价</td><td>作为额外成本计入外卖毛利。</td><td>套餐含杯套、冰箱贴等周边时填写；无则留空。</td></tr>
             <tr><td>折扣 / 折后价</td><td>两种输入方式可切换，系统最终统一换算为折扣率。</td><td>折扣支持 0.85、8.5、85 三种写法；折后价不得高于外卖原价。</td></tr>
             <tr><td>配送距离 / 时段</td><td>决定不同平台和渠道的配送加价。</td><td>点击看板自定义选择框设置；支持鼠标、方向键与回车。完整版和汇总版会自动同步。</td></tr>
             <tr><td>淘宝直营技术费率</td><td>淘宝直营技术服务费的城市差异参数。</td><td>默认 7%，支持小数；实际因城、因店可能不同。</td></tr>
@@ -1248,12 +1248,12 @@
         </section>
 
         <section class="manual-section" id="manual-profit">
-          <h3>6. 实付、毛利与毛利率</h3>
+          <h3>6. 实付、外卖毛利与外卖毛利率</h3>
           <div class="manual-formula">外卖实付 = 外卖原价 + 打包费 − 折扣出资 − 神会员/爆红包商家出资 − 平台补贴</div>
           <div class="manual-formula">堂食实付 = 堂食原价</div>
-          <div class="manual-formula">毛利 = 到手价 − 产品成本 − 周边订货价</div>
-          <div class="manual-formula">毛利率 = 毛利 ÷ 到手价</div>
-          <p>产品成本或周边订货价未填写时，对应字段按 0 参与毛利计算；若两者均未填写，建议不要将毛利结果用于经营判断。</p>
+          <div class="manual-formula">外卖毛利 = 到手价 − 产品成本 − 周边订货价</div>
+          <div class="manual-formula">外卖毛利率 = 外卖毛利 ÷ 到手价</div>
+          <p>产品成本或周边订货价未填写时，对应字段按 0 参与外卖毛利计算；若两者均未填写，建议不要将外卖毛利结果用于经营判断。</p>
         </section>
 
         <section class="manual-section" id="manual-summary">
@@ -1274,8 +1274,8 @@
 
         <section class="manual-section" id="manual-notice">
           <h3>10. 使用提醒</h3>
-          <ul><li>结果用于方案预估和内部比较，不替代平台账单结算。</li><li>本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据；请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</li><li>淘宝直营技术服务费因城定价，默认 7% 仅为工具预设，请按当地实际政策修改。</li><li>平台费率、活动档位、配送规则发生变化时，应先更新工具口径再批量测算。</li><li>输入负数、折后价高于原价或缺少打包费会导致结果失真；打包费为 0 时也应明确填写 0。</li><li>比较产品时，请确保距离、时段、活动与渠道口径一致。</li><li>毛利只扣除了产品成本与周边订货价，未包含房租、人工、水电、损耗、税费等经营费用。</li></ul>
-          <div class="manual-callout"><b>建议复核顺序：</b>先核对价格与折扣 → 再核对活动出资/补贴 → 再看平台费用明细 → 最后判断到手率和毛利率。</div>
+          <ul><li>结果用于方案预估和内部比较，不替代平台账单结算。</li><li>本工具测算结果仅供经营分析和方案预估参考，不作为最终结算、财务核算或决策依据；请对关键输入和测算结果进行二次人工复核，最终以平台官方规则及实际结算结果为准。</li><li>淘宝直营技术服务费因城定价，默认 7% 仅为工具预设，请按当地实际政策修改。</li><li>平台费率、活动档位、配送规则发生变化时，应先更新工具口径再批量测算。</li><li>输入负数、折后价高于原价或缺少打包费会导致结果失真；打包费为 0 时也应明确填写 0。</li><li>比较产品时，请确保距离、时段、活动与渠道口径一致。</li><li>外卖毛利只扣除了产品成本与周边订货价，未包含房租、人工、水电、损耗、税费等经营费用。</li></ul>
+          <div class="manual-callout"><b>建议复核顺序：</b>先核对价格与折扣 → 再核对活动出资/补贴 → 再看平台费用明细 → 最后判断到手率和外卖毛利率。</div>
         </section>
         <section class="manual-section" id="manual-version">
           <h3>11. 版本与更新记录</h3><p>版本号用于确认计算口径。导出分析和保存方案时，建议同时保留当前版本信息。</p>
@@ -1372,7 +1372,7 @@ const pct = v => (v*100).toFixed(1) + "%";
 // 到手率分级配色阈值（可改）
 const GOOD = 0.80, MID = 0.72;
 const grade = rate => rate>=GOOD ? "good" : rate>=MID ? "mid" : "bad";
-// 毛利率分级（可改）：<0 亏(红)，≥45% 好(绿)，其余(琥珀)
+// 外卖毛利率分级（可改）：<0 亏(红)，≥45% 好(绿)，其余(琥珀)
 const GOODM = 0.45;
 const marginGrade = m => m<0 ? "bad" : m>=GOODM ? "good" : "mid";
 const marginOf = (net, cost, wholesale) => {
@@ -1666,13 +1666,13 @@ function compute(){
   setBig("mt_pct", "mt_amt", mtRate);
   setBig("tb_pct", "tb_amt", tbRate);
 
-  // 毛利率 =（到手价 − 成本 − 订货价）÷ 到手价
+  // 外卖毛利率 =（到手价 − 成本 − 订货价）÷ 到手价
   const setMargin = (mid, rate) => {
     const el = $(mid);
     const cost = num($("cost").value), wholesale = num($("wholesale").value), net = P*rate;
     if(P<=0 || cost<=0){ el.textContent = ""; return; }
     const m = marginOf(net, cost, wholesale), profit = net - cost - wholesale;
-    el.innerHTML = '毛利率 <b class="'+marginGrade(m)+'">'+pct(m)+'</b> · 毛利 '+ (Math.round(profit*100)/100).toFixed(2) +' 元';
+    el.innerHTML = '外卖毛利率 <b class="'+marginGrade(m)+'">'+pct(m)+'</b> · 外卖毛利 '+ (Math.round(profit*100)/100).toFixed(2) +' 元';
   };
   setMargin("mt_margin", mtRate);
   setMargin("tb_margin", tbRate);
@@ -1931,7 +1931,7 @@ function renderExec(){
   const tb = $("execRows");
   tb.innerHTML = "";
   const rowModes = selectedChannelModes();
-  const EXEC_LABELS = ["","","标签","渠道口径","产品名称","外卖原价","堂食原价","配送距离","时段","折扣","活动","打包费","佣金","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","毛利","毛利率",""];
+  const EXEC_LABELS = ["","","标签","渠道口径","产品名称","外卖原价","堂食原价","配送距离","时段","折扣","活动","打包费","佣金","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","外卖毛利","外卖毛利率",""];
   rowModes.forEach(({id:rowMode,label:rowChannel}) => products.forEach((p, i) => {
     const draft = !!p.draft;
     const cv = prodChannelMode(p,rowMode);
@@ -2119,7 +2119,7 @@ function renderExec(){
   initColDrag();
   initRowDrag();
   $("execFoot").textContent = products.length
-    ? "渠道字段可选择直营、代理；同时勾选时，全部直营产品排在上方、代理产品排在下方。佣金 / 活动 / 到手价 / 到手率 / 外卖实付 / 毛利 / 毛利率仍按美团、淘宝各 50% 取平均；毛利 = 到手价 − 成本 − 订货价；到手率 = 到手价 ÷（外卖原价+打包费）。"
+    ? "渠道字段可选择直营、代理；同时勾选时，全部直营产品排在上方、代理产品排在下方。佣金 / 活动 / 到手价 / 到手率 / 外卖实付 / 外卖毛利 / 外卖毛利率仍按美团、淘宝各 50% 取平均；外卖毛利 = 到手价 − 成本 − 订货价；到手率 = 到手价 ÷（外卖原价+打包费）。"
     : "";
   $("calcNote").style.display = products.length ? "" : "none";
   if(typeof updateValidationBadge==="function") updateValidationBadge();
@@ -2143,8 +2143,8 @@ function showDecisionCard(p, mode){
   const cv = prodChannelMode(p,mode||channelMode), mtNet = p.price*(cv.mtRate||0), tbNet = p.price*(cv.tbRate||0), m = summaryMetrics(p,mode);
   let platform = platFilter==="mt" ? "当前仅看美团" : platFilter==="tb" ? "当前仅看淘宝" : Math.abs(mtNet-tbNet)<0.05 ? "两平台接近" : mtNet>tbNet ? "优先美团" : "优先淘宝";
   const burdens = [{name:"佣金",value:m.fee},{name:"活动与折扣出资",value:m.act},{name:"产品及周边成本",value:(p.cost||0)+(p.wholesale||0)}].sort((a,b)=>b.value-a.value), key=burdens[0];
-  let action = m.margin<0 ? "当前为负毛利，先核对产品成本和周边订货价，再决定是否保留活动。" : key.name==="产品及周边成本" ? "成本是当前第一压力项，建议优先复核配方、包材和周边订货价。" : key.name==="活动与折扣出资" ? "活动与折扣占用最高，建议优先测试更低补贴档位或缩小折扣力度。" : "佣金占用最高，建议结合配送距离、时段和两平台到手差异选择主推平台。";
-  panel.innerHTML = '<div class="decision-panel-head"><h3>'+escapeHtml(p.name||"未命名产品")+' · '+(mode==="dai"?"代理":"直营")+'决策卡</h3><button class="decision-close" type="button">收起</button></div><div class="decision-panel-grid"><div>建议平台<b>'+platform+'</b></div><div>当前到手 / 毛利率<b>'+fmtY(m.net)+' · '+pct(m.margin)+'</b></div><div>最大压力项<b>'+key.name+' '+fmtY(key.value)+'</b></div></div><div class="decision-action"><b>建议动作：</b>'+action+'</div>';
+  let action = m.margin<0 ? "当前为负外卖毛利，先核对产品成本和周边订货价，再决定是否保留活动。" : key.name==="产品及周边成本" ? "成本是当前第一压力项，建议优先复核配方、包材和周边订货价。" : key.name==="活动与折扣出资" ? "活动与折扣占用最高，建议优先测试更低补贴档位或缩小折扣力度。" : "佣金占用最高，建议结合配送距离、时段和两平台到手差异选择主推平台。";
+  panel.innerHTML = '<div class="decision-panel-head"><h3>'+escapeHtml(p.name||"未命名产品")+' · '+(mode==="dai"?"代理":"直营")+'决策卡</h3><button class="decision-close" type="button">收起</button></div><div class="decision-panel-grid"><div>建议平台<b>'+platform+'</b></div><div>当前到手 / 外卖毛利率<b>'+fmtY(m.net)+' · '+pct(m.margin)+'</b></div><div>最大压力项<b>'+key.name+' '+fmtY(key.value)+'</b></div></div><div class="decision-action"><b>建议动作：</b>'+action+'</div>';
   panel.classList.add("show"); panel.querySelector(".decision-close").onclick=()=>panel.classList.remove("show");
 }
 
@@ -2918,17 +2918,17 @@ $("shotBtn").addEventListener("click", async ()=>{
       const cv = prodChannel(p), fee=pick(cv.mtFee,cv.tbFee), rate=pick(cv.mtRate,cv.tbRate), net=p.price*rate;
       const act=platFilter==="mt"?(p.mtAct||0)+(p.mtDiscPay||0):platFilter==="tb"?(p.tbAct||0)+(p.tbDiscPay||0):((p.mtAct||0)+(p.tbAct||0)+(p.mtDiscPay||0)+(p.tbDiscPay||0))/2;
       const pay=p.mtPay!=null?pick(p.mtPay,p.tbPay):null, profit=profitOf(net,p.cost,p.wholesale), margin=marginOf(net,p.cost,p.wholesale);
-      return {序号:i+1,标签:p.tag||"",产品名称:p.name||"未命名产品",外卖原价:p.price,堂食原价:p.priceDine||null,配送距离_km:p.dist||null,时段:TIME_LABEL[p.time]||"日间",折扣:platFilter==="tb"?p.dTB:p.dMT,活动:act,打包费:p.packFee||0,佣金:fee,到手价:net,到手率:rShow(rate,p.price,p.packFee),外卖实付:pay,堂食实付:p.priceDine||null,产品成本:p.cost||null,周边订货价:p.wholesale||null,毛利:profit,毛利率:margin};
+      return {序号:i+1,标签:p.tag||"",产品名称:p.name||"未命名产品",外卖原价:p.price,堂食原价:p.priceDine||null,配送距离_km:p.dist||null,时段:TIME_LABEL[p.time]||"日间",折扣:platFilter==="tb"?p.dTB:p.dMT,活动:act,打包费:p.packFee||0,佣金:fee,到手价:net,到手率:rShow(rate,p.price,p.packFee),外卖实付:pay,堂食实付:p.priceDine||null,产品成本:p.cost||null,周边订货价:p.wholesale||null,外卖毛利:profit,外卖毛利率:margin};
     });
     const avg = key => rows.reduce((s,r)=>s+(Number(r[key])||0),0)/rows.length;
-    const avgRate = avg("到手率"), avgMargin = avg("毛利率"), avgFee = avg("佣金"), avgAct = avg("活动");
+    const avgRate = avg("到手率"), avgMargin = avg("外卖毛利率"), avgFee = avg("佣金"), avgAct = avg("活动");
     const diagnosis = rows.map((r, i) => {
       const base = r.外卖原价 + r.打包费, feeRate = base>0?r.佣金/base:0, actRate = base>0?r.活动/base:0;
       const costRate = r.到手价>0?((r.产品成本||0)+(r.周边订货价||0))/r.到手价:0;
-      const status = r.到手率>=avgRate && r.毛利率>=avgMargin ? "优先推广" : r.到手率>=avgRate ? "优化成本" : r.毛利率>=avgMargin ? "优化平台费" : "重点复盘";
+      const status = r.到手率>=avgRate && r.外卖毛利率>=avgMargin ? "优先推广" : r.到手率>=avgRate ? "优化成本" : r.外卖毛利率>=avgMargin ? "优化平台费" : "重点复盘";
       const driver = feeRate>=actRate && feeRate>=costRate ? "佣金压力较高" : actRate>=costRate ? "活动成本较高" : "成本占比较高";
-      const priority = Math.max(0,avgRate-r.到手率)*100 + Math.max(0,avgMargin-r.毛利率)*100 + feeRate*20 + actRate*20;
-      return {产品名称:r.产品名称,标签:r.标签||"未分类",到手率:r.到手率,毛利率:r.毛利率,佣金率:feeRate,活动成本率:actRate,成本率:costRate,经营判断:status,主要压力项:driver,优化优先级:priority,建议:status==="优先推广"?"优先保障曝光与供给":status==="优化成本"?"复核产品成本、周边订货价与定价":status==="优化平台费"?"优先调整折扣、活动或平台结构":"同步复核活动、佣金和成本结构"};
+      const priority = Math.max(0,avgRate-r.到手率)*100 + Math.max(0,avgMargin-r.外卖毛利率)*100 + feeRate*20 + actRate*20;
+      return {产品名称:r.产品名称,标签:r.标签||"未分类",到手率:r.到手率,外卖毛利率:r.外卖毛利率,佣金率:feeRate,活动成本率:actRate,成本率:costRate,经营判断:status,主要压力项:driver,优化优先级:priority,建议:status==="优先推广"?"优先保障曝光与供给":status==="优化成本"?"复核产品成本、周边订货价与定价":status==="优化平台费"?"优先调整折扣、活动或平台结构":"同步复核活动、佣金和成本结构"};
     });
     const platformCompare = products.map((p,i) => {
       const cv=prodChannel(p), mtNet=p.price*cv.mtRate, tbNet=p.price*cv.tbRate;
@@ -2936,7 +2936,7 @@ $("shotBtn").addEventListener("click", async ()=>{
     });
     const tagMap = {};
     rows.forEach(r => { const k=r.标签||"未分类"; (tagMap[k]||(tagMap[k]=[])).push(r); });
-    const tagSummary = Object.entries(tagMap).map(([tag,rs]) => ({标签:tag,产品数:rs.length,平均到手率:rs.reduce((s,r)=>s+r.到手率,0)/rs.length,平均毛利率:rs.reduce((s,r)=>s+r.毛利率,0)/rs.length,平均佣金:rs.reduce((s,r)=>s+r.佣金,0)/rs.length,平均活动:rs.reduce((s,r)=>s+r.活动,0)/rs.length})).sort((a,b)=>b.平均毛利率-a.平均毛利率);
+    const tagSummary = Object.entries(tagMap).map(([tag,rs]) => ({标签:tag,产品数:rs.length,平均到手率:rs.reduce((s,r)=>s+r.到手率,0)/rs.length,平均外卖毛利率:rs.reduce((s,r)=>s+r.外卖毛利率,0)/rs.length,平均佣金:rs.reduce((s,r)=>s+r.佣金,0)/rs.length,平均活动:rs.reduce((s,r)=>s+r.活动,0)/rs.length})).sort((a,b)=>b.平均外卖毛利率-a.平均外卖毛利率);
     const priority = [...diagnosis].sort((a,b)=>b.优化优先级-a.优化优先级).map((r,i)=>({优先级排名:i+1,...r}));
     const counts = key => diagnosis.filter(r=>r.经营判断===key).length;
     const analysis = [
@@ -2944,7 +2944,7 @@ $("shotBtn").addEventListener("click", async ()=>{
       ["当前平台口径", platFilter==="mt"?"美团":platFilter==="tb"?"淘宝":"美团 + 淘宝综合"],
       ["当前经营口径", getChannelMode()==="zhi"?"直营":getChannelMode()==="dai"?"代理":"直营 60% + 代理 40%"],
       ["产品数", rows.length], ["平均到手率", avg("到手率")], ["平均到手价", avg("到手价")],
-      ["平均佣金", avgFee], ["平均活动成本", avgAct], ["平均毛利率", avgMargin],
+      ["平均佣金", avgFee], ["平均活动成本", avgAct], ["平均外卖毛利率", avgMargin],
       ["优先推广产品数", counts("优先推广")], ["优化成本产品数", counts("优化成本")],
       ["优化平台费产品数", counts("优化平台费")], ["重点复盘产品数", counts("重点复盘")],
       ["最高优化优先级产品", priority[0]?.产品名称||""], ["优先处理原因", priority[0]?.主要压力项||""],
@@ -3047,7 +3047,7 @@ function archiveChannelMode(a){ const v=archiveView(a); return v.zhi && v.dai ? 
 function archiveControlsMarkup(idx, a){
   const v=archiveView(a), check=(k)=>v.cols[k]?" checked":"";
   return '<details class="col-fold archive-controls" data-arch-controls="'+idx+'"><summary>经营字段 · 渠道字段</summary><div class="col-toggles">'+
-    '<span class="tg-label">经营字段</span>'+ARCH_COLS.map(k=>'<label><input type="checkbox" data-arch-col="'+k+'"'+check(k)+'>'+({tag:"标签",price:"外卖原价",dine:"堂食原价",disc:"折扣",fee:"佣金",act:"活动",net:"到手价",rate:"到手率",pay:"外卖实付",dinepay:"堂食实付",cost:"产品成本",wholesale:"周边订货价",profit:"毛利",margin:"毛利率"}[k])+'</label>').join('')+
+    '<span class="tg-label">经营字段</span>'+ARCH_COLS.map(k=>'<label><input type="checkbox" data-arch-col="'+k+'"'+check(k)+'>'+({tag:"标签",price:"外卖原价",dine:"堂食原价",disc:"折扣",fee:"佣金",act:"活动",net:"到手价",rate:"到手率",pay:"外卖实付",dinepay:"堂食实付",cost:"产品成本",wholesale:"周边订货价",profit:"外卖毛利",margin:"外卖毛利率"}[k])+'</label>').join('')+
     '<span class="tg-sep"></span><div class="arch-mode-line"><span class="tg-label">渠道字段</span><label><input type="checkbox" data-arch-mode="mt"'+(v.mt?" checked":"")+'>美团</label><label><input type="checkbox" data-arch-mode="tb"'+(v.tb?" checked":"")+'>淘宝</label><label><input type="checkbox" data-arch-mode="zhi"'+(v.zhi?" checked":"")+'>直营</label><label><input type="checkbox" data-arch-mode="dai"'+(v.dai?" checked":"")+'>代理</label></div><div class="arch-export-line"><button type="button" data-arch-copy="'+idx+'">复制表格</button><button type="button" data-arch-analysis="'+idx+'">分析表格</button></div></div></details>';
 }
 function applyArchiveCols(){
@@ -3074,11 +3074,11 @@ async function exportArchiveAnalysis(idx, btn){
   try{
     if(!window.XLSX) await new Promise((res,rej)=>{ const s=document.createElement("script"); s.src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"; s.onload=res; s.onerror=rej; document.head.appendChild(s); setTimeout(rej,8000); });
     const pick=(mt,tb)=>pf==="mt"?mt:pf==="tb"?tb:(mt+tb)/2;
-    const rows=a.products.map((p,i)=>{ const cv=prodChannelMode(p,cm), fee=pick(cv.mtFee,cv.tbFee), rate=pick(cv.mtRate,cv.tbRate), net=p.price*rate, act=pf==="mt"?(p.mtAct||0)+(p.mtDiscPay||0):pf==="tb"?(p.tbAct||0)+(p.tbDiscPay||0):((p.mtAct||0)+(p.tbAct||0)+(p.mtDiscPay||0)+(p.tbDiscPay||0))/2; return {序号:i+1,产品名称:p.name||"未命名产品",标签:p.tag||"未分类",外卖原价:p.price,折扣:pf==="tb"?p.dTB:p.dMT,佣金:fee,活动:act,到手价:net,到手率:rShow(rate,p.price,p.packFee),产品成本:p.cost||0,周边订货价:p.wholesale||0,毛利:profitOf(net,p.cost,p.wholesale),毛利率:marginOf(net,p.cost,p.wholesale)}; });
-    const avg=k=>rows.reduce((s,r)=>s+(Number(r[k])||0),0)/rows.length, avgRate=avg("到手率"), avgMargin=avg("毛利率");
-    const diagnosis=rows.map(r=>{ const base=r.外卖原价||1, feeRate=r.佣金/base, actRate=r.活动/base, status=r.到手率>=avgRate&&r.毛利率>=avgMargin?"优先推广":r.到手率>=avgRate?"优化成本":r.毛利率>=avgMargin?"优化平台费":"重点复盘"; return {...r,佣金率:feeRate,活动成本率:actRate,经营判断:status,建议:status==="优先推广"?"优先保障曝光与供给":status==="优化成本"?"复核产品成本与定价":status==="优化平台费"?"优化折扣、活动或平台结构":"同步复核活动、佣金和成本"}; });
+    const rows=a.products.map((p,i)=>{ const cv=prodChannelMode(p,cm), fee=pick(cv.mtFee,cv.tbFee), rate=pick(cv.mtRate,cv.tbRate), net=p.price*rate, act=pf==="mt"?(p.mtAct||0)+(p.mtDiscPay||0):pf==="tb"?(p.tbAct||0)+(p.tbDiscPay||0):((p.mtAct||0)+(p.tbAct||0)+(p.mtDiscPay||0)+(p.tbDiscPay||0))/2; return {序号:i+1,产品名称:p.name||"未命名产品",标签:p.tag||"未分类",外卖原价:p.price,折扣:pf==="tb"?p.dTB:p.dMT,佣金:fee,活动:act,到手价:net,到手率:rShow(rate,p.price,p.packFee),产品成本:p.cost||0,周边订货价:p.wholesale||0,外卖毛利:profitOf(net,p.cost,p.wholesale),外卖毛利率:marginOf(net,p.cost,p.wholesale)}; });
+    const avg=k=>rows.reduce((s,r)=>s+(Number(r[k])||0),0)/rows.length, avgRate=avg("到手率"), avgMargin=avg("外卖毛利率");
+    const diagnosis=rows.map(r=>{ const base=r.外卖原价||1, feeRate=r.佣金/base, actRate=r.活动/base, status=r.到手率>=avgRate&&r.外卖毛利率>=avgMargin?"优先推广":r.到手率>=avgRate?"优化成本":r.外卖毛利率>=avgMargin?"优化平台费":"重点复盘"; return {...r,佣金率:feeRate,活动成本率:actRate,经营判断:status,建议:status==="优先推广"?"优先保障曝光与供给":status==="优化成本"?"复核产品成本与定价":status==="优化平台费"?"优化折扣、活动或平台结构":"同步复核活动、佣金和成本"}; });
     const platform=a.products.map((p,i)=>{const cv=prodChannelMode(p,cm), mt=p.price*cv.mtRate,tb=p.price*cv.tbRate;return {产品名称:rows[i].产品名称,美团到手价:mt,淘宝到手价:tb,美团到手率:rShow(cv.mtRate,p.price,p.packFee),淘宝到手率:rShow(cv.tbRate,p.price,p.packFee),建议平台:mt>tb?"美团":tb>mt?"淘宝闪购":"两平台接近"};});
-    const summary=[["项目名称",a.name||"项目快照"],["生成时间",new Date().toLocaleString("zh-CN")],["平台口径",pf==="mt"?"美团":pf==="tb"?"淘宝":"双平台综合"],["经营口径",cm==="zhi"?"直营":cm==="dai"?"代理":"直营60%+代理40%"],["产品数",rows.length],["平均到手率",avgRate],["平均毛利率",avgMargin],["平均佣金",avg("佣金")],["平均活动成本",avg("活动")]];
+    const summary=[["项目名称",a.name||"项目快照"],["生成时间",new Date().toLocaleString("zh-CN")],["平台口径",pf==="mt"?"美团":pf==="tb"?"淘宝":"双平台综合"],["经营口径",cm==="zhi"?"直营":cm==="dai"?"代理":"直营60%+代理40%"],["产品数",rows.length],["平均到手率",avgRate],["平均外卖毛利率",avgMargin],["平均佣金",avg("佣金")],["平均活动成本",avg("活动")]];
     const wb=XLSX.utils.book_new(), wsS=XLSX.utils.aoa_to_sheet(summary), wsD=XLSX.utils.json_to_sheet(rows), wsG=XLSX.utils.json_to_sheet(diagnosis), wsP=XLSX.utils.json_to_sheet(platform);
     wsS["!cols"]=[{wch:18},{wch:28}]; wsD["!cols"]=wsG["!cols"]=wsP["!cols"]=Array(16).fill({wch:14});
     XLSX.utils.book_append_sheet(wb,wsS,"分析汇总"); XLSX.utils.book_append_sheet(wb,wsD,"产品明细"); XLSX.utils.book_append_sheet(wb,wsG,"经营诊断"); XLSX.utils.book_append_sheet(wb,wsP,"平台差异");
@@ -3111,7 +3111,7 @@ function renderArchives(){
     $("archiveFoot").textContent = "共 "+archives.length+" 份快照";
     return;
   }
-  const ARCH_LABELS = ["","","标签","外卖原价","堂食原价","折扣","佣金","活动","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","毛利","毛利率",""];
+  const ARCH_LABELS = ["","","标签","外卖原价","堂食原价","折扣","佣金","活动","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","外卖毛利","外卖毛利率",""];
   list.innerHTML = entries.map(({a, idx}) => {
     const pf = archivePlatFilter(a);
     const cmA = archiveChannelMode(a);
@@ -3182,7 +3182,7 @@ function renderArchives(){
         archiveControlsMarkup(idx, a)+
         '<div class="exec-tablewrap">'+
         '<table class="exec-table" data-arch-table="'+idx+'">'+
-        '<thead><tr><th class="idx">#</th><th class="col-tag">标签</th><th class="lft">产品名称</th><th class="col-price">外卖原价</th><th class="col-dine">堂食原价</th><th class="col-disc dh">折扣</th><th class="col-fee dh">佣金</th><th class="col-act dh">活动</th><th class="col-net dh">到手价</th><th class="col-rate dh">到手率</th><th class="col-pay dh">外卖实付</th><th class="col-dinepay">堂食实付</th><th class="col-cost">产品成本</th><th class="col-wholesale">周边订货价</th><th class="col-profit dh">毛利</th><th class="col-margin dh">毛利率</th><th class="delc"></th></tr></thead>'+
+        '<thead><tr><th class="idx">#</th><th class="col-tag">标签</th><th class="lft">产品名称</th><th class="col-price">外卖原价</th><th class="col-dine">堂食原价</th><th class="col-disc dh">折扣</th><th class="col-fee dh">佣金</th><th class="col-act dh">活动</th><th class="col-net dh">到手价</th><th class="col-rate dh">到手率</th><th class="col-pay dh">外卖实付</th><th class="col-dinepay">堂食实付</th><th class="col-cost">产品成本</th><th class="col-wholesale">周边订货价</th><th class="col-profit dh">外卖毛利</th><th class="col-margin dh">外卖毛利率</th><th class="delc"></th></tr></thead>'+
         '<tbody>'+rows+avgRow+'</tbody>'+
         '</table>'+
         '</div>'+
@@ -3809,9 +3809,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.26";
-const CALC_UPDATED = "2026-08-28";
+const CALC_VERSION = "v3.0.27";
+const CALC_UPDATED = "2026-08-31";
 const CALC_CHANGELOG = [
+  {version:"v3.0.27",date:"2026-08-31",items:["工具内“毛利”统一更名为“外卖毛利”，“毛利率”统一更名为“外卖毛利率”","同步更新完整版、汇总版、项目夹、方案对比、校验提示、说明书及导出表格字段；计算公式和数据逻辑保持不变"]},
   {version:"v3.0.26",date:"2026-08-28",items:["版本记录改为一个总折叠开关，默认隐藏全部版本明细，展开后一次查看完整更新记录","产品资料库继续保持默认折叠，并在每次打开说明书时恢复收起状态"]},
   {version:"v3.0.25",date:"2026-08-28",items:["说明书版本记录改为逐个版本折叠展示，默认全部收起，点击版本标题查看详情","每次打开说明书时，产品资料库与版本记录均恢复默认折叠状态"]},
   {version:"v3.0.24",date:"2026-08-28",items:["原 GitHub 固定网址新增前端访问密码门，验证成功后当前浏览器 30 天内免重复输入","密码输入框增加显示/隐藏按钮，便于用户核对输入内容","访问密码仅以 PBKDF2 派生校验值写入页面；前端保护用于日常访问限制，后续可升级服务器端验证"]},
@@ -3824,7 +3825,7 @@ const CALC_CHANGELOG = [
   {version:"v3.0.17",date:"2026-08-20",items:["说明书新增“产品资料自动带出”专节，完整说明搜索选择、自动填充、组合求和、缺失字段和手动修改规则","补充双产品组合的价格与成本求和示例"]},
   {version:"v3.0.16",date:"2026-08-20",items:["完整版与汇总版的产品名称候选改为看板自有浮层，替代尺寸突兀的浏览器原生列表","候选项同步展示堂食原价、外卖原价和产品成本，支持鼠标、方向键与回车选择","组合产品录入时仅搜索当前名称片段，完整匹配后自动收起候选框"]},
   {version:"v3.0.15",date:"2026-08-20",items:["内置 40 款产品的堂食原价、外卖原价与产品成本资料，输入完整名称即可自动带出","产品名称包含多个已收录产品时按字段自动求和，自动结果仍支持手动修改","完整版与汇总版快速测算同步支持产品资料匹配；资料缺失或名称未收录时对应字段保持空白"]},
-  {version:"v3.0.14",date:"2026-08-13",items:["汇总版到手率与毛利统一使用红色重点标记","毛利率恢复普通文字色，避免与毛利重点标记混淆"]},
+  {version:"v3.0.14",date:"2026-08-13",items:["汇总版到手率与外卖毛利统一使用红色重点标记","外卖毛利率恢复普通文字色，避免与外卖毛利重点标记混淆"]},
   {version:"v3.0.13",date:"2026-08-12",items:["网站版接入 Cloudflare 匿名访问统计，可查看访问量、访客趋势、设备、地区与页面性能","统计不读取测算输入或本地数据；本地 HTML 保持离线且不启用访问统计"]},
   {version:"v3.0.12",date:"2026-08-12",items:["移除导出分享版功能及相关入口和说明","重新整理自定义背景面板：未设置时单按钮，应用背景后上传与恢复操作并列展示"]},
   {version:"v3.0.11",date:"2026-08-12",items:["标题下免责声明精简为单行灰色小字，移除边框和标签","删除完整版页尾重复的计算口径说明，详细口径统一在说明书中维护"]},
@@ -3909,8 +3910,8 @@ function scenarioSummary(scn){
   const A=k=>vals.reduce((a,v)=>a+(v[k]||0),0)/vals.length;return{count:ps.length,rate:A("rate"),margin:A("margin"),fee:A("fee"),act:A("act")};
 }
 function renderScenarioCenter(compareIds=[]){
-  const rows=scenarios.map(s=>{const m=scenarioSummary(s);return'<div class="wf-scenario"><input type="checkbox" data-scn-check="'+s.id+'" '+(compareIds.includes(s.id)?'checked':'')+'><div class="wf-scenario-main"><b>'+escapeHtml(s.name)+'</b><span>'+s.createdAt+' · '+m.count+' 个产品 · 到手率 '+pct(m.rate)+' · 毛利率 '+pct(m.margin)+'</span></div><button class="wf-btn" data-scn-restore="'+s.id+'">恢复</button><button class="wf-btn danger" data-scn-del="'+s.id+'">删除</button></div>';}).join('')||'<div class="wf-empty">还没有保存方案。先为当前汇总列表命名并保存。</div>';
-  const chosen=scenarios.filter(s=>compareIds.includes(s.id));const compare=chosen.length?'<div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>方案</th><th>产品数</th><th>平均到手率</th><th>平均毛利率</th><th>平均佣金</th><th>平均活动</th></tr></thead><tbody>'+chosen.map(s=>{const m=scenarioSummary(s);return'<tr><td>'+escapeHtml(s.name)+'</td><td>'+m.count+'</td><td>'+pct(m.rate)+'</td><td>'+pct(m.margin)+'</td><td>'+fmtY(m.fee)+'</td><td>'+fmtY(m.act)+'</td></tr>';}).join('')+'</tbody></table></div>':'';
+  const rows=scenarios.map(s=>{const m=scenarioSummary(s);return'<div class="wf-scenario"><input type="checkbox" data-scn-check="'+s.id+'" '+(compareIds.includes(s.id)?'checked':'')+'><div class="wf-scenario-main"><b>'+escapeHtml(s.name)+'</b><span>'+s.createdAt+' · '+m.count+' 个产品 · 到手率 '+pct(m.rate)+' · 外卖毛利率 '+pct(m.margin)+'</span></div><button class="wf-btn" data-scn-restore="'+s.id+'">恢复</button><button class="wf-btn danger" data-scn-del="'+s.id+'">删除</button></div>';}).join('')||'<div class="wf-empty">还没有保存方案。先为当前汇总列表命名并保存。</div>';
+  const chosen=scenarios.filter(s=>compareIds.includes(s.id));const compare=chosen.length?'<div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>方案</th><th>产品数</th><th>平均到手率</th><th>平均外卖毛利率</th><th>平均佣金</th><th>平均活动</th></tr></thead><tbody>'+chosen.map(s=>{const m=scenarioSummary(s);return'<tr><td>'+escapeHtml(s.name)+'</td><td>'+m.count+'</td><td>'+pct(m.rate)+'</td><td>'+pct(m.margin)+'</td><td>'+fmtY(m.fee)+'</td><td>'+fmtY(m.act)+'</td></tr>';}).join('')+'</tbody></table></div>':'';
   openWorkflow("方案对比","保存同一批产品的不同定价、折扣或活动方案，最多勾选 4 个并排比较。",'<div class="wf-grid" style="grid-template-columns:1fr auto"><div class="wf-field"><label>当前方案名称</label><input id="scenarioName" placeholder="如：双杯套餐·降低活动档位"></div><button class="wf-btn primary" id="scenarioSave" style="align-self:end" type="button">保存当前方案</button></div><div class="workflow-actions"><button class="wf-btn" id="scenarioCompare" type="button">对比已勾选方案</button></div>'+rows+compare);
   $("scenarioSave").onclick=()=>{if(!products.length)return;const name=$("scenarioName").value.trim()||"方案 "+(scenarios.length+1);scenarios.unshift({id:uid(),name,createdAt:new Date().toLocaleString("zh-CN"),products:JSON.parse(JSON.stringify(products)),platFilter,channelMode:getChannelMode(),version:CALC_VERSION});saveScenarios();renderScenarioCenter();};
   $("scenarioCompare").onclick=()=>renderScenarioCenter([...document.querySelectorAll('[data-scn-check]:checked')].slice(0,4).map(x=>x.dataset.scnCheck));
@@ -3919,12 +3920,12 @@ function renderScenarioCenter(compareIds=[]){
 }
 function validationIssues(){
   const issues=[],add=(level,where,msg)=>issues.push({level,where,msg});const P=num($("price").value),pk=$("packFee").value;
-  if(!(P>0))add("error","完整版","外卖原价未填写或不大于 0");if(String(pk).trim()==="")add("error","完整版","打包费未填写；没有打包费也应填写 0");if(!$("cost").value)add("warn","完整版","产品成本未填写，无法形成可靠毛利判断");
+  if(!(P>0))add("error","完整版","外卖原价未填写或不大于 0");if(String(pk).trim()==="")add("error","完整版","打包费未填写；没有打包费也应填写 0");if(!$("cost").value)add("warn","完整版","产品成本未填写，无法形成可靠外卖毛利判断");
   const mt=readDiscount("mt"),tb=readDiscount("tb");if(mt.bad)add("error","完整版","美团折扣/折后价无效");if(tb.bad)add("error","完整版","淘宝折扣/折后价无效");const tech=num($("tbZhiTechRate").value);if(tech!==7)add("warn","完整版","淘宝直营技术费率当前为 "+tech+"%，与默认 7% 不同，请确认城市口径");
   [["a_mt_sh","a_mt_sh_lvl","a_mt_sh_v","a_mt_sh_sub_v","美团神会员"],["a_tb_bh","a_tb_bh_lvl","a_tb_bh_v","a_tb_bh_sub_v","淘宝爆红包"]].forEach(([c,l,p,s,n])=>{if($(c).checked&&!$(l).value&&(!$(p).value||!$(s).value))add("error","完整版",n+"选择自定义后，出资或补贴未填写");});
-  const names={};products.forEach((p,i)=>{const where="汇总第 "+(i+1)+" 行";if(!(p.price>0))add("error",where,"外卖原价缺失");if(!p.name)add("warn",where,"产品名称为空");if(!(p.cost>0))add("warn",where,"产品成本未填写");const m=summaryMetrics(p,"zhi");if(m.margin<0)add("error",where,"当前口径下毛利为负（"+pct(m.margin)+"）");if(p.dMT>1||p.dTB>1||p.dMT<=0||p.dTB<=0)add("error",where,"折扣超出有效范围");const key=(p.name||"").trim();if(key){names[key]=(names[key]||0)+1;}});Object.entries(names).filter(([,n])=>n>1).forEach(([n,c])=>add("warn","汇总列表","产品“"+n+"”出现 "+c+" 次，请确认是否为不同方案或重复录入"));return issues;
+  const names={};products.forEach((p,i)=>{const where="汇总第 "+(i+1)+" 行";if(!(p.price>0))add("error",where,"外卖原价缺失");if(!p.name)add("warn",where,"产品名称为空");if(!(p.cost>0))add("warn",where,"产品成本未填写");const m=summaryMetrics(p,"zhi");if(m.margin<0)add("error",where,"当前口径下外卖毛利为负（"+pct(m.margin)+"）");if(p.dMT>1||p.dTB>1||p.dMT<=0||p.dTB<=0)add("error",where,"折扣超出有效范围");const key=(p.name||"").trim();if(key){names[key]=(names[key]||0)+1;}});Object.entries(names).filter(([,n])=>n>1).forEach(([n,c])=>add("warn","汇总列表","产品“"+n+"”出现 "+c+" 次，请确认是否为不同方案或重复录入"));return issues;
 }
-function renderValidation(){const issues=validationIssues(),err=issues.filter(x=>x.level==="error").length,warn=issues.length-err;openWorkflow("测算校验中心","集中检查缺失字段、无效折扣、口径偏差、重复产品和负毛利。",'<div class="wf-grid"><div class="wf-card"><h3>阻断问题</h3><p><b style="font-size:22px;color:var(--warn)">'+err+'</b> 项</p></div><div class="wf-card"><h3>复核提醒</h3><p><b style="font-size:22px;color:var(--amber)">'+warn+'</b> 项</p></div><div class="wf-card"><h3>检查范围</h3><p>完整版当前输入＋汇总列表 '+products.length+' 个产品</p></div></div>'+(issues.length?'<div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>级别</th><th>位置</th><th>问题与建议</th></tr></thead><tbody>'+issues.map(x=>'<tr><td><span class="wf-badge '+x.level+'">'+(x.level==='error'?'需修正':'需复核')+'</span></td><td>'+x.where+'</td><td>'+escapeHtml(x.msg)+'</td></tr>').join('')+'</tbody></table></div>':'<div class="wf-empty"><span class="wf-badge ok">检查通过</span><p>没有发现明显问题，可以进入方案比较或导出。</p></div>'));}
+function renderValidation(){const issues=validationIssues(),err=issues.filter(x=>x.level==="error").length,warn=issues.length-err;openWorkflow("测算校验中心","集中检查缺失字段、无效折扣、口径偏差、重复产品和负外卖毛利。",'<div class="wf-grid"><div class="wf-card"><h3>阻断问题</h3><p><b style="font-size:22px;color:var(--warn)">'+err+'</b> 项</p></div><div class="wf-card"><h3>复核提醒</h3><p><b style="font-size:22px;color:var(--amber)">'+warn+'</b> 项</p></div><div class="wf-card"><h3>检查范围</h3><p>完整版当前输入＋汇总列表 '+products.length+' 个产品</p></div></div>'+(issues.length?'<div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>级别</th><th>位置</th><th>问题与建议</th></tr></thead><tbody>'+issues.map(x=>'<tr><td><span class="wf-badge '+x.level+'">'+(x.level==='error'?'需修正':'需复核')+'</span></td><td>'+x.where+'</td><td>'+escapeHtml(x.msg)+'</td></tr>').join('')+'</tbody></table></div>':'<div class="wf-empty"><span class="wf-badge ok">检查通过</span><p>没有发现明显问题，可以进入方案比较或导出。</p></div>'));}
 function updateValidationBadge(){
   const btn=$("validateMainBtn"); if(!btn)return;
   const issues=validationIssues(),errors=issues.filter(x=>x.level==="error").length;
