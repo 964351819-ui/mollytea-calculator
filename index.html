@@ -753,6 +753,7 @@
   .wf-field{display:grid;gap:5px}.wf-field label{font-size:11px;color:var(--sub)}.wf-field input,.wf-field select,.wf-field textarea{width:100%;min-width:0;padding:8px 9px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink);font:inherit;font-size:12.5px}.wf-field textarea{min-height:70px;resize:vertical}.wf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.wf-card{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card-2)}.wf-card h3{margin:0 0 6px;font-size:14px}.wf-card p{margin:4px 0;color:var(--sub);font-size:12px;line-height:1.65}.wf-note{padding:10px 12px;border-left:3px solid var(--accent);background:var(--glow);color:var(--sub);font-size:12px;line-height:1.65}.wf-empty{padding:28px;text-align:center;color:var(--sub);font-size:13px}
   .wf-tablewrap{overflow:auto;margin-top:12px}.wf-table{width:100%;min-width:760px;border-collapse:collapse;font-size:12px}.wf-table th,.wf-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}.wf-table th{background:var(--field);color:var(--sub);font-weight:600}.wf-table input{width:92px;height:32px;padding:4px 7px;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:inherit;font-size:12px}.wf-table .neg{color:var(--warn);font-weight:700}.wf-table .pos{color:var(--good);font-weight:700}
   .wf-badge{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;font-size:10.5px;font-weight:700}.wf-badge.error{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent)}.wf-badge.warn{color:var(--amber);background:color-mix(in srgb,var(--amber) 10%,transparent)}.wf-badge.ok{color:var(--good);background:color-mix(in srgb,var(--good) 10%,transparent)}
+  .save-notice{position:fixed;left:50%;bottom:28px;z-index:13000;max-width:min(520px,calc(100vw - 32px));padding:11px 15px;border:1px solid color-mix(in srgb,var(--warn) 40%,var(--line));border-radius:10px;background:var(--card);color:var(--warn);box-shadow:0 12px 38px rgba(0,0,0,.2);font-size:12.5px;font-weight:650;line-height:1.55;opacity:0;transform:translate(-50%,12px);pointer-events:none;transition:opacity .18s,transform .18s}.save-notice.show{opacity:1;transform:translate(-50%,0)}
   .wf-scenario{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card-2);margin-top:8px}.wf-scenario input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent)}.wf-scenario-main{flex:1;min-width:0}.wf-scenario-main b{display:block;font-size:13px}.wf-scenario-main span{display:block;color:var(--sub);font-size:11px}.manual-version-fold{margin-top:10px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);overflow:hidden}.manual-version-fold>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650;user-select:none}.manual-version-fold>summary::-webkit-details-marker{display:none}.manual-version-fold>summary::before{content:"›";display:grid;width:19px;height:19px;flex:none;place-items:center;border-radius:50%;background:var(--glow);color:var(--accent);font-size:17px;line-height:1;transition:transform .16s}.manual-version-fold[open]>summary::before{transform:rotate(90deg)}.manual-version-fold>summary span{margin-left:auto;color:var(--sub);font-size:11.5px;font-weight:500}.manual-version-body{padding:0 14px 8px;border-top:1px solid var(--line)}.wf-version{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.wf-version:last-child{border-bottom:0}.wf-version time{color:var(--sub);font-size:11px}.wf-version b{display:block;font-size:13px}.wf-version ul{margin:5px 0 0;padding-left:17px;color:var(--sub);font-size:12px;line-height:1.7}
   @media(max-width:760px){.workflow-overlay{padding:0}.workflow-dialog{width:100%;height:100vh;max-height:none;border:0;border-radius:0}.workflow-body{padding:18px}.wf-grid{grid-template-columns:1fr}}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"])[data-has-background][data-bg-treatment="soft"] body::before{background:rgba(18,17,17,.38)}:root:not([data-theme="light"])[data-has-background][data-bg-treatment="deep"] body::before{background:rgba(18,17,17,.62)}}
@@ -1140,7 +1141,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.27 · 更新于 2026-08-31</span>
+    <span id="calcVersionStamp">计算口径 v3.0.29 · 更新于 2026-09-10</span>
   </div>
 </div>
 
@@ -1269,7 +1270,7 @@
 
         <section class="manual-section" id="manual-data">
           <h3>9. 数据保存、分享与导出</h3>
-          <ul><li><b>本地保存：</b>输入、产品清单、项目夹、方案和主题等偏好保存在当前浏览器本机，不会自动上传。</li><li><b>匿名访问统计：</b>网站版使用 Cloudflare Web Analytics 统计页面访问量、访客趋势、设备、地区与页面性能；不跟踪个人身份，不读取或上传产品名称、价格、成本及其他测算输入。本地 HTML 不启用访问统计。</li><li><b>在线更新：</b>通过固定网址访问时会自动绕过旧页面缓存并获取最新发布版本；本地 HTML 打开不受影响。</li><li><b>批量导入：</b>CSV/TSV 可离线读取；XLSX/XLS 需要联网加载 Excel 解析组件。导入前会先预览，确认后才追加。</li><li><b>方案记录：</b>从项目夹进入方案对比；保存产品清单、平台和渠道口径，可随时恢复，对比结果同时标记当前计算版本。</li><li><b>发送原 HTML：</b>接收者得到的是发送当时的文件版本；你以后继续修改自己的文件，对方不会自动更新。</li><li><b>复制表格：</b>输出制表符格式，可直接粘贴到 Excel、飞书表格等工具。</li><li><b>分析表格：</b>输出 XLSX，包含明细、汇总、平台对比、标签和经营诊断等分析内容。</li><li><b>项目夹：</b>保存的是当前清单快照；每个项目的显示列和渠道选择独立，不应影响其他项目。</li><li><b>口径版本：</b>工具底部及本说明书最下方显示当前版本。以后调整费率、档位、公式或功能时，说明书与更新记录必须同步修改。</li></ul>
+          <ul><li><b>本地保存：</b>输入、产品清单、项目夹、方案和主题等偏好保存在当前浏览器本机，不会自动上传。</li><li><b>匿名访问统计：</b>网站版使用 Cloudflare Web Analytics 统计页面访问量、访客趋势、设备、地区与页面性能；不跟踪个人身份，不读取或上传产品名称、价格、成本及其他测算输入。本地 HTML 不启用访问统计。</li><li><b>在线更新：</b>通过固定网址访问时会自动绕过旧页面缓存并获取最新发布版本；本地 HTML 打开不受影响。</li><li><b>批量导入：</b>CSV/TSV 可离线读取；XLSX/XLS 需要联网加载 Excel 解析组件。导入前会先预览，确认后才追加。</li><li><b>方案记录：</b>从项目夹进入方案对比；保存产品清单、平台、渠道口径和淘宝直营技术费率，可随时恢复。以后修改页面费率，旧方案仍按保存时费率查看、对比和导出。</li><li><b>发送原 HTML：</b>接收者得到的是发送当时的文件版本；你以后继续修改自己的文件，对方不会自动更新。</li><li><b>复制表格：</b>输出制表符格式，可直接粘贴到 Excel、飞书表格等工具。</li><li><b>分析表格：</b>输出 XLSX，包含明细、汇总、平台对比、标签和经营诊断等分析内容。</li><li><b>项目夹：</b>保存的是当前清单快照；每个项目的显示列、渠道选择和产品费率独立，不应影响其他项目。</li><li><b>口径版本：</b>工具底部及本说明书最下方显示当前版本。以后调整费率、档位、公式或功能时，说明书与更新记录必须同步修改。</li></ul>
         </section>
 
         <section class="manual-section" id="manual-notice">
@@ -1315,6 +1316,19 @@
 
 <script>
 const $ = id => document.getElementById(id);
+let saveNoticeTimer = null, saveNoticeLastAt = 0;
+function notifySaveFailure(scope="数据"){
+  const now=Date.now();
+  if(now-saveNoticeLastAt<1200)return;
+  saveNoticeLastAt=now;
+  let el=$("saveNotice");
+  if(!el){el=document.createElement("div");el.id="saveNotice";el.className="save-notice";el.setAttribute("role","alert");document.body.appendChild(el);}
+  el.textContent=scope+"保存失败：浏览器存储空间可能不足或已被禁用，本次修改刷新后可能丢失。";
+  el.classList.add("show");clearTimeout(saveNoticeTimer);saveNoticeTimer=setTimeout(()=>el.classList.remove("show"),5200);
+}
+function safeStorageSet(key,value,scope){
+  try{localStorage.setItem(key,value);return true;}catch(e){notifySaveFailure(scope);return false;}
+}
 const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
 let manualLastFocus = null;
 function openManual(){
@@ -1470,7 +1484,7 @@ function prodChannelMode(p, mode){
   if(mode === "both" || p.dMT==null || p.dist==null)
     return { mtRate:p.mt, tbRate:p.tb, mtFee:p.mtFee, tbFee:p.tbFee };
   const t = TIME[p.time] || TIME.day;
-  const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0);
+  const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
   if(mode === "zhi")
     return { mtRate:ratio(p.price,s.mtZhiNet), tbRate:ratio(p.price,s.tbZhiNet),
              mtFee:s.mtZhiTech+s.mtZhiShip,    tbFee:s.tbZhiTech+s.tbZhiShip };
@@ -1491,6 +1505,30 @@ function globalParams(){
 }
 function tbZhiTechRateLabel(){
   const pct = Math.max(0, num($("tbZhiTechRate").value));
+  return String(Math.round(pct*100)/100).replace(/\.0+$/,"");
+}
+function inferProductTbZhiTechRate(p){
+  const P=Number(p?.price), dTB=Number(p?.dTB), dist=Number(p?.dist), storedRate=Number(p?.tb);
+  if(!(P>0) || !Number.isFinite(dTB) || !Number.isFinite(dist) || !Number.isFinite(storedRate)) return null;
+  const packFee=Number(p.packFee)||0, tbAct=Number(p.tbAct)||0, t=TIME[p.time]||TIME.day;
+  const grossBase=P+packFee, TBbase=grossBase-(P-P*dTB)-tbAct;
+  if(!(TBbase>0)) return null;
+  const distTB=Math.max(0,dist-3)*0.6;
+  const cliTB=Math.floor(Math.min(Math.max(TBbase-25,0),25)/5)*0.6+Math.floor(Math.max(TBbase-50,0)/5)*0.8;
+  const tbZhiShip=(3.5+distTB+cliTB+t.tb)*0.75;
+  const tbDaiNet=TBbase-grossBase*0.18;
+  const tbZhiNet=P*((storedRate-0.4*ratio(P,tbDaiNet))/0.6);
+  const inferred=(TBbase-tbZhiShip-tbZhiNet)/(TBbase*0.75);
+  return Number.isFinite(inferred)&&inferred>=0&&inferred<=1 ? Math.round(inferred*1000000)/1000000 : null;
+}
+function productTbZhiTechRate(p){
+  const saved=Number(p?.tbZhiTechRate);
+  if(p?.tbZhiTechRate!==null&&p?.tbZhiTechRate!==""&&Number.isFinite(saved)&&saved>=0) return saved;
+  const inferred=inferProductTbZhiTechRate(p);
+  return inferred==null ? Math.max(0,num($("tbZhiTechRate").value))/100 : inferred;
+}
+function productTbZhiTechRateLabel(p){
+  const pct=productTbZhiTechRate(p)*100;
   return String(Math.round(pct*100)/100).replace(/\.0+$/,"");
 }
 
@@ -1709,9 +1747,9 @@ function compute(){
       g.mtAct? ["活动出资", -g.mtAct]:null,
     ], s.mtZhiNet, r(s.mtZhiNet)) +
     blk("代理（技术服务费+运营服务费+配送费66折）", s.MTm, P-s.MTm, [
-      ["技术服务费 成交×1%", -s.mtDaiTech],
-      ["运营服务费 max(成交×9%,1.5)", -s.mtDaiOps],
-      [`配送费 [...]×0.66${s.mtDaiCapped?"（已封顶成交×40%）":""}`, -s.mtDaiShip],
+      ["技术服务费（原价＋打包费）×1%", -s.mtDaiTech],
+      ["运营服务费 max〔（原价＋打包费）×9%，1.5〕", -s.mtDaiOps],
+      [`配送费 [...]×0.66${s.mtDaiCapped?"（已封顶扣费基数×40%）":""}`, -s.mtDaiShip],
       g.mtAct? ["活动出资", -g.mtAct]:null,
     ], s.mtDaiNet, r(s.mtDaiNet));
 
@@ -1722,7 +1760,7 @@ function compute(){
       g.tbAct? ["活动出资", -g.tbAct]:null,
     ], s.tbZhiNet, r(s.tbZhiNet)) +
     blk("代理（运营服务费18%全包）", s.TBm, P-s.TBm, [
-      ["运营服务费 成交×18%", -s.tbDaiPack],
+      ["运营服务费（原价＋打包费）×18%", -s.tbDaiPack],
       g.tbAct? ["活动出资", -g.tbAct]:null,
     ], s.tbDaiNet, r(s.tbDaiNet));
 }
@@ -1749,7 +1787,7 @@ let products = [];   // {name, price, mtDisc, tbDisc, mtFee, tbFee, mtAct, tbAct
 function loadProducts(){
   try{ const a = JSON.parse(localStorage.getItem(PSTORE)||"null"); if(Array.isArray(a)) products = a; }catch(e){}
 }
-function saveProducts(){ try{ localStorage.setItem(PSTORE, JSON.stringify(products)); }catch(e){} }
+function saveProducts(){ return safeStorageSet(PSTORE,JSON.stringify(products),"产品清单"); }
 
 const discLabel = p => p.bad ? "—" : (p.d>=1 ? "不打折" : (p.d*10).toFixed(1).replace(/\.0$/,"")+"折");
 const fmtY = v => "¥" + (Math.round(v*100)/100);
@@ -1791,7 +1829,7 @@ function infoButton(value, title, rule, content, extraClass){
 }
 function fullFeeInfoContent(p, filter, mode){
   if(!(p.price > 0) || p.dist == null || p.dMT == null) return '<div class="act-platform">此产品缺少测算前提，暂无法还原逐项扣费。</div>';
-  const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, TIME[p.time]||TIME.day, p.mtAct||0, p.tbAct||0);
+  const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, TIME[p.time]||TIME.day, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
   const line = (label, value) => '<div class="act-line"><span>'+label+'</span><b>'+value+'</b></div>';
   const block = (title, cls, rows, net) => '<div class="act-platform"><span class="act-platform-name '+cls+'">'+title+'</span>'+rows.map(row => row ? line(row[0], row[1]) : '').join('')+line('= 到手价', fmtY(net))+'</div>';
   const mtZhi = block('美团 · 直营', 'mtv', [
@@ -1799,8 +1837,8 @@ function fullFeeInfoContent(p, filter, mode){
     p.mtAct>0 ? ['− 活动出资', fmtY(p.mtAct)] : null,
   ], s.mtZhiNet);
   const mtDai = block('美团 · 代理', 'mtv', [
-    ['成交价（原价×折扣）', fmtY(s.MTm)], ['− 技术服务费（成交×1%）', fmtY(s.mtDaiTech)],
-    ['− 运营服务费（max(成交×9%, 1.5)）', fmtY(s.mtDaiOps)], ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶）':''), fmtY(s.mtDaiShip)],
+    ['成交价（原价×折扣）', fmtY(s.MTm)], ['− 技术服务费（原价＋打包费）×1%', fmtY(s.mtDaiTech)],
+    ['− 运营服务费 max〔（原价＋打包费）×9%，1.5〕', fmtY(s.mtDaiOps)], ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶扣费基数×40%）':''), fmtY(s.mtDaiShip)],
     p.mtAct>0 ? ['− 活动出资', fmtY(p.mtAct)] : null,
   ], s.mtDaiNet);
   const tbZhi = block('淘宝闪购 · 直营', 'tbv', [
@@ -1808,7 +1846,7 @@ function fullFeeInfoContent(p, filter, mode){
     p.tbAct>0 ? ['− 活动出资', fmtY(p.tbAct)] : null,
   ], s.tbZhiNet);
   const tbDai = block('淘宝闪购 · 代理', 'tbv', [
-    ['成交价（原价×折扣）', fmtY(s.TBm)], ['− 运营服务费（18% 全包）', fmtY(s.tbDaiPack)],
+    ['成交价（原价×折扣）', fmtY(s.TBm)], ['− 运营服务费（原价＋打包费）×18%', fmtY(s.tbDaiPack)],
     p.tbAct>0 ? ['− 活动出资', fmtY(p.tbAct)] : null,
   ], s.tbDaiNet);
   const zhi = mode !== 'dai', dai = mode !== 'zhi';
@@ -1996,7 +2034,7 @@ function renderExec(){
           const finishTime = () => {
             p.time = select.value;
             p.mtDiscPay = p.price - p.price*(p.dMT||1); p.tbDiscPay = p.price - p.price*(p.dTB||1);
-            const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, TIME[p.time]||TIME.day, p.mtAct||0, p.tbAct||0);
+            const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, TIME[p.time]||TIME.day, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
             p.mt = s.mtRate; p.tb = s.tbRate; p.mtFee = s.mtFee; p.tbFee = s.tbFee;
             p.mtPay = p.price + (p.packFee||0) - p.mtDiscPay - (p.mtShPay||0) - (p.mtSub||0);
             p.tbPay = p.price + (p.packFee||0) - p.tbDiscPay - (p.tbBhPay||0) - (p.tbSub||0);
@@ -2046,7 +2084,7 @@ function renderExec(){
             p.tbDiscPay = p.price - p.price*(p.dTB||1);
             p.mtDisc = discFmt(p.dMT); p.tbDisc = discFmt(p.dTB);
             const t = TIME[p.time] || TIME.day;
-            const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0);
+            const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
             p.mt = s.mtRate; p.tb = s.tbRate;
             p.mtFee = s.mtFee; p.tbFee = s.tbFee;
             // 外卖实付 = 外卖原价 + 打包费 - 折扣金额 - 神会员/爆红包商家出资 - 平台补贴（不含减配）
@@ -2156,7 +2194,7 @@ function execDetail(p){
   if(!(P>0) || p.dist==null || p.dMT==null)
     return '<div class="detail dnote">此产品为早期数据，删除后在完整版重新加入即可查看逐项明细。</div>';
   const t = TIME[p.time] || TIME.day;
-  const s = calcScenario(P, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0);
+  const s = calcScenario(P, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
   const line = (k, v, tot) => '<div class="dl'+(tot?' dtot':'')+'"><span>'+k+'</span><span>'+v+'</span></div>';
   const block = (title, rows, net) => {
     let h = '<div class="dtitle">'+title+' · 打包费 '+fmtY(p.packFee||0)+'</div>';
@@ -2174,19 +2212,19 @@ function execDetail(p){
       p.mtAct>0 ? ['− 活动出资', money2(p.mtAct)] : null,
     ], s.mtZhiNet);
   const mtDai = block('代理 · 技术服务费 + 运营服务费 + 配送费66折', [
-      ['− 技术服务费（成交×1%）', money2(s.mtDaiTech)],
-      ['− 运营服务费（max(成交×9%, 1.5)）', money2(s.mtDaiOps)],
-      ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶）':''), money2(s.mtDaiShip)],
+      ['− 技术服务费（原价＋打包费）×1%', money2(s.mtDaiTech)],
+      ['− 运营服务费 max〔（原价＋打包费）×9%，1.5〕', money2(s.mtDaiOps)],
+      ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶扣费基数×40%）':''), money2(s.mtDaiShip)],
       p.mtAct>0 ? ['− 活动出资', money2(p.mtAct)] : null,
     ], s.mtDaiNet);
-  const tbZhi = block('直营 · 技术费'+tbZhiTechRateLabel()+'%×0.75 + 配送费75折', [
+  const tbZhi = block('直营 · 技术费'+productTbZhiTechRateLabel(p)+'%×0.75 + 配送费75折', [
       ['成交价（原价×折扣）', money2(s.TBm)],
-      ['− 技术服务费（成交×'+tbZhiTechRateLabel()+'%×0.75）', money2(s.tbZhiTech)],
+      ['− 技术服务费（成交×'+productTbZhiTechRateLabel(p)+'%×0.75）', money2(s.tbZhiTech)],
       ['− 配送费', money2(s.tbZhiShip)],
       p.tbAct>0 ? ['− 活动出资', money2(p.tbAct)] : null,
     ], s.tbZhiNet);
   const tbDai = block('代理 · 运营服务费18% 全包', [
-      ['− 运营服务费', money2(s.tbDaiPack)],
+      ['− 运营服务费（原价＋打包费）×18%', money2(s.tbDaiPack)],
       p.tbAct>0 ? ['− 活动出资', money2(p.tbAct)] : null,
     ], s.tbDaiNet);
   const mtCol = (showZhi?mtZhi:'')+(showDai?mtDai:'');
@@ -2281,9 +2319,9 @@ function addSummaryRow(){
     mtPay:null, tbPay:null, mtShPay, tbBhPay, mtSub, tbSub,
     mtDiscPay:0, tbDiscPay:0, mtDisc:discLabel(pMT), tbDisc:discLabel(pTB),
     mtFee:0, tbFee:0, mtAct:g.mtAct, tbAct:g.tbAct, mt:0, tb:0,
-    dMT:pMT.d, dTB:pTB.d, dist:g.dist, time:$("timeSel").value,
+    dMT:pMT.d, dTB:pTB.d, dist:g.dist, time:$("timeSel").value, tbZhiTechRate:g.tbZhiTechRate,
   });
-  saveProducts();
+  if(!saveProducts()){products.pop();renderExec();return;}
   renderExec();
   const row = $("execRows").lastElementChild;
   if(row) row.scrollIntoView({block:"nearest", behavior:"smooth"});
@@ -2297,7 +2335,7 @@ function addCurrentToList(){
   const g = globalParams();
   const pMT = readDiscount("mt"), pTB = readDiscount("tb");
   const pkf = num($("packFee").value);
-  const s = calcScenario(P, pMT.d, pTB.d, pkf, g.dist, g.t, g.mtAct, g.tbAct);
+  const s = calcScenario(P, pMT.d, pTB.d, pkf, g.dist, g.t, g.mtAct, g.tbAct, g.tbZhiTechRate);
   const mtSub = subsidyOf($("a_mt_sh").checked, num($("a_mt_sh_sub_v").value));
   const tbSub = subsidyOf($("a_tb_bh").checked, num($("a_tb_bh_sub_v").value));
   const mtShPay = $("a_mt_sh").checked ? num($("a_mt_sh_v").value) : 0;   // 神会员商家出资（不含减配）
@@ -2316,9 +2354,9 @@ function addCurrentToList(){
     mtFee: s.mtFee, tbFee: s.tbFee,
     mtAct: g.mtAct, tbAct: g.tbAct,
     mt: s.mtRate, tb: s.tbRate,
-    dMT: pMT.d, dTB: pTB.d, dist: g.dist, time: $("timeSel").value,   // 供展开明细重算
+    dMT: pMT.d, dTB: pTB.d, dist: g.dist, time: $("timeSel").value, tbZhiTechRate:g.tbZhiTechRate,   // 供展开明细重算
   });
-  saveProducts(); renderExec();
+  if(!saveProducts()){products.pop();return;} renderExec();
   if(document.body.classList.contains("exec")) flashQuickAdd("已加入汇总版 ✓", true);
   else flashBtn("已加入汇总版清单 ✓", true);
 }
@@ -2407,7 +2445,7 @@ function persist(){
     if(!el.id) return;
     d[el.id] = el.type==="checkbox" ? el.checked : el.value;
   });
-  try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){}
+  return safeStorageSet(STORE,JSON.stringify(d),"当前输入");
 }
 function restore(){
   let d; try{ d = JSON.parse(localStorage.getItem(STORE)||"null"); }catch(e){}
@@ -2989,9 +3027,19 @@ let archives = [];
 let archiveSearchQuery = "";
 let archiveSortMode = "recent";
 function loadArchives(){
-  try{ const a = JSON.parse(localStorage.getItem(ARCHIVE_STORE)||"null"); if(Array.isArray(a)) archives = a; }catch(e){}
+  try{
+    const a=JSON.parse(localStorage.getItem(ARCHIVE_STORE)||"null");
+    if(Array.isArray(a)){
+      archives=a;let changed=false;
+      archives.forEach(entry=>{
+        (entry.products||[]).forEach(p=>{if(freezeSavedProductRate(p))changed=true;});
+        if(entry.tbZhiTechRate==null&&entry.products?.length){entry.tbZhiTechRate=productTbZhiTechRate(entry.products[0]);changed=true;}
+      });
+      if(changed)saveArchives();
+    }
+  }catch(e){}
 }
-function saveArchives(){ try{ localStorage.setItem(ARCHIVE_STORE, JSON.stringify(archives)); }catch(e){} }
+function saveArchives(){ return safeStorageSet(ARCHIVE_STORE,JSON.stringify(archives),"项目夹"); }
 
 function saveToArchive(){
   if(!products.length){
@@ -3006,6 +3054,7 @@ function saveToArchive(){
     date: now.toLocaleString("zh-CN"),
     platFilter: platFilter,          // 记录存入时的平台口径（both/mt/tb）
     channelMode: getChannelMode(),   // 记录存入时的直营/代理口径（both/zhi/dai）
+    tbZhiTechRate: globalParams().tbZhiTechRate,
     products: JSON.parse(JSON.stringify(products)),
   };
   // 计算汇总（按存入时的平台 + 直营/代理口径）
@@ -3019,7 +3068,7 @@ function saveToArchive(){
     avgNet: avg(products.map(p=>p.price*rateS(p))),
   };
   archives.unshift(entry);
-  saveArchives();
+  if(!saveArchives()){archives.shift();flashArchiveBtn("保存失败");return;}
   renderArchives();
   flashArchiveBtn("已存入项目夹 ✓");
   openArchiveDrawer();
@@ -3310,7 +3359,7 @@ function renderArchives(){
             p.tbDiscPay = p.price - p.price*(p.dTB||1);
             p.mtDisc = discFmt(p.dMT); p.tbDisc = discFmt(p.dTB);
             const t = TIME[p.time] || TIME.day;
-            const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0);
+            const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
             p.mt = s.mtRate; p.tb = s.tbRate;
             p.mtFee = s.mtFee; p.tbFee = s.tbFee;
             p.mtPay = p.price + (p.packFee||0) - p.mtDiscPay - (p.mtShPay||0) - (p.mtSub||0);
@@ -3371,7 +3420,7 @@ function toggleArchiveDetail(tr, archIdx, pIdx){
     return;
   }
   const t = TIME[p.time] || TIME.day;
-  const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0);
+  const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
   const P = p.price, base = P + (p.packFee||0), r = n => base>0 ? n/base : 0;   // 到手率 = 到手÷(原价+打包费)
   const line2 = (k, v, tot) => '<div class="dl'+(tot?' dtot':'')+'"><span>'+k+'</span><span>'+v+'</span></div>';
   const block2 = (title, rows, net) => {
@@ -3391,19 +3440,19 @@ function toggleArchiveDetail(tr, archIdx, pIdx){
       p.mtAct>0 ? ['− 活动出资', money2(p.mtAct)] : null,
     ], s.mtZhiNet);
   const mtDai = block2('代理 · 技术服务费 + 运营服务费 + 配送费66折', [
-      ['− 技术服务费（成交×1%）', money2(s.mtDaiTech)],
-      ['− 运营服务费（max(成交×9%, 1.5)）', money2(s.mtDaiOps)],
-      ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶）':''), money2(s.mtDaiShip)],
+      ['− 技术服务费（原价＋打包费）×1%', money2(s.mtDaiTech)],
+      ['− 运营服务费 max〔（原价＋打包费）×9%，1.5〕', money2(s.mtDaiOps)],
+      ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶扣费基数×40%）':''), money2(s.mtDaiShip)],
       p.mtAct>0 ? ['− 活动出资', money2(p.mtAct)] : null,
     ], s.mtDaiNet);
-  const tbZhi = block2('直营 · 技术费'+tbZhiTechRateLabel()+'%×0.75 + 配送费75折', [
+  const tbZhi = block2('直营 · 技术费'+productTbZhiTechRateLabel(p)+'%×0.75 + 配送费75折', [
       ['成交价（原价×折扣）', money2(s.TBm)],
-      ['− 技术服务费（成交×'+tbZhiTechRateLabel()+'%×0.75）', money2(s.tbZhiTech)],
+      ['− 技术服务费（成交×'+productTbZhiTechRateLabel(p)+'%×0.75）', money2(s.tbZhiTech)],
       ['− 配送费', money2(s.tbZhiShip)],
       p.tbAct>0 ? ['− 活动出资', money2(p.tbAct)] : null,
     ], s.tbZhiNet);
   const tbDai = block2('代理 · 运营服务费18% 全包', [
-      ['− 运营服务费', money2(s.tbDaiPack)],
+      ['− 运营服务费（原价＋打包费）×18%', money2(s.tbDaiPack)],
       p.tbAct>0 ? ['− 活动出资', money2(p.tbAct)] : null,
     ], s.tbDaiNet);
   const mtCol = (showZhi?mtZhi:'')+(showDai?mtDai:'');
@@ -3809,9 +3858,11 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.27";
-const CALC_UPDATED = "2026-08-31";
+const CALC_VERSION = "v3.0.29";
+const CALC_UPDATED = "2026-09-10";
 const CALC_CHANGELOG = [
+  {version:"v3.0.29",date:"2026-09-10",items:["修正代理模式费用说明：技术费与运营费明确按外卖原价＋打包费计算，配送费封顶明确按扣费基数计算；实际计算公式保持不变","产品清单、项目夹、方案及当前输入保存失败时显示显著提示；项目夹与方案不再在保存失败时误报成功"]},
+  {version:"v3.0.28",date:"2026-09-10",items:["产品、方案和项目快照新增淘宝直营技术费率快照，查看、对比、展开详情及导出时不再受当前页面费率变化影响","恢复方案时同步恢复保存时费率；已有旧数据根据当时保存的淘宝结果自动反推并补齐原费率，避免旧方案按新费率重算"]},
   {version:"v3.0.27",date:"2026-08-31",items:["工具内“毛利”统一更名为“外卖毛利”，“毛利率”统一更名为“外卖毛利率”","同步更新完整版、汇总版、项目夹、方案对比、校验提示、说明书及导出表格字段；计算公式和数据逻辑保持不变"]},
   {version:"v3.0.26",date:"2026-08-28",items:["版本记录改为一个总折叠开关，默认隐藏全部版本明细，展开后一次查看完整更新记录","产品资料库继续保持默认折叠，并在每次打开说明书时恢复收起状态"]},
   {version:"v3.0.25",date:"2026-08-28",items:["说明书版本记录改为逐个版本折叠展示，默认全部收起，点击版本标题查看详情","每次打开说明书时，产品资料库与版本记录均恢复默认折叠状态"]},
@@ -3847,8 +3898,18 @@ const SCENARIO_STORE="daoshoulv_scenarios_v1";
 let workflowLastFocus=null, batchPending=[], scenarios=[];
 try{scenarios=JSON.parse(localStorage.getItem(SCENARIO_STORE)||"[]");if(!Array.isArray(scenarios))scenarios=[];}catch(_){scenarios=[];}
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
-function ensureProductIds(){let changed=false;products.forEach(p=>{if(!p.id){p.id=uid();changed=true;}});if(changed)saveProducts();}
-function saveScenarios(){try{localStorage.setItem(SCENARIO_STORE,JSON.stringify(scenarios));}catch(_){}}
+function freezeSavedProductRate(p){
+  if(!p || (p.tbZhiTechRate!==null&&p.tbZhiTechRate!==""&&Number.isFinite(Number(p.tbZhiTechRate))&&Number(p.tbZhiTechRate)>=0)) return false;
+  p.tbZhiTechRate=productTbZhiTechRate(p);
+  return true;
+}
+function ensureProductIds(){
+  let productsChanged=false,scenariosChanged=false;
+  products.forEach(p=>{if(!p.id){p.id=uid();productsChanged=true;}if(freezeSavedProductRate(p))productsChanged=true;});
+  scenarios.forEach(s=>{(s.products||[]).forEach(p=>{if(freezeSavedProductRate(p))scenariosChanged=true;});if(s.tbZhiTechRate==null&&s.products?.length){s.tbZhiTechRate=productTbZhiTechRate(s.products[0]);scenariosChanged=true;}});
+  if(productsChanged)saveProducts();if(scenariosChanged)saveScenarios();
+}
+function saveScenarios(){return safeStorageSet(SCENARIO_STORE,JSON.stringify(scenarios),"方案");}
 function openWorkflow(title,subtitle,html){
   workflowLastFocus=document.activeElement;$("workflowTitle").textContent=title;$("workflowSubtitle").textContent=subtitle||"";$("workflowBody").innerHTML=html;
   $("workflowOverlay").classList.add("open");$("workflowOverlay").setAttribute("aria-hidden","false");document.body.classList.add("manual-open");$("workflowClose").focus();
@@ -3884,7 +3945,7 @@ function buildImportedProduct(row){
   const mtJp=num(rowVal(row,["美团减配"],$("a_mt_jp").checked?$("a_mt_jp_v").value:0)),tbJp=num(rowVal(row,["淘宝减配"],$("a_tb_jp").checked?$("a_tb_jp_v").value:0));
   const mtAct=mtShPay+mtJp,tbAct=tbBhPay+tbJp,t=TIME[timeKey]||TIME.day,tech=Math.max(0,num(rowVal(row,["淘宝直营技术费率","淘宝技术费率"],$("tbZhiTechRate").value)))/100;
   const s=calcScenario(P,dMT,dTB,packFee,dist,t,mtAct,tbAct,tech);
-  return{id:uid(),name:String(rowVal(row,["产品名称","名称","商品名称"],"未命名产品")).trim(),tag:String(rowVal(row,["标签","分类"],"")).trim(),price:P,priceDine:dine,cost,wholesale,packFee,dMT,dTB,dist,time:timeKey,mtShPay,tbBhPay,mtSub,tbSub,mtAct,tbAct,mtDiscPay:P-P*dMT,tbDiscPay:P-P*dTB,mtDisc:discLabel({d:dMT,bad:false}),tbDisc:discLabel({d:dTB,bad:false}),mtFee:s.mtFee,tbFee:s.tbFee,mt:s.mtRate,tb:s.tbRate,mtPay:P+packFee-(P-P*dMT)-mtShPay-mtSub,tbPay:P+packFee-(P-P*dTB)-tbBhPay-tbSub};
+  return{id:uid(),name:String(rowVal(row,["产品名称","名称","商品名称"],"未命名产品")).trim(),tag:String(rowVal(row,["标签","分类"],"")).trim(),price:P,priceDine:dine,cost,wholesale,packFee,dMT,dTB,dist,time:timeKey,tbZhiTechRate:tech,mtShPay,tbBhPay,mtSub,tbSub,mtAct,tbAct,mtDiscPay:P-P*dMT,tbDiscPay:P-P*dTB,mtDisc:discLabel({d:dMT,bad:false}),tbDisc:discLabel({d:dTB,bad:false}),mtFee:s.mtFee,tbFee:s.tbFee,mt:s.mtRate,tb:s.tbRate,mtPay:P+packFee-(P-P*dMT)-mtShPay-mtSub,tbPay:P+packFee-(P-P*dTB)-tbBhPay-tbSub};
 }
 function batchTemplate(){
   const headers=["产品名称","标签","外卖原价","堂食原价","产品成本","周边订货价","打包费","美团折扣","淘宝折扣","配送距离","下单时段","美团神会员出资","美团神会员补贴","美团减配","淘宝爆红包出资","淘宝爆红包补贴","淘宝减配","淘宝直营技术费率"];
@@ -3895,7 +3956,7 @@ function renderBatchImport(status=""){
   const preview=batchPending.length?'<div class="wf-note">已识别 <b>'+batchPending.length+'</b> 个有效产品。确认后将追加到当前汇总列表，不覆盖已有产品。</div><div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>#</th><th>产品名称</th><th>外卖原价</th><th>打包费</th><th>美团折扣</th><th>淘宝折扣</th><th>成本</th></tr></thead><tbody>'+batchPending.slice(0,12).map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(p.name)+'</td><td>'+fmtY(p.price)+'</td><td>'+fmtY(p.packFee)+'</td><td>'+discFmt(p.dMT)+'</td><td>'+discFmt(p.dTB)+'</td><td>'+(p.cost?fmtY(p.cost):'—')+'</td></tr>').join('')+'</tbody></table></div><div class="workflow-actions"><button class="wf-btn primary" id="batchConfirm" type="button">确认导入 '+batchPending.length+' 个产品</button><button class="wf-btn" id="batchCancel" type="button">清除预览</button></div>':'';
   openWorkflow("批量导入产品","支持 XLSX、XLS、CSV、TSV；导入前先预览，不会直接覆盖当前清单。",'<div class="wf-grid"><div class="wf-card"><h3>1. 下载模板</h3><p>使用标准字段最稳定；允许删掉不需要的选填列。</p><button class="wf-btn" id="batchTemplate" type="button">下载 CSV 模板</button></div><div class="wf-card"><h3>2. 准备数据</h3><p>外卖原价为必填；缺少折扣、距离、活动时沿用完整版当前设置。</p></div><div class="wf-card"><h3>3. 选择文件</h3><p>XLSX 解析需要联网加载组件；CSV/TSV 可离线导入。</p><button class="wf-btn primary" id="batchChoose" type="button">选择文件</button></div></div>'+(status?'<div class="wf-note" style="margin-top:12px">'+escapeHtml(status)+'</div>':'')+preview);
   $("batchTemplate").onclick=batchTemplate;$("batchChoose").onclick=()=>$("batchImportFile").click();
-  if($("batchConfirm"))$("batchConfirm").onclick=()=>{products.push(...batchPending);batchPending=[];saveProducts();renderExec();closeWorkflow();};
+  if($("batchConfirm"))$("batchConfirm").onclick=()=>{const added=batchPending.slice();products.push(...added);if(!saveProducts()){products.splice(products.length-added.length,added.length);return;}batchPending=[];renderExec();closeWorkflow();};
   if($("batchCancel"))$("batchCancel").onclick=()=>{batchPending=[];renderBatchImport();};
 }
 async function handleBatchFile(file){
@@ -3913,9 +3974,9 @@ function renderScenarioCenter(compareIds=[]){
   const rows=scenarios.map(s=>{const m=scenarioSummary(s);return'<div class="wf-scenario"><input type="checkbox" data-scn-check="'+s.id+'" '+(compareIds.includes(s.id)?'checked':'')+'><div class="wf-scenario-main"><b>'+escapeHtml(s.name)+'</b><span>'+s.createdAt+' · '+m.count+' 个产品 · 到手率 '+pct(m.rate)+' · 外卖毛利率 '+pct(m.margin)+'</span></div><button class="wf-btn" data-scn-restore="'+s.id+'">恢复</button><button class="wf-btn danger" data-scn-del="'+s.id+'">删除</button></div>';}).join('')||'<div class="wf-empty">还没有保存方案。先为当前汇总列表命名并保存。</div>';
   const chosen=scenarios.filter(s=>compareIds.includes(s.id));const compare=chosen.length?'<div class="wf-tablewrap"><table class="wf-table"><thead><tr><th>方案</th><th>产品数</th><th>平均到手率</th><th>平均外卖毛利率</th><th>平均佣金</th><th>平均活动</th></tr></thead><tbody>'+chosen.map(s=>{const m=scenarioSummary(s);return'<tr><td>'+escapeHtml(s.name)+'</td><td>'+m.count+'</td><td>'+pct(m.rate)+'</td><td>'+pct(m.margin)+'</td><td>'+fmtY(m.fee)+'</td><td>'+fmtY(m.act)+'</td></tr>';}).join('')+'</tbody></table></div>':'';
   openWorkflow("方案对比","保存同一批产品的不同定价、折扣或活动方案，最多勾选 4 个并排比较。",'<div class="wf-grid" style="grid-template-columns:1fr auto"><div class="wf-field"><label>当前方案名称</label><input id="scenarioName" placeholder="如：双杯套餐·降低活动档位"></div><button class="wf-btn primary" id="scenarioSave" style="align-self:end" type="button">保存当前方案</button></div><div class="workflow-actions"><button class="wf-btn" id="scenarioCompare" type="button">对比已勾选方案</button></div>'+rows+compare);
-  $("scenarioSave").onclick=()=>{if(!products.length)return;const name=$("scenarioName").value.trim()||"方案 "+(scenarios.length+1);scenarios.unshift({id:uid(),name,createdAt:new Date().toLocaleString("zh-CN"),products:JSON.parse(JSON.stringify(products)),platFilter,channelMode:getChannelMode(),version:CALC_VERSION});saveScenarios();renderScenarioCenter();};
+  $("scenarioSave").onclick=()=>{if(!products.length)return;const name=$("scenarioName").value.trim()||"方案 "+(scenarios.length+1);const entry={id:uid(),name,createdAt:new Date().toLocaleString("zh-CN"),products:JSON.parse(JSON.stringify(products)),platFilter,channelMode:getChannelMode(),tbZhiTechRate:globalParams().tbZhiTechRate,version:CALC_VERSION};scenarios.unshift(entry);if(!saveScenarios()){scenarios.shift();return;}renderScenarioCenter();};
   $("scenarioCompare").onclick=()=>renderScenarioCenter([...document.querySelectorAll('[data-scn-check]:checked')].slice(0,4).map(x=>x.dataset.scnCheck));
-  document.querySelectorAll('[data-scn-restore]').forEach(b=>b.onclick=()=>{const s=scenarios.find(x=>x.id===b.dataset.scnRestore);if(!s)return;products=JSON.parse(JSON.stringify(s.products));saveProducts();renderExec();closeWorkflow();});
+  document.querySelectorAll('[data-scn-restore]').forEach(b=>b.onclick=()=>{const s=scenarios.find(x=>x.id===b.dataset.scnRestore);if(!s)return;const previousProducts=products;products=JSON.parse(JSON.stringify(s.products));if(!saveProducts()){products=previousProducts;return;}const savedRate=Number(s.tbZhiTechRate);if(Number.isFinite(savedRate)&&savedRate>=0){$("tbZhiTechRate").value=String(Math.round(savedRate*10000)/100);syncQuickFromFull();persist();}renderExec();closeWorkflow();});
   document.querySelectorAll('[data-scn-del]').forEach(b=>b.onclick=()=>{scenarios=scenarios.filter(x=>x.id!==b.dataset.scnDel);saveScenarios();renderScenarioCenter(compareIds);});
 }
 function validationIssues(){
