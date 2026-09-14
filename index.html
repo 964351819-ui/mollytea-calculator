@@ -1141,7 +1141,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.0.29 · 更新于 2026-09-10</span>
+    <span id="calcVersionStamp">计算口径 v3.0.30 · 更新于 2026-09-14</span>
   </div>
 </div>
 
@@ -1169,7 +1169,7 @@
         <section class="manual-section" id="manual-input">
           <h3>2. 输入字段怎么填</h3>
           <div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>字段</th><th>用途</th><th>填写建议</th></tr></thead><tbody>
-            <tr><td>产品名称</td><td>区分商品、套餐或规格；内置产品可自动带出堂食原价、外卖原价与产品成本。</td><td>可输入一个或多个完整产品名称；多个产品按字段求和。自动结果仍可手动修改，未收录的名称保持价格与成本为空。</td></tr>
+            <tr><td>产品名称</td><td>区分商品、套餐或规格；内置产品可自动带出堂食原价、外卖原价与产品成本。</td><td>可输入一个或多个完整产品名称；多个产品按字段求和。自动结果仍可手动修改；名称未收录时保留当前价格与成本，不主动清空。</td></tr>
             <tr><td>外卖原价</td><td>折扣、活动门槛、到手和平台费用的核心价格。</td><td>填写外卖端展示原价，不是折后价。</td></tr>
             <tr><td>堂食原价</td><td>用于展示堂食实付及外卖/堂食价格对照。</td><td>不参与平台佣金和到手价计算。</td></tr>
             <tr><td>打包费</td><td>计入订单金额、活动门槛与到手率分母。</td><td>必填；没有打包费时填写 0。</td></tr>
@@ -1184,8 +1184,8 @@
             <li><b>搜索与选择：</b>在完整版或汇总版快速测算的“产品名称”中输入文字，候选框会显示匹配产品及其堂食原价、外卖原价和产品成本；可点击候选，或用方向键选择后按回车确认。</li>
             <li><b>自动填充：</b>选择或输入一个已收录的完整产品名称后，系统会自动填写堂食原价、外卖原价和产品成本；候选框随后自动收起。</li>
             <li><b>组合求和：</b>名称中包含两个或更多已收录产品时，各字段分别求和。建议使用“＋”连接产品；输入“＋”后可继续搜索下一个产品。</li>
-            <li><b>缺失与未知：</b>若组合中任一产品缺少某个字段，该字段保持空白；未收录的名称不会显示价格或成本。</li>
-            <li><b>允许修改：</b>自动带出的数值只是录入辅助，堂食原价、外卖原价和产品成本都可以继续手动修改；再次修改产品名称时会重新匹配。</li>
+            <li><b>缺失与未知：</b>若已匹配组合中的任一产品缺少某个字段，该字段保持空白；若产品名称完全未匹配资料库，则保留用户当前填写的价格与成本。</li>
+            <li><b>允许修改：</b>自动带出的数值只是录入辅助，堂食原价、外卖原价和产品成本都可以继续手动修改；再次输入已收录名称时才会用资料库数值更新。</li>
           </ol>
           <div class="manual-callout"><b>组合示例：</b>输入“针王橘子＋茉莉奶白（中杯）”，自动显示堂食原价 35 元、外卖原价 38 元、产品成本 11.13 元。</div>
           <details class="manual-catalog" id="manual-catalog">
@@ -2521,6 +2521,8 @@ function matchCatalogProducts(value){
 const catalogNumber = value => Number.isFinite(value) ? String(Math.round(value*100)/100) : "";
 function applyProductCatalog(value){
   const matched=matchCatalogProducts(value);
+  // 未匹配只代表资料库无法自动补全，不能覆盖用户已经手动填写的价格与成本。
+  if(!matched.length){ compute(); persist(); syncQuickFromFull(); return; }
   [["price","price"],["priceDine","dine"],["cost","cost"]].forEach(([id,key])=>{
     const input=$(id); if(!input) return;
     input.value=matched.length && matched.every(item=>Number.isFinite(item[key]))
@@ -3858,9 +3860,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.0.29";
-const CALC_UPDATED = "2026-09-10";
+const CALC_VERSION = "v3.0.30";
+const CALC_UPDATED = "2026-09-14";
 const CALC_CHANGELOG = [
+  {version:"v3.0.30",date:"2026-09-14",items:["修改产品名称但资料库没有匹配项时，不再清空用户已填写的堂食原价、外卖原价和产品成本","完整版与汇总版快速测算同步生效；重新输入已收录产品名称时仍会正常自动带出或组合求和"]},
   {version:"v3.0.29",date:"2026-09-10",items:["修正代理模式费用说明：技术费与运营费明确按外卖原价＋打包费计算，配送费封顶明确按扣费基数计算；实际计算公式保持不变","产品清单、项目夹、方案及当前输入保存失败时显示显著提示；项目夹与方案不再在保存失败时误报成功"]},
   {version:"v3.0.28",date:"2026-09-10",items:["产品、方案和项目快照新增淘宝直营技术费率快照，查看、对比、展开详情及导出时不再受当前页面费率变化影响","恢复方案时同步恢复保存时费率；已有旧数据根据当时保存的淘宝结果自动反推并补齐原费率，避免旧方案按新费率重算"]},
   {version:"v3.0.27",date:"2026-08-31",items:["工具内“毛利”统一更名为“外卖毛利”，“毛利率”统一更名为“外卖毛利率”","同步更新完整版、汇总版、项目夹、方案对比、校验提示、说明书及导出表格字段；计算公式和数据逻辑保持不变"]},
