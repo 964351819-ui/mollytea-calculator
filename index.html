@@ -758,7 +758,15 @@
   .wf-badge{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;font-size:10.5px;font-weight:700}.wf-badge.error{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent)}.wf-badge.warn{color:var(--amber);background:color-mix(in srgb,var(--amber) 10%,transparent)}.wf-badge.ok{color:var(--good);background:color-mix(in srgb,var(--good) 10%,transparent)}
   .save-notice{position:fixed;left:50%;bottom:28px;z-index:13000;max-width:min(520px,calc(100vw - 32px));padding:11px 15px;border:1px solid color-mix(in srgb,var(--warn) 40%,var(--line));border-radius:10px;background:var(--card);color:var(--warn);box-shadow:0 12px 38px rgba(0,0,0,.2);font-size:12.5px;font-weight:650;line-height:1.55;opacity:0;transform:translate(-50%,12px);pointer-events:none;transition:opacity .18s,transform .18s}.save-notice.show{opacity:1;transform:translate(-50%,0)}
   .wf-scenario{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card-2);margin-top:8px}.wf-scenario input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent)}.wf-scenario-main{flex:1;min-width:0}.wf-scenario-main b{display:block;font-size:13px}.wf-scenario-main span{display:block;color:var(--sub);font-size:11px}.manual-version-fold{margin-top:10px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);overflow:hidden}.manual-version-fold>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650;user-select:none}.manual-version-fold>summary::-webkit-details-marker{display:none}.manual-version-fold>summary::before{content:"›";display:grid;width:19px;height:19px;flex:none;place-items:center;border-radius:50%;background:var(--glow);color:var(--accent);font-size:17px;line-height:1;transition:transform .16s}.manual-version-fold[open]>summary::before{transform:rotate(90deg)}.manual-version-fold>summary span{margin-left:auto;color:var(--sub);font-size:11.5px;font-weight:500}.manual-version-body{padding:0 14px 8px;border-top:1px solid var(--line)}.wf-version{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.wf-version:last-child{border-bottom:0}.wf-version time{color:var(--sub);font-size:11px}.wf-version b{display:block;font-size:13px}.wf-version ul{margin:5px 0 0;padding-left:17px;color:var(--sub);font-size:12px;line-height:1.7}
-  @media(max-width:760px){.workflow-overlay{padding:0}.workflow-dialog,.workflow-dialog:has(.combo-workflow){width:100%;height:100vh;max-height:none;border:0;border-radius:0}.workflow-body{padding:18px}.wf-grid,.combo-grid{grid-template-columns:1fr}.combo-input-panel>summary{padding:12px}.combo-input-body{padding:11px}.combo-preview-head{align-items:flex-start;flex-wrap:wrap}.combo-summary{width:100%;margin-left:36px}.combo-actionbar{position:static;align-items:flex-start;flex-direction:column;margin:0 -18px -18px;padding:12px 18px}.combo-actionbar .workflow-actions{width:100%}.combo-actionbar .wf-btn{flex:1}.combo-actionbar .wf-btn.primary{min-width:160px}}
+  .combo-input-body .wf-field{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--card-2)}
+  .combo-input-body .wf-field label{display:flex;align-items:center;gap:8px;margin:0;color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;line-height:1.5}
+  .combo-input-body .wf-field textarea{display:block;height:120px;min-height:120px;margin:0;padding:11px 12px;border-radius:8px;background:var(--card);font-family:inherit;font-size:12px;font-weight:400;line-height:1.7;font-variant-numeric:tabular-nums}
+  .combo-input-body .wf-field textarea::placeholder{font-family:inherit;font-size:12px;font-weight:400;color:var(--sub);opacity:.8}
+  .combo-input-body .combo-format{margin:0;font-size:11px;line-height:1.65}
+  .combo-product-card{grid-column:1/-1}.combo-gift-card{margin-top:0}.combo-optional{padding:2px 7px;border-radius:5px;background:var(--field);color:var(--sub);font-size:10px;font-weight:400}
+  .combo-gift-formula{border-top:1px solid var(--line);padding-top:9px;color:var(--sub);font-size:11px;line-height:1.65}.combo-gift-formula summary{cursor:pointer;font-size:11px;font-weight:500}.combo-gift-formula p{margin:8px 0 0}
+  .combo-generate-row{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  @media(max-width:760px){.workflow-overlay{padding:0}.workflow-dialog,.workflow-dialog:has(.combo-workflow){width:100%;height:100vh;max-height:none;border:0;border-radius:0}.workflow-body{padding:18px}.wf-grid,.combo-grid{grid-template-columns:1fr}.combo-input-panel>summary{padding:12px}.combo-input-body{padding:11px}.combo-preview-head{align-items:flex-start;flex-wrap:wrap}.combo-summary{width:100%;margin-left:36px}.combo-actionbar{position:static;align-items:flex-start;flex-direction:column;margin:0 -18px -18px;padding:12px 18px}.combo-actionbar .workflow-actions{width:100%}.combo-actionbar .wf-btn{flex:1}.combo-actionbar .wf-btn.primary{min-width:160px}.combo-generate-row{flex-wrap:wrap}.combo-generate-row .wf-btn{width:100%}}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"])[data-has-background][data-bg-treatment="soft"] body::before{background:rgba(18,17,17,.38)}:root:not([data-theme="light"])[data-has-background][data-bg-treatment="deep"] body::before{background:rgba(18,17,17,.62)}}
 </style>
 
@@ -1145,7 +1153,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.2 · 更新于 2026-09-14</span>
+    <span id="calcVersionStamp">计算口径 v3.2.6 · 更新于 2026-09-15</span>
   </div>
 </div>
 
@@ -1199,7 +1207,8 @@
         </section>
 
         <section class="manual-section" id="manual-combo">
-          <h3>3. 产品 × 周边组合录入</h3>
+          <h3>3. 产品 × 周边组合录入</h3><p>赠送周边支持多行，每行填写“名称｜成本”，例如“小卡｜1.50”下一行“贴纸｜2.00”。各赠品独立从原外卖毛利扣除自己的成本，并分别输出两列。如果同时赠送两件，请填为一行“小卡＋贴纸｜3.50”。</p>
+          <p>组合预览、追加清单和模板导出按周边分组，同一种周边搭配的产品连续排列。可选填赠送周边名称和成本（须同时填写，成本允许为 0），重新生成预览后，冷、热模板末尾增加“额外送＋名称”两列：外卖毛利＝前面的外卖毛利−赠送成本；外卖毛利率＝赠送后外卖毛利÷同一行到手价。到手价不大于 0 时沿用模板口径显示 0%。赠送成本单独展示，不重复扣减前面的原外卖毛利。</p>
           <p>在汇总版右上角打开“工具 → 产品 × 周边组合录入”，分别粘贴产品资料和周边资料，系统会一次生成全部笛卡尔组合。例如 3 个产品和 4 个周边会生成 12 条汇总记录。</p>
           <h4>粘贴格式</h4>
           <div class="manual-formula">产品推荐格式：产品名称｜外卖原价｜堂食原价｜冷成本｜热成本<br>产品兼容格式：产品名称｜外卖原价｜堂食原价｜产品成本（冷、热共用）</div>
@@ -3905,9 +3914,13 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.2";
-const CALC_UPDATED = "2026-09-14";
+const CALC_VERSION = "v3.2.6";
+const CALC_UPDATED = "2026-09-15";
 const CALC_CHANGELOG = [
+  {version:"v3.2.6",date:"2026-09-15",items:["产品资料在顶部占整行；周边资料和赠送周边在下方各占一半，手机端纵向排列"]},
+  {version:"v3.2.5",date:"2026-09-15",items:["统一产品、周边、赠送周边资料区的卡片、输入框、字体与间距，顶部双栏输入框对齐","赠送周边支持多行输入；计算说明默认折叠，点击“赠送后的毛利怎么算？”查看；优化手机端按钮布局"]},
+  {version:"v3.2.4",date:"2026-09-15",items:["赠送周边支持多行名称和成本，每个赠品分别导出外卖毛利、外卖毛利率两列；同步说明书"]},
+  {version:"v3.2.3",date:"2026-09-15",items:["组合预览及导出按周边分组，同一周边的产品连续排列","新增赠送周边名称和成本输入；冷、热模板末尾显示赠送后外卖毛利和外卖毛利率；同步说明书"]},
   {version:"v3.2.2",date:"2026-09-14",items:["重新设计产品 × 周边组合录入页，按录入、核对、导出三步组织操作","生成预览后自动收起大输入区，可随时点击修改资料重新展开","预览表改为限高滚动并固定表头，导出、追加和清除操作集中在底部操作栏","优化规则提示、数量统计、移动端布局并同步更新完整说明书"]},
   {version:"v3.2.1",date:"2026-09-14",items:["在产品 × 周边组合预览中新增可折叠的“导出说明与示例”","使用冷/热工作表标签和示例表格直观展示全国、北上新藏、距离、成本与外卖毛利等输出结构","同步更新完整说明书"]},
   {version:"v3.2.0",date:"2026-09-14",items:["产品 × 周边组合录入支持分别填写冷成本和热成本；旧版单成本格式继续兼容并自动用于冷、热两版","周边简版和扩展版均保留独立周边成本，模板中单列显示为周边订货价并参与外卖毛利计算","新增图片模板版 Excel 导出：自动生成冷、热工作表，并为每个组合展开直营/代理、全国/北上新藏及 3km/4km 结果","北上新藏外卖原价默认加 1 元，导出时按调整后的原价和平台折扣重新匹配自动活动档位；同步更新完整说明书"]},
@@ -4056,7 +4069,7 @@ function parseComboData(text,type){
   return {items,errors};
 }
 function buildComboProducts(productRows,peripheralRows){
-  return productRows.flatMap(product=>peripheralRows.map(peripheral=>{
+  return peripheralRows.flatMap(peripheral=>productRows.map(product=>{
     const comboPrice=product.price+peripheral.price,packFee=num($("packFee").value),dMT=readDiscount("mt").d,dTB=readDiscount("tb").d;
     const mtOn=$("a_mt_sh").checked,tbOn=$("a_tb_bh").checked,mtLevel=mtOn?mtAutoLevel(comboPrice*dMT+packFee):0,tbLevel=tbOn?tbAutoLevel(comboPrice*dTB+packFee):0;
     const row={
@@ -4076,6 +4089,7 @@ function buildComboProducts(productRows,peripheralRows){
       built.comboProductName=product.name;built.comboPeripheralName=peripheral.name;
       built.comboProductPrice=product.price;built.comboPeripheralPrice=peripheral.price;built.comboPeripheralDine=peripheral.dine;
       built.comboColdCost=product.coldCost;built.comboHotCost=product.hotCost;
+      built.comboGifts=comboDraft.gifts.map(g=>({...g}));
       built.mtActivityAuto=mtOn;built.tbActivityAuto=tbOn;
     }
     return built;
@@ -4103,20 +4117,28 @@ function comboTemplateMetrics(p,mode,dist,regionAdd,cost){
 }
 function styleComboTemplateSheet(ws,title,comboRows,costKey){
   const headers=["周边加价","范围","活动距离","套餐内容","外卖原价","堂食原价","平台扣点","活动支出","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","外卖毛利","外卖毛利率"];
+  const first=comboRows.find(p=>p.comboGifts?.length||p.comboGiftName);const gifts=first?(first.comboGifts||[{name:first.comboGiftName,cost:first.comboGiftCost||0}]):[];
+  gifts.forEach(()=>headers.push("外卖毛利","外卖毛利率"));
+  comboRows=[...comboRows].sort((a,b)=>comboRows.findIndex(p=>p.comboPeripheralName===a.comboPeripheralName)-comboRows.findIndex(p=>p.comboPeripheralName===b.comboPeripheralName));
   ws.views=[{state:"frozen",ySplit:3,showGridLines:false}];ws.pageSetup={paperSize:9,orientation:"landscape",fitToPage:true,fitToWidth:1,fitToHeight:0,margins:{left:.25,right:.25,top:.35,bottom:.35,header:.15,footer:.15}};
   ws.columns=[13,12,12,34,11,11,11,11,11,11,11,11,11,14,11,13].map(width=>({width}));
+  gifts.forEach((g,i)=>{ws.getColumn(17+i*2).width=14;ws.getColumn(18+i*2).width=14;});
   const thin={style:"thin",color:{argb:"FFB7B1A9"}},medium={style:"medium",color:{argb:"FF5B5752"}};
   const setTitle=(row,text)=>{ws.mergeCells(row,1,row,16);const c=ws.getCell(row,1);c.value=text;c.font={name:"Arial",size:14,bold:true,color:{argb:"FF2E2925"}};c.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FFF4D49A"}};c.alignment={vertical:"middle",horizontal:"left"};ws.getRow(row).height=32;c.border={bottom:medium};};
   const setHeader=row=>{const r=ws.getRow(row);r.values=headers;r.height=26;r.eachCell(c=>{c.font={name:"Arial",size:10,bold:true,color:{argb:"FF3A332D"}};c.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FFF4D49A"}};c.alignment={vertical:"middle",horizontal:"center"};c.border={top:thin,bottom:medium,left:thin,right:thin};});};
   const addSection=(startRow,label,mode)=>{
-    setTitle(startRow,label);setHeader(startRow+1);let row=startRow+2;
+    setTitle(startRow,label);setHeader(startRow+1);
+    gifts.forEach((gift,i)=>{const col=17+i*2;ws.mergeCells(startRow,col,startRow,col+1);const c=ws.getCell(startRow,col);c.value="额外送"+gift.name+"（¥"+gift.cost.toFixed(2)+"）";c.font={name:"Arial",size:11,bold:true};c.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FFFBE6CC"}};c.alignment={vertical:"middle",horizontal:"center",wrapText:true};});
+    let row=startRow+2;
     comboRows.forEach(p=>{
       const groupStart=row,peripheralAdd=p.comboPeripheralPrice||0;
       [["全国",3,0],["全国",4,0],["北上新藏",3,1],["北上新藏",4,1]].forEach(([area,dist,add],idx)=>{
         const m=comboTemplateMetrics(p,mode,dist,add,p[costKey]??p.cost??0),r=ws.getRow(row);
         r.values=[idx===0?peripheralAdd:null,(idx===0||idx===2)?area:null,dist+"km",idx===0?p.name:null,m.price,m.dine,m.fee,m.activity,m.net,m.rate,m.pay,m.dine,m.cost,m.wholesale,m.profit,m.margin];r.height=22;
+        gifts.forEach((gift,i)=>{const profit=m.profit-gift.cost;r.getCell(17+i*2).value=profit;r.getCell(18+i*2).value=m.net>0?profit/m.net:0;});
         r.eachCell((c,col)=>{c.font={name:"Arial",size:10,bold:[9,10,11,15,16].includes(col),color:{argb:"FF3A3734"}};c.alignment={vertical:"middle",horizontal:col===4?"left":"center",wrapText:col===4};c.border={top:thin,bottom:idx===3?medium:thin,left:thin,right:thin};});
         [5,6].forEach(col=>r.getCell(col).numFmt="0.00");[7,8,9,11,12,13,14,15].forEach(col=>r.getCell(col).numFmt='¥0.00');[10,16].forEach(col=>r.getCell(col).numFmt="0.00%");row++;
+        gifts.forEach((g,i)=>{r.getCell(17+i*2).numFmt='¥0.00';r.getCell(18+i*2).numFmt='0.00%';r.getCell(17+i*2).font={name:"Arial",size:10,bold:true,color:{argb:"FFD52C36"}};});
       });
       ws.mergeCells(groupStart,1,row-1,1);ws.getCell(groupStart,1).value=peripheralAdd;ws.getCell(groupStart,1).numFmt='¥0.00';
       ws.mergeCells(groupStart,2,groupStart+1,2);ws.mergeCells(groupStart+2,2,groupStart+3,2);ws.mergeCells(groupStart,4,row-1,4);
@@ -4139,17 +4161,28 @@ async function exportComboTemplate(){
   }catch(e){if(btn)btn.textContent="导出失败，请联网重试";}finally{if(btn)btn.disabled=false;}
 }
 function comboExportHelpHtml(){
-  return '<details class="combo-export-help"><summary>导出说明与示例</summary><div class="combo-export-help-body"><p>点击导出后会下载一个 Excel 文件，包含“冷”和“热”两个工作表。每张表按直营、代理分区，并为每个组合生成全国与北上新藏的 3km、4km 测算行；北上新藏外卖原价自动加 1 元，活动档位随新价格重新匹配。</p><div class="combo-export-demo" role="img" aria-label="Excel 导出示例：冷和热两个工作表，包含范围、活动距离、套餐内容、价格、成本、到手价及外卖毛利"><div class="combo-export-tabs"><span>冷</span><span>热</span></div><div class="combo-export-sheet"><table><thead><tr><th>范围</th><th>活动距离</th><th>套餐内容</th><th>外卖原价</th><th>活动支出</th><th>到手价</th><th>产品成本</th><th>周边订货价</th><th>外卖毛利</th></tr></thead><tbody><tr><td>全国</td><td>3km</td><td>示例饮品＋示例周边</td><td>¥39.00</td><td>自动匹配</td><td>自动计算</td><td>冷成本</td><td>周边成本</td><td>自动计算</td></tr><tr><td>北上新藏</td><td>4km</td><td>示例饮品＋示例周边</td><td>¥40.00</td><td>重新匹配</td><td>自动计算</td><td>冷成本</td><td>周边成本</td><td>自动计算</td></tr></tbody></table></div><div class="combo-export-caption">示例仅展示主要字段；实际文件还会包含堂食原价、平台扣点、到手率、实付和外卖毛利率等完整列。</div></div></div></details>';
+  return '<details class="combo-export-help"><summary>导出说明与示例</summary><div class="combo-export-help-body"><p>点击导出后会下载一个 Excel 文件，包含“冷”和“热”两个工作表。每张表按直营、代理分区，同一周边的产品集中排列。选填赠送名称和成本后，末尾增加“额外送＋名称”的外卖毛利和外卖毛利率两列，分别为原外卖毛利减赠送成本、赠送后外卖毛利除以到手价。每个组合生成全国与北上新藏的 3km、4km 测算行；北上新藏外卖原价自动加 1 元，活动档位随新价格重新匹配。</p><div class="combo-export-demo" role="img" aria-label="Excel 导出示例：冷和热两个工作表，包含范围、活动距离、套餐内容、价格、成本、到手价及外卖毛利"><div class="combo-export-tabs"><span>冷</span><span>热</span></div><div class="combo-export-sheet"><table><thead><tr><th>范围</th><th>活动距离</th><th>套餐内容</th><th>外卖原价</th><th>活动支出</th><th>到手价</th><th>产品成本</th><th>周边订货价</th><th>外卖毛利</th></tr></thead><tbody><tr><td>全国</td><td>3km</td><td>示例饮品＋示例周边</td><td>¥39.00</td><td>自动匹配</td><td>自动计算</td><td>冷成本</td><td>周边成本</td><td>自动计算</td></tr><tr><td>北上新藏</td><td>4km</td><td>示例饮品＋示例周边</td><td>¥40.00</td><td>重新匹配</td><td>自动计算</td><td>冷成本</td><td>周边成本</td><td>自动计算</td></tr></tbody></table></div><div class="combo-export-caption">示例仅展示主要字段；实际文件还会包含堂食原价、平台扣点、到手率、实付和外卖毛利率等完整列。</div></div></div></details>';
+}
+function parseComboGifts(text){
+  const items=[],errors=[];
+  String(text||"").split(/\r?\n/).forEach((line,i)=>{
+    if(!line.trim())return;
+    const cells=splitComboLine(line),cost=Number(cells[1]);
+    if(cells.length!==2||!cells[0]||!cells[1]||!Number.isFinite(cost)||cost<0){errors.push("赠送周边第 "+(i+1)+" 行请填写名称及非负成本");return;}
+    items.push({name:cells[0],cost});
+  });return {items,errors};
 }
 function renderComboBuilder(status=""){
   const hasPreview=comboPending.length>0,inputSummary=hasPreview?'已录入 '+comboCounts.products+' 个产品、'+comboCounts.peripherals+' 个周边；需要调整时展开修改。':'粘贴产品表和周边表，支持从 Excel 直接复制。';
-  const inputPanel='<details class="combo-input-panel"'+(hasPreview?'':' open')+'><summary><span class="combo-step-num">1</span><span class="combo-input-title"><b>录入产品与周边资料</b><small>'+inputSummary+'</small></span><em class="combo-input-toggle"></em></summary><div class="combo-input-body"><div class="wf-grid combo-grid"><div class="wf-field"><label>产品资料</label><textarea id="comboProducts" placeholder="产品名称｜外卖原价｜堂食原价｜冷成本｜热成本">'+escapeHtml(comboDraft.products)+'</textarea><span class="combo-format">推荐 5 列：名称｜外卖原价｜堂食原价｜冷成本｜热成本；旧版 4 列会将同一成本用于冷、热。</span></div><div class="wf-field"><label>周边资料</label><textarea id="comboPeripherals" placeholder="周边名称｜周边原价｜周边成本">'+escapeHtml(comboDraft.peripherals)+'</textarea><span class="combo-format">简版 3 列必须填写周边成本；扩展版：名称｜外卖原价｜堂食原价｜周边成本。</span></div></div><div class="combo-generate-row"><span>组合数量 = 产品数 × 周边数，单次最多 1000 条。</span><button class="wf-btn primary" id="comboGenerate" type="button">'+(hasPreview?'重新生成预览':'生成组合预览')+'</button></div></div></details>';
+  const inputPanel='<details class="combo-input-panel"'+(hasPreview?'':' open')+'><summary><span class="combo-step-num">1</span><span class="combo-input-title"><b>录入产品与周边资料</b><small>'+inputSummary+'</small></span><em class="combo-input-toggle"></em></summary><div class="combo-input-body"><div class="wf-grid combo-grid"><div class="wf-field combo-product-card"><label for="comboProducts">产品资料</label><textarea id="comboProducts" placeholder="产品名称｜外卖原价｜堂食原价｜冷成本｜热成本">'+escapeHtml(comboDraft.products)+'</textarea><span class="combo-format">推荐 5 列：名称｜外卖原价｜堂食原价｜冷成本｜热成本；旧版 4 列会将同一成本用于冷、热。</span></div><div class="wf-field"><label for="comboPeripherals">周边资料</label><textarea id="comboPeripherals" placeholder="周边名称｜周边原价｜周边成本">'+escapeHtml(comboDraft.peripherals)+'</textarea><span class="combo-format">简版 3 列必须填写周边成本；扩展版：名称｜外卖原价｜堂食原价｜周边成本。</span></div><div class="wf-field combo-gift-card"><label for="comboGifts">赠送周边 <span class="combo-optional">选填 · 支持多个</span></label><textarea id="comboGifts" placeholder="小卡｜1.50&#10;贴纸｜2.00">'+escapeHtml(comboDraft.giftText||'')+'</textarea><span class="combo-format">每行：名称｜成本。各赠品分别计算；同时赠送多件时，填一行组合名称及合计成本。</span><details class="combo-gift-formula"><summary>赠送后的毛利怎么算？</summary><p>外卖毛利＝原外卖毛利−赠送成本<br>外卖毛利率＝赠送后外卖毛利÷到手价。每个赠品在导出末尾各占两列。</p></details></div></div><div class="combo-generate-row"><span>组合数量 = 产品数 × 周边数，单次最多 1000 条。</span><button class="wf-btn primary" id="comboGenerate" type="button">'+(hasPreview?'重新生成预览':'生成组合预览')+'</button></div></div></details>';
   const previewRows=comboPending.slice(0,20).map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(p.name)+'</td><td>'+fmtY(p.price)+'</td><td>'+(p.priceDine?fmtY(p.priceDine):'—')+'</td><td>'+fmtY(p.comboColdCost??p.cost??0)+'</td><td>'+fmtY(p.comboHotCost??p.cost??0)+'</td><td>'+fmtY(p.wholesale||0)+'</td><td>'+fmtY(p.mtAct||0)+'</td><td>'+fmtY(p.tbAct||0)+'</td></tr>').join('');
-  const preview=hasPreview?'<section class="combo-preview-section"><div class="combo-preview-head"><span class="combo-step-num">2</span><div class="combo-preview-copy"><h3>核对组合预览</h3><p>'+escapeHtml(status||'组合已生成，请核对价格、成本和活动。')+'</p></div><div class="combo-summary"><span>产品 <b>'+comboCounts.products+'</b></span><span>周边 <b>'+comboCounts.peripherals+'</b></span><span>组合 <b>'+comboPending.length+'</b></span></div></div><div class="combo-rule-note">原价分别相加，冷/热产品成本与周边成本分开保存；北上新藏导出价自动加 1 元，并按新价格重新匹配活动。</div><div class="wf-tablewrap combo-tablewrap"><table class="wf-table"><thead><tr><th>#</th><th>组合名称</th><th>外卖原价</th><th>堂食原价</th><th>冷成本</th><th>热成本</th><th>周边成本</th><th>美团活动</th><th>淘宝活动</th></tr></thead><tbody>'+previewRows+'</tbody></table></div>'+(comboPending.length>20?'<div class="combo-rule-note">当前展示前 20 条，导出和追加会处理全部 '+comboPending.length+' 条。</div>':'')+comboExportHelpHtml()+'<div class="combo-actionbar"><div class="combo-action-title"><span class="combo-step-num">3</span><b>选择下一步</b></div><div class="workflow-actions"><button class="wf-btn primary" id="comboExport" type="button">导出图片模板版 Excel</button><button class="wf-btn" id="comboConfirm" type="button">追加 '+comboPending.length+' 个组合到汇总版</button><button class="wf-btn" id="comboClear" type="button">清除预览</button></div></div></section>':'';
+  const preview=hasPreview?'<section class="combo-preview-section"><div class="combo-preview-head"><span class="combo-step-num">2</span><div class="combo-preview-copy"><h3>核对组合预览</h3><p>'+escapeHtml(status||'组合已生成，请核对价格、成本和活动。')+'</p></div><div class="combo-summary"><span>产品 <b>'+comboCounts.products+'</b></span><span>周边 <b>'+comboCounts.peripherals+'</b></span><span>组合 <b>'+comboPending.length+'</b></span></div></div><div class="combo-rule-note">按相同周边集中排列；原价分别相加，冷/热产品成本与周边成本分开保存；北上新藏导出价自动加 1 元，并按新价格重新匹配活动。</div><div class="wf-tablewrap combo-tablewrap"><table class="wf-table"><thead><tr><th>#</th><th>组合名称</th><th>外卖原价</th><th>堂食原价</th><th>冷成本</th><th>热成本</th><th>周边成本</th><th>美团活动</th><th>淘宝活动</th></tr></thead><tbody>'+previewRows+'</tbody></table></div>'+(comboPending.length>20?'<div class="combo-rule-note">当前展示前 20 条，导出和追加会处理全部 '+comboPending.length+' 条。</div>':'')+comboExportHelpHtml()+'<div class="combo-actionbar"><div class="combo-action-title"><span class="combo-step-num">3</span><b>选择下一步</b></div><div class="workflow-actions"><button class="wf-btn primary" id="comboExport" type="button">导出图片模板版 Excel</button><button class="wf-btn" id="comboConfirm" type="button">追加 '+comboPending.length+' 个组合到汇总版</button><button class="wf-btn" id="comboClear" type="button">清除预览</button></div></div></section>':'';
   const notice=!hasPreview&&status?'<div class="wf-note">'+escapeHtml(status)+'</div>':'';
   openWorkflow("产品 × 周边组合录入","三步完成批量组合：粘贴资料、核对预览、导出模板或追加到汇总版。",'<div class="combo-workflow">'+inputPanel+notice+preview+'</div>');
   $("comboGenerate").onclick=()=>{
-    comboDraft={products:$("comboProducts").value,peripherals:$("comboPeripherals").value};
+    comboDraft={products:$("comboProducts").value,peripherals:$("comboPeripherals").value,giftText:$("comboGifts").value,gifts:[]};
+    const result=parseComboGifts(comboDraft.giftText);comboDraft.gifts=result.items;
+    if(result.errors.length){comboPending=[];renderComboBuilder(result.errors.join("；"));return;}
     const productResult=parseComboData(comboDraft.products,"product"),peripheralResult=parseComboData(comboDraft.peripherals,"peripheral"),total=productResult.items.length*peripheralResult.items.length;
     comboCounts={products:productResult.items.length,peripherals:peripheralResult.items.length};
     if(!productResult.items.length||!peripheralResult.items.length){comboPending=[];renderComboBuilder([...productResult.errors,...peripheralResult.errors,"请至少录入 1 个有效产品和 1 个有效周边。"].join("；"));return;}
