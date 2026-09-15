@@ -745,7 +745,8 @@
   .manual-tablewrap{overflow:auto;margin:10px 0}.manual-table{width:100%;min-width:620px;border-collapse:collapse;font-size:12px}.manual-table th,.manual-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.6}.manual-table th{background:var(--field);color:var(--sub);font-weight:600}.manual-table td{color:var(--sub)}.manual-table td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
   .manual-catalog{margin-top:14px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);overflow:hidden}.manual-catalog>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650;user-select:none}.manual-catalog>summary::-webkit-details-marker{display:none}.manual-catalog>summary::before{content:"›";display:grid;place-items:center;width:19px;height:19px;flex:none;border-radius:50%;background:var(--glow);color:var(--accent);font-size:17px;line-height:1;transition:transform .16s}.manual-catalog[open]>summary::before{transform:rotate(90deg)}.manual-catalog>summary span{margin-left:auto;color:var(--sub);font-size:11.5px;font-weight:500}.manual-catalog-body{padding:0 14px 12px;border-top:1px solid var(--line)}.manual-catalog .manual-table{min-width:560px}.manual-catalog .manual-table th:nth-child(n+2),.manual-catalog .manual-table td:nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums}
   .manual-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.manual-tags span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--card-2);color:var(--sub);font-size:11.5px}
-  @media(max-width:760px){.manual-overlay{padding:0}.manual-dialog{width:100%;height:100vh;max-height:none;border:0;border-radius:0}.manual-head{padding:17px 18px 14px}.manual-layout{grid-template-columns:1fr}.manual-nav{display:flex;gap:4px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:9px 12px}.manual-nav .manual-nav-title{display:none}.manual-nav a{white-space:nowrap}.manual-content{padding:20px 18px 38px}.manual-steps{grid-template-columns:1fr}}
+  .manual-combo-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 16px}.manual-combo-intro>div{padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card-2)}.manual-combo-intro b{display:block;margin-bottom:4px;font-size:12.5px}.manual-combo-intro span{display:block;color:var(--sub);font-size:11.5px;line-height:1.6}.manual-format-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.manual-format-card{padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:var(--field)}.manual-format-card b{display:block;margin-bottom:6px;font-size:12.5px}.manual-format-card code{display:block;color:var(--sub);font:600 11.5px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}.manual-rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.manual-rule{padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card-2)}.manual-rule b{display:block;margin-bottom:3px;font-size:12.5px}.manual-rule span{display:block;color:var(--sub);font-size:11.5px;line-height:1.65}.manual-rule.wide{grid-column:1/-1}
+  @media(max-width:760px){.manual-overlay{padding:0}.manual-dialog{width:100%;height:100vh;max-height:none;border:0;border-radius:0}.manual-head{padding:17px 18px 14px}.manual-layout{grid-template-columns:1fr}.manual-nav{display:flex;gap:4px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:9px 12px}.manual-nav .manual-nav-title{display:none}.manual-nav a{white-space:nowrap}.manual-content{padding:20px 18px 38px}.manual-steps,.manual-combo-intro,.manual-format-grid,.manual-rule-grid{grid-template-columns:1fr}.manual-rule.wide{grid-column:auto}}
   /* 独立工作流中心：批量导入 / 方案对比 / 校验 / 实际复盘 / 版本 */
   .workflow-overlay{display:none;position:fixed;inset:0;z-index:11900;padding:28px;background:rgba(15,14,13,.5);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
   .workflow-overlay.open{display:flex;align-items:center;justify-content:center}.workflow-dialog{width:min(1040px,100%);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:0 24px 80px rgba(0,0,0,.24)}
@@ -1054,7 +1055,7 @@
             <button id="copyBtn" class="copybtn" type="button">复制表格</button>
             <button id="shotBtn" class="copybtn" type="button">分析表格</button>
             <button id="batchImportBtn" class="copybtn" type="button">批量导入产品</button>
-            <button id="comboImportBtn" class="copybtn" type="button">产品 × 周边组合录入</button>
+            <button id="comboImportBtn" class="copybtn" type="button">周边套餐测算</button>
             <div class="tool-sep"></div>
             <button id="archiveBtn" class="copybtn" type="button">存入项目夹</button>
             <button id="archiveViewBtn" class="copybtn" type="button">查看项目夹</button>
@@ -1169,7 +1170,7 @@
     <div class="manual-layout">
       <nav class="manual-nav" aria-label="说明书目录">
         <div class="manual-nav-title">目录</div>
-        <a href="#manual-start">快速上手</a><a href="#manual-input">输入字段</a><a href="#manual-catalog">产品资料库</a><a href="#manual-combo">组合录入</a><a href="#manual-core">核心口径</a><a href="#manual-fees">平台费用</a><a href="#manual-activity">活动与档位</a><a href="#manual-profit">实付与外卖毛利</a><a href="#manual-summary">汇总版</a><a href="#manual-features">功能清单</a><a href="#manual-data">数据与分享</a><a href="#manual-notice">使用提醒</a><a href="#manual-version">版本记录</a>
+        <a href="#manual-start">快速上手</a><a href="#manual-input">输入字段</a><a href="#manual-catalog">产品资料库</a><a href="#manual-combo">周边套餐测算</a><a href="#manual-core">核心口径</a><a href="#manual-fees">平台费用</a><a href="#manual-activity">活动与档位</a><a href="#manual-profit">实付与外卖毛利</a><a href="#manual-summary">汇总版</a><a href="#manual-features">功能清单</a><a href="#manual-data">数据与分享</a><a href="#manual-notice">使用提醒</a><a href="#manual-version">版本记录</a>
       </nav>
       <main class="manual-content">
         <section class="manual-section" id="manual-start">
@@ -1207,23 +1208,28 @@
         </section>
 
         <section class="manual-section" id="manual-combo">
-          <h3>3. 产品 × 周边组合录入</h3><p>赠送周边支持多行，每行填写“名称｜成本”，例如“小卡｜1.50”下一行“贴纸｜2.00”。各赠品独立从原外卖毛利扣除自己的成本，并分别输出外卖毛利、外卖毛利率；填写两个或以上赠品时，末尾自动增加“赠送周边汇总”，按全部赠品成本合计扣减。</p>
-          <p>组合预览、追加清单和模板导出按周边分组，同一种周边搭配的产品连续排列；导出时“周边加价”等连续一致的分组字段会合并单元格。冷、热测算并排输出在同一个“测算格式”工作表。赠送后外卖毛利＝原外卖毛利−对应赠送成本；赠送后外卖毛利率＝赠送后外卖毛利÷同一行到手价。到手价不大于 0 时显示 0%；任一外卖毛利或外卖毛利率为负时使用粉色底提醒。</p>
-          <p>在汇总版右上角打开“工具 → 产品 × 周边组合录入”，分别粘贴产品资料和周边资料，系统会一次生成全部笛卡尔组合。例如 3 个产品和 4 个周边会生成 12 条汇总记录。</p>
+          <h3>3. 周边套餐测算</h3>
+          <p>批量组合产品与周边，统一核对价格、成本、活动及外卖毛利，再导出标准 Excel 或追加到汇总版。</p>
+          <div class="manual-combo-intro">
+            <div><b>① 粘贴资料</b><span>在“工具 → 周边套餐测算”中录入产品、周边和可选赠品。</span></div>
+            <div><b>② 生成预览</b><span>产品数 × 周边数自动生成全部组合；例如 3 × 4 = 12 条。</span></div>
+            <div><b>③ 导出或追加</b><span>核对结果后导出模板，或把组合追加至当前汇总清单。</span></div>
+          </div>
           <h4>粘贴格式</h4>
-          <div class="manual-formula">产品推荐格式：产品名称｜外卖原价｜堂食原价｜冷成本｜热成本<br>产品兼容格式：产品名称｜外卖原价｜堂食原价｜产品成本（冷、热共用）</div>
-          <div class="manual-formula">周边简版：周边名称｜周边原价｜周边成本<br>周边扩展版：周边名称｜周边外卖原价｜周边堂食原价｜周边成本</div>
-          <ul>
-            <li><b>组合名称：</b>使用“产品名称＋周边名称”。</li>
-            <li><b>外卖原价：</b>产品外卖原价＋周边外卖原价。</li>
-            <li><b>堂食原价：</b>产品堂食原价＋周边堂食原价；周边只填写一个原价时，该价格同时用于外卖和堂食。</li>
-            <li><b>成本拆分：</b>冷成本和热成本分别用于“测算格式”工作表左右两侧的冷、热测算；只填写一个产品成本时两套测算共用。周边成本始终单独保存在“周边订货价”，外卖毛利会同时扣除产品成本与周边成本。</li>
-            <li><b>默认参数：</b>折扣、打包费、配送距离、下单时段、淘宝直营技术费率和活动启用状态沿用完整版当前设置。只要勾选美团神会员或淘宝爆红包，每个组合都会按“组合外卖原价 × 对应平台折扣＋打包费”单独计算门槛并自动匹配活动出资和补贴；未勾选则不计该活动。</li>
-            <li><b>录入后联动：</b>组合加入汇总版后，双击修改外卖原价、对应平台折扣或打包费，已开启的自动活动会按新门槛立即重新匹配出资和补贴，并同步更新佣金、到手价、到手率和外卖毛利。</li>
-            <li><b>自定义保护：</b>若在汇总版直接手动修改活动金额，该记录会切换为自定义活动，后续调整原价时不会再覆盖手填值。</li>
-            <li><b>模板输出：</b>预览后点击“导出图片模板版 Excel”，自动生成“测算格式”工作表，冷、热测算左右并排。每个组合分别展开直营、代理，以及全国/北上新藏的 3km、4km 结果；北上新藏外卖原价默认增加 1 元，并按新原价重新匹配自动活动档位。同一周边的连续分组字段会合并单元格；多个赠品会自动增加合计结果，负外卖毛利和负外卖毛利率使用粉色底提醒。导出使用汇总版当前选择的平台口径。</li>
-            <li><b>预览确认：</b>生成后录入区会自动折叠，页面集中展示组合数量、规则提示和可滚动预览表；需要调整时点击“修改资料”重新展开。预览不会覆盖已有汇总记录，可直接导出模板，也可点击追加进入当前汇总清单。追加到汇总版时以冷成本作为当前产品成本，模板文件仍分别保留冷、热成本。</li>
-          </ul>
+          <div class="manual-format-grid">
+            <div class="manual-format-card"><b>产品资料</b><code>推荐：名称｜外卖原价｜堂食原价｜冷成本｜热成本</code><code>兼容：名称｜外卖原价｜堂食原价｜产品成本</code></div>
+            <div class="manual-format-card"><b>周边资料</b><code>简版：名称｜周边原价｜周边成本</code><code>扩展：名称｜外卖原价｜堂食原价｜周边成本</code></div>
+            <div class="manual-format-card"><b>赠送周边（选填）</b><code>每行：名称｜成本</code><code>示例：小卡｜1.50　贴纸｜2.00</code></div>
+            <div class="manual-format-card"><b>组合结果</b><code>名称：产品名称＋周边名称</code><code>原价：产品原价＋周边原价</code></div>
+          </div>
+          <h4>计算与联动</h4>
+          <div class="manual-rule-grid">
+            <div class="manual-rule"><b>成本拆分</b><span>冷、热成本分别进入左右两套测算；单一产品成本则两套共用。周边成本单独计入“周边订货价”。</span></div>
+            <div class="manual-rule"><b>活动自动匹配</b><span>沿用当前折扣、打包费、配送及时段；活动门槛按“组合外卖原价 × 平台折扣＋打包费”计算。</span></div>
+            <div class="manual-rule"><b>修改后重算</b><span>追加后修改原价、折扣或打包费，自动活动立即重新匹配；手动修改活动金额后保留自定义值。</span></div>
+            <div class="manual-rule"><b>赠品测算</b><span>每个赠品分别扣减外卖毛利；两个以上赠品额外生成“赠送周边汇总”，按总成本扣减。</span></div>
+            <div class="manual-rule wide"><b>模板输出</b><span>冷、热测算在同一“测算格式”工作表左右并排，展开直营/代理、全国/北上新藏及 3km/4km；北上新藏外卖原价默认加 1 元。结果按周边分组，相同字段合并单元格；负外卖毛利或负外卖毛利率以粉色底提示。</span></div>
+          </div>
           <div class="manual-callout"><b>数据量提示：</b>组合数量 = 产品数 × 周边数。单次最多生成 1000 条，避免误粘贴导致页面卡顿。</div>
         </section>
 
@@ -1293,13 +1299,13 @@
 
         <section class="manual-section" id="manual-summary">
           <h3>8. 汇总版怎么用</h3>
-          <ul><li><b>快速测算：</b>在汇总版顶部直接录入，与完整版共用同一套计算逻辑；输入已收录的完整产品名称会自动带出价格与成本，多个产品名称会自动求和；点击“加入汇总列表”生成产品行。</li><li><b>组合录入：</b>从“工具”打开产品 × 周边组合录入，粘贴两张资料表后批量生成全部搭配，组合原价自动求和，产品成本和周边成本分别入列。</li><li><b>测算校验：</b>汇总版右上角会实时显示问题数量；点击后集中查看阻断问题与复核提醒。</li><li><b>渠道字段：</b>可选美团、淘宝、直营、代理。多产品同时选择直营和代理时，直营统一在上、代理统一在下。</li><li><b>经营字段：</b>按需要显示或隐藏列；配送距离、时段和打包费默认隐藏，可随时打开。</li><li><b>直接编辑：</b>双击可编辑字段即可修改，结果会立即重算；自动活动记录修改外卖原价、折扣或打包费时会重新匹配活动门槛，自定义活动不会被覆盖。点击活动、佣金或到手价后的信息图标查看明细。</li><li><b>排序与复制：</b>支持调整产品顺序和列顺序；复制表格会包含当前显示列及“直营/代理”渠道口径。</li><li><b>平均行：</b>分别展示直营和代理的平均结果，便于横向判断。</li></ul>
+          <ul><li><b>快速测算：</b>在汇总版顶部直接录入，与完整版共用同一套计算逻辑；输入已收录的完整产品名称会自动带出价格与成本，多个产品名称会自动求和；点击“加入汇总列表”生成产品行。</li><li><b>周边套餐测算：</b>从“工具”打开周边套餐测算，粘贴两张资料表后批量生成全部搭配，组合原价自动求和，产品成本和周边成本分别入列。</li><li><b>测算校验：</b>汇总版右上角会实时显示问题数量；点击后集中查看阻断问题与复核提醒。</li><li><b>渠道字段：</b>可选美团、淘宝、直营、代理。多产品同时选择直营和代理时，直营统一在上、代理统一在下。</li><li><b>经营字段：</b>按需要显示或隐藏列；配送距离、时段和打包费默认隐藏，可随时打开。</li><li><b>直接编辑：</b>双击可编辑字段即可修改，结果会立即重算；自动活动记录修改外卖原价、折扣或打包费时会重新匹配活动门槛，自定义活动不会被覆盖。点击活动、佣金或到手价后的信息图标查看明细。</li><li><b>排序与复制：</b>支持调整产品顺序和列顺序；复制表格会包含当前显示列及“直营/代理”渠道口径。</li><li><b>平均行：</b>分别展示直营和代理的平均结果，便于横向判断。</li></ul>
         </section>
 
         <section class="manual-section" id="manual-features">
           <h3>9. 功能清单</h3>
-          <div class="manual-tags"><span>亮色/深色模式</span><span>8 种主题色</span><span>自定义背景</span><span>折扣/折后价切换</span><span>自动活动档位</span><span>费用明细</span><span>快速测算</span><span>批量导入产品</span><span>产品 × 周边组合录入</span><span>项目夹方案对比</span><span>测算校验中心</span><span>口径版本记录</span><span>显示列控制</span><span>列顺序调整</span><span>产品行排序</span><span>复制表格</span><span>XLSX 深度分析</span><span>导出 PDF</span><span>项目夹快照</span><span>项目搜索与排序</span><span>项目内实时编辑</span><span>手机/电脑响应式布局</span><span>本地自动保存</span></div>
-          <h4>推荐工作流</h4><ol><li>先在完整版确认折扣、打包费、配送、时段与活动默认设置。</li><li>普通产品使用批量导入；需要搭配周边时使用“产品 × 周边组合录入”。</li><li>在汇总版运行“测算校验”，先修正阻断问题，再处理复核提醒。</li><li>将确认中的清单保存为方案，调整价格、折扣或活动后在项目夹进行对比。</li><li>确认方案后存入项目夹，复制业务表格或导出分析表格。</li></ol>
+          <div class="manual-tags"><span>亮色/深色模式</span><span>8 种主题色</span><span>自定义背景</span><span>折扣/折后价切换</span><span>自动活动档位</span><span>费用明细</span><span>快速测算</span><span>批量导入产品</span><span>周边套餐测算</span><span>项目夹方案对比</span><span>测算校验中心</span><span>口径版本记录</span><span>显示列控制</span><span>列顺序调整</span><span>产品行排序</span><span>复制表格</span><span>XLSX 深度分析</span><span>导出 PDF</span><span>项目夹快照</span><span>项目搜索与排序</span><span>项目内实时编辑</span><span>手机/电脑响应式布局</span><span>本地自动保存</span></div>
+          <h4>推荐工作流</h4><ol><li>先在完整版确认折扣、打包费、配送、时段与活动默认设置。</li><li>普通产品使用批量导入；需要搭配周边时使用“周边套餐测算”。</li><li>在汇总版运行“测算校验”，先修正阻断问题，再处理复核提醒。</li><li>将确认中的清单保存为方案，调整价格、折扣或活动后在项目夹进行对比。</li><li>确认方案后存入项目夹，复制业务表格或导出分析表格。</li></ol>
         </section>
 
         <section class="manual-section" id="manual-data">
@@ -3915,9 +3921,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.9";
+const CALC_VERSION = "v3.2.10";
 const CALC_UPDATED = "2026-09-15";
 const CALC_CHANGELOG = [
+  {version:"v3.2.10",date:"2026-09-15",items:["工具入口与弹窗名称统一改为周边套餐测算","重构说明书周边套餐测算板块，按操作步骤、粘贴格式、计算与联动分区展示","优化桌面和移动端说明书排版"]},
   {version:"v3.2.9",date:"2026-09-15",items:["产品×周边模板导出改为冷、热测算在同一工作表左右并排","同一周边的连续分组字段跨产品合并单元格；负外卖毛利和负外卖毛利率使用粉色底提醒","多个赠送周边除分别测算外，末尾新增全部赠品成本合计后的赠送周边汇总；同步说明书"]},
   {version:"v3.2.8",date:"2026-09-15",items:["美团和淘宝减配默认值统一改为 3 元；完整版、汇总版同步，说明书同步更新；保留已有保存输入和历史方案金额"]},
   {version:"v3.2.7",date:"2026-09-15",items:["预览与冷、热模板统一按周边名称分组：先列完同一周边的全部产品，再进入下一周边","兼容缺少独立周边名称的旧记录，从套餐名称识别完整周边名称；统一空格及全角加号"]},
@@ -4210,7 +4217,7 @@ function renderComboBuilder(status=""){
   const previewRows=comboPending.slice(0,20).map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(p.name)+'</td><td>'+fmtY(p.price)+'</td><td>'+(p.priceDine?fmtY(p.priceDine):'—')+'</td><td>'+fmtY(p.comboColdCost??p.cost??0)+'</td><td>'+fmtY(p.comboHotCost??p.cost??0)+'</td><td>'+fmtY(p.wholesale||0)+'</td><td>'+fmtY(p.mtAct||0)+'</td><td>'+fmtY(p.tbAct||0)+'</td></tr>').join('');
   const preview=hasPreview?'<section class="combo-preview-section"><div class="combo-preview-head"><span class="combo-step-num">2</span><div class="combo-preview-copy"><h3>核对组合预览</h3><p>'+escapeHtml(status||'组合已生成，请核对价格、成本和活动。')+'</p></div><div class="combo-summary"><span>产品 <b>'+comboCounts.products+'</b></span><span>周边 <b>'+comboCounts.peripherals+'</b></span><span>组合 <b>'+comboPending.length+'</b></span></div></div><div class="combo-rule-note">按相同周边集中排列；原价分别相加，冷/热产品成本与周边成本分开保存；北上新藏导出价自动加 1 元，并按新价格重新匹配活动。</div><div class="wf-tablewrap combo-tablewrap"><table class="wf-table"><thead><tr><th>#</th><th>组合名称</th><th>外卖原价</th><th>堂食原价</th><th>冷成本</th><th>热成本</th><th>周边成本</th><th>美团活动</th><th>淘宝活动</th></tr></thead><tbody>'+previewRows+'</tbody></table></div>'+(comboPending.length>20?'<div class="combo-rule-note">当前展示前 20 条，导出和追加会处理全部 '+comboPending.length+' 条。</div>':'')+comboExportHelpHtml()+'<div class="combo-actionbar"><div class="combo-action-title"><span class="combo-step-num">3</span><b>选择下一步</b></div><div class="workflow-actions"><button class="wf-btn primary" id="comboExport" type="button">导出图片模板版 Excel</button><button class="wf-btn" id="comboConfirm" type="button">追加 '+comboPending.length+' 个组合到汇总版</button><button class="wf-btn" id="comboClear" type="button">清除预览</button></div></div></section>':'';
   const notice=!hasPreview&&status?'<div class="wf-note">'+escapeHtml(status)+'</div>':'';
-  openWorkflow("产品 × 周边组合录入","三步完成批量组合：粘贴资料、核对预览、导出模板或追加到汇总版。",'<div class="combo-workflow">'+inputPanel+notice+preview+'</div>');
+  openWorkflow("周边套餐测算","三步完成批量组合：粘贴资料、核对预览、导出模板或追加到汇总版。",'<div class="combo-workflow">'+inputPanel+notice+preview+'</div>');
   $("comboGenerate").onclick=()=>{
     comboDraft={products:$("comboProducts").value,peripherals:$("comboPeripherals").value,giftText:$("comboGifts").value,gifts:[]};
     const result=parseComboGifts(comboDraft.giftText);comboDraft.gifts=result.items;
