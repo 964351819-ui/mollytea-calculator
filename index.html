@@ -972,7 +972,7 @@
         <span class="fee"><input type="number" id="a_mt_sh_v" value="3.5" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">出资</span>
         <span class="fee"><input type="number" id="a_mt_sh_sub_v" value="3.5" step="0.01" min="0" inputmode="decimal" placeholder="补贴"></span><span class="yuan">补贴</span></div>
       <div class="act"><input type="checkbox" id="a_mt_jp"><span class="nm">美团 · 减配</span>
-        <span class="fee"><input type="number" id="a_mt_jp_v" value="3.5" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">元</span></div>
+        <span class="fee"><input type="number" id="a_mt_jp_v" value="3" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">元</span></div>
       <div class="act"><input type="checkbox" id="a_tb_bh"><span class="nm">淘宝 · 爆红包</span>
         <span class="fee" ><select id="a_tb_bh_lvl" onchange="tbBhLevel(this)">
           <option value="">自定义</option>
@@ -988,7 +988,7 @@
         <span class="fee"><input type="number" id="a_tb_bh_v" value="3" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">出资</span>
         <span class="fee"><input type="number" id="a_tb_bh_sub_v" value="3" step="0.01" min="0" inputmode="decimal" placeholder="补贴"></span><span class="yuan">补贴</span></div>
       <div class="act"><input type="checkbox" id="a_tb_jp"><span class="nm">淘宝 · 减配</span>
-        <span class="fee"><input type="number" id="a_tb_jp_v" value="3.5" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">元</span></div>
+        <span class="fee"><input type="number" id="a_tb_jp_v" value="3" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">元</span></div>
     </div>
     <div class="activity-payments">
       <div class="payout-field mt">
@@ -1153,7 +1153,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.6 · 更新于 2026-09-15</span>
+    <span id="calcVersionStamp">计算口径 v3.2.8 · 更新于 2026-09-15</span>
   </div>
 </div>
 
@@ -1275,6 +1275,7 @@
           <h3>6. 活动、补贴与自动档位</h3><p>标准档位会按照平台的活动门槛金额自动跳转；选择“自定义”后，出资和补贴清空并允许手动填写，不再自动覆盖。</p>
           <div class="manual-formula">活动门槛金额 = 外卖原价 × 对应平台折扣 + 打包费</div>
           <div class="manual-formula">商家活动成本 = 折扣出资 + 神会员/爆红包商家出资 + 减配出资</div>
+          <p>美团、淘宝减配默认均为 3 元，完整版与汇总版同步，支持手动修改。已有浏览器保存的输入与历史方案继续保留各自金额；组合录入沿用当前页面设置。</p>
           <div class="manual-callout"><b>平台补贴不计入商家活动成本，</b>但会用于计算消费者外卖实付。减配只影响商家到手，不从消费者实付中再次扣除。</div>
           <div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>门槛金额</th><th>美团神会员商家出资/补贴</th><th>淘宝爆红包商家出资/补贴</th></tr></thead><tbody>
             <tr><td>20 元以下</td><td>3.5 / 3.5</td><td>3 / 3</td></tr><tr><td>20（含）–28 元</td><td>4 / 4</td><td>3.5 / 3.5</td></tr><tr><td>28（含）–38 元</td><td>5.5 / 5.5</td><td>5 / 5</td></tr><tr><td>38（含）–48 元</td><td>7.5 / 7.5</td><td>6 / 6</td></tr><tr><td>48（含）–58 元</td><td>8.5 / 8.5</td><td>7 / 7</td></tr><tr><td>58（含）–68 元</td><td>10 / 10</td><td>9 / 9</td></tr><tr><td>68（含）–88 元</td><td>10 / 10</td><td>10 / 10</td></tr><tr><td>88 元及以上</td><td>13 / 13</td><td>12 / 12</td></tr>
@@ -3914,9 +3915,11 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.6";
+const CALC_VERSION = "v3.2.8";
 const CALC_UPDATED = "2026-09-15";
 const CALC_CHANGELOG = [
+  {version:"v3.2.8",date:"2026-09-15",items:["美团和淘宝减配默认值统一改为 3 元；完整版、汇总版同步，说明书同步更新；保留已有保存输入和历史方案金额"]},
+  {version:"v3.2.7",date:"2026-09-15",items:["预览与冷、热模板统一按周边名称分组：先列完同一周边的全部产品，再进入下一周边","兼容缺少独立周边名称的旧记录，从套餐名称识别完整周边名称；统一空格及全角加号"]},
   {version:"v3.2.6",date:"2026-09-15",items:["产品资料在顶部占整行；周边资料和赠送周边在下方各占一半，手机端纵向排列"]},
   {version:"v3.2.5",date:"2026-09-15",items:["统一产品、周边、赠送周边资料区的卡片、输入框、字体与间距，顶部双栏输入框对齐","赠送周边支持多行输入；计算说明默认折叠，点击“赠送后的毛利怎么算？”查看；优化手机端按钮布局"]},
   {version:"v3.2.4",date:"2026-09-15",items:["赠送周边支持多行名称和成本，每个赠品分别导出外卖毛利、外卖毛利率两列；同步说明书"]},
@@ -4115,11 +4118,22 @@ function comboTemplateMetrics(p,mode,dist,regionAdd,cost){
   const fee=byPlatform(mtFee,tbFee),activity=byPlatform(mtActivity,tbActivity),net=byPlatform(mtNet,tbNet),pay=byPlatform(mtPay,tbPay),wholesale=p.wholesale||0;
   return {price,dine:p.priceDine||0,fee,activity,net,rate:(price+pack)>0?net/(price+pack):0,pay,cost,wholesale,profit:net-cost-wholesale,margin:net>0?(net-cost-wholesale)/net:0};
 }
+function groupComboRowsByPeripheral(rows){
+  const groups=new Map();
+  rows.forEach((p,index)=>{
+    // 老记录可能只有套餐名称；仅移除第一个产品分隔符，保留周边内部的加号。
+    const name=String(p.comboPeripheralName||"").trim()||String(p.name||"").replace(/^[^＋+]*[＋+]\s*/,"").trim();
+    const key=name?name.replace(/\s+/g,"").replace(/＋/g,"+"):"unknown:"+index;
+    if(!groups.has(key))groups.set(key,[]);
+    groups.get(key).push(p);
+  });
+  return [...groups.values()].flat();
+}
 function styleComboTemplateSheet(ws,title,comboRows,costKey){
   const headers=["周边加价","范围","活动距离","套餐内容","外卖原价","堂食原价","平台扣点","活动支出","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","外卖毛利","外卖毛利率"];
   const first=comboRows.find(p=>p.comboGifts?.length||p.comboGiftName);const gifts=first?(first.comboGifts||[{name:first.comboGiftName,cost:first.comboGiftCost||0}]):[];
   gifts.forEach(()=>headers.push("外卖毛利","外卖毛利率"));
-  comboRows=[...comboRows].sort((a,b)=>comboRows.findIndex(p=>p.comboPeripheralName===a.comboPeripheralName)-comboRows.findIndex(p=>p.comboPeripheralName===b.comboPeripheralName));
+  comboRows=groupComboRowsByPeripheral(comboRows);
   ws.views=[{state:"frozen",ySplit:3,showGridLines:false}];ws.pageSetup={paperSize:9,orientation:"landscape",fitToPage:true,fitToWidth:1,fitToHeight:0,margins:{left:.25,right:.25,top:.35,bottom:.35,header:.15,footer:.15}};
   ws.columns=[13,12,12,34,11,11,11,11,11,11,11,11,11,14,11,13].map(width=>({width}));
   gifts.forEach((g,i)=>{ws.getColumn(17+i*2).width=14;ws.getColumn(18+i*2).width=14;});
@@ -4173,6 +4187,7 @@ function parseComboGifts(text){
   });return {items,errors};
 }
 function renderComboBuilder(status=""){
+  comboPending=groupComboRowsByPeripheral(comboPending);
   const hasPreview=comboPending.length>0,inputSummary=hasPreview?'已录入 '+comboCounts.products+' 个产品、'+comboCounts.peripherals+' 个周边；需要调整时展开修改。':'粘贴产品表和周边表，支持从 Excel 直接复制。';
   const inputPanel='<details class="combo-input-panel"'+(hasPreview?'':' open')+'><summary><span class="combo-step-num">1</span><span class="combo-input-title"><b>录入产品与周边资料</b><small>'+inputSummary+'</small></span><em class="combo-input-toggle"></em></summary><div class="combo-input-body"><div class="wf-grid combo-grid"><div class="wf-field combo-product-card"><label for="comboProducts">产品资料</label><textarea id="comboProducts" placeholder="产品名称｜外卖原价｜堂食原价｜冷成本｜热成本">'+escapeHtml(comboDraft.products)+'</textarea><span class="combo-format">推荐 5 列：名称｜外卖原价｜堂食原价｜冷成本｜热成本；旧版 4 列会将同一成本用于冷、热。</span></div><div class="wf-field"><label for="comboPeripherals">周边资料</label><textarea id="comboPeripherals" placeholder="周边名称｜周边原价｜周边成本">'+escapeHtml(comboDraft.peripherals)+'</textarea><span class="combo-format">简版 3 列必须填写周边成本；扩展版：名称｜外卖原价｜堂食原价｜周边成本。</span></div><div class="wf-field combo-gift-card"><label for="comboGifts">赠送周边 <span class="combo-optional">选填 · 支持多个</span></label><textarea id="comboGifts" placeholder="小卡｜1.50&#10;贴纸｜2.00">'+escapeHtml(comboDraft.giftText||'')+'</textarea><span class="combo-format">每行：名称｜成本。各赠品分别计算；同时赠送多件时，填一行组合名称及合计成本。</span><details class="combo-gift-formula"><summary>赠送后的毛利怎么算？</summary><p>外卖毛利＝原外卖毛利−赠送成本<br>外卖毛利率＝赠送后外卖毛利÷到手价。每个赠品在导出末尾各占两列。</p></details></div></div><div class="combo-generate-row"><span>组合数量 = 产品数 × 周边数，单次最多 1000 条。</span><button class="wf-btn primary" id="comboGenerate" type="button">'+(hasPreview?'重新生成预览':'生成组合预览')+'</button></div></div></details>';
   const previewRows=comboPending.slice(0,20).map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(p.name)+'</td><td>'+fmtY(p.price)+'</td><td>'+(p.priceDine?fmtY(p.priceDine):'—')+'</td><td>'+fmtY(p.comboColdCost??p.cost??0)+'</td><td>'+fmtY(p.comboHotCost??p.cost??0)+'</td><td>'+fmtY(p.wholesale||0)+'</td><td>'+fmtY(p.mtAct||0)+'</td><td>'+fmtY(p.tbAct||0)+'</td></tr>').join('');
