@@ -1154,7 +1154,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.8 · 更新于 2026-09-15</span>
+    <span id="calcVersionStamp">计算口径 v3.2.11 · 更新于 2026-11-02</span>
   </div>
 </div>
 
@@ -1263,10 +1263,10 @@
           <div class="manual-formula">代理到手 = 扣费基数 − 技术服务费 − 运营服务费 − 实际配送费</div>
 
           <h4>淘宝闪购直营</h4>
-          <div class="manual-formula">技术服务费 = 扣费基数 × 自定义费率（默认 7%）× 75%，不设 1.55 元保底</div>
+          <div class="manual-formula">技术服务费 = 扣费基数 × 自定义费率（默认 7%）× 78.5%，不设 1.55 元保底</div>
           <div class="manual-formula">距离加价 = max（配送距离 − 3km，0）× 0.6 元</div>
           <div class="manual-formula">25–50 元客单部分：每满 5 元加 0.6 元；50 元以上部分：每满 5 元加 0.8 元</div>
-          <div class="manual-formula">配送费 =（3.5 元 + 距离加价 + 客单加价 + 时段加价）× 75%</div>
+          <div class="manual-formula">配送费 =（3.5 元 + 距离加价 + 客单加价 + 时段加价）× 78.5%</div>
           <div class="manual-formula">直营到手 = 扣费基数 − 技术服务费 − 配送费</div>
 
           <h4>淘宝闪购代理</h4>
@@ -1521,10 +1521,12 @@ function selectedChannelModes(){
 // 返回某产品在当前口径下的美团/淘宝 到手率(net÷price) 与 佣金
 // 指定口径（both/zhi/dai）下某产品的美团/淘宝 到手率与佣金
 function prodChannelMode(p, mode){
-  if(mode === "both" || p.dMT==null || p.dist==null)
+  if(p.dMT==null || p.dist==null)
     return { mtRate:p.mt, tbRate:p.tb, mtFee:p.mtFee, tbFee:p.tbFee };
   const t = TIME[p.time] || TIME.day;
   const s = calcScenario(p.price, p.dMT, p.dTB, p.packFee||0, p.dist, t, p.mtAct||0, p.tbAct||0, productTbZhiTechRate(p));
+  if(mode === "both")
+    return {mtRate:s.mtRate,tbRate:s.tbRate,mtFee:s.mtFee,tbFee:s.tbFee};
   if(mode === "zhi")
     return { mtRate:ratio(p.price,s.mtZhiNet), tbRate:ratio(p.price,s.tbZhiNet),
              mtFee:s.mtZhiTech+s.mtZhiShip,    tbFee:s.tbZhiTech+s.tbZhiShip };
@@ -1555,6 +1557,7 @@ function inferProductTbZhiTechRate(p){
   if(!(TBbase>0)) return null;
   const distTB=Math.max(0,dist-3)*0.6;
   const cliTB=Math.floor(Math.min(Math.max(TBbase-25,0),25)/5)*0.6+Math.floor(Math.max(TBbase-50,0)/5)*0.8;
+  // 未保存技术费率快照的旧记录按原 75% 系数反推，保留当时的城市技术费率。
   const tbZhiShip=(3.5+distTB+cliTB+t.tb)*0.75;
   const tbDaiNet=TBbase-grossBase*0.18;
   const tbZhiNet=P*((storedRate-0.4*ratio(P,tbDaiNet))/0.6);
@@ -1603,9 +1606,9 @@ function calcScenario(P, dMT, dTB, packFee, dist, t, mtAct, tbAct, tbZhiTechRate
   const mtDaiCapped = mtDaiShipRaw > MTbase*0.40;
   const mtDaiNet  = MTbase - mtDaiOp - mtDaiShip;
 
-  // 淘宝直营技术服务费：按成交价费率计算，不再设置 ¥1.55 保底。
-  const tbZhiTech = TBbase*tbZhiTechPct*0.75;
-  const tbZhiShip = (3.5 + distTB + cliTB + t.tb) * 0.75;
+  // 淘宝原直营城市：技术服务费、平台配送费统一采用 78.5% 折扣系数。
+  const tbZhiTech = TBbase*tbZhiTechPct*0.785;
+  const tbZhiShip = (3.5 + distTB + cliTB + t.tb) * 0.785;
   const tbZhiNet  = TBbase - tbZhiTech - tbZhiShip;
   const tbDaiPack = grossBase*0.18;
   const tbDaiNet  = TBbase - tbDaiPack;
@@ -1794,9 +1797,9 @@ function compute(){
     ], s.mtDaiNet, r(s.mtDaiNet));
 
   $("tb_brk").innerHTML =
-    blk("直营（技术费"+tbZhiTechRateLabel()+"%×0.75+配送费75折）", s.TBm, P-s.TBm, [
-      ["技术服务费 成交×"+tbZhiTechRateLabel()+"%×0.75", -s.tbZhiTech],
-      ["配送费 [起步3.5+距离+客单+时段]×0.75", -s.tbZhiShip],
+    blk("直营（技术费"+tbZhiTechRateLabel()+"%×0.785+配送费78.5%）", s.TBm, P-s.TBm, [
+      ["技术服务费 成交×"+tbZhiTechRateLabel()+"%×0.785", -s.tbZhiTech],
+      ["配送费 [起步3.5+距离+客单+时段]×0.785", -s.tbZhiShip],
       g.tbAct? ["活动出资", -g.tbAct]:null,
     ], s.tbZhiNet, r(s.tbZhiNet)) +
     blk("代理（运营服务费18%全包）", s.TBm, P-s.TBm, [
@@ -2276,9 +2279,9 @@ function execDetail(p){
       ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶扣费基数×40%）':''), money2(s.mtDaiShip)],
       p.mtAct>0 ? ['− 活动出资', money2(p.mtAct)] : null,
     ], s.mtDaiNet);
-  const tbZhi = block('直营 · 技术费'+productTbZhiTechRateLabel(p)+'%×0.75 + 配送费75折', [
+  const tbZhi = block('直营 · 技术费'+productTbZhiTechRateLabel(p)+'%×0.785 + 配送费78.5%', [
       ['成交价（原价×折扣）', money2(s.TBm)],
-      ['− 技术服务费（成交×'+productTbZhiTechRateLabel(p)+'%×0.75）', money2(s.tbZhiTech)],
+      ['− 技术服务费（成交×'+productTbZhiTechRateLabel(p)+'%×0.785）', money2(s.tbZhiTech)],
       ['− 配送费', money2(s.tbZhiShip)],
       p.tbAct>0 ? ['− 活动出资', money2(p.tbAct)] : null,
     ], s.tbZhiNet);
@@ -3508,9 +3511,9 @@ function toggleArchiveDetail(tr, archIdx, pIdx){
       ['− 配送费×0.66'+(s.mtDaiCapped?'（已封顶扣费基数×40%）':''), money2(s.mtDaiShip)],
       p.mtAct>0 ? ['− 活动出资', money2(p.mtAct)] : null,
     ], s.mtDaiNet);
-  const tbZhi = block2('直营 · 技术费'+productTbZhiTechRateLabel(p)+'%×0.75 + 配送费75折', [
+  const tbZhi = block2('直营 · 技术费'+productTbZhiTechRateLabel(p)+'%×0.785 + 配送费78.5%', [
       ['成交价（原价×折扣）', money2(s.TBm)],
-      ['− 技术服务费（成交×'+productTbZhiTechRateLabel(p)+'%×0.75）', money2(s.tbZhiTech)],
+      ['− 技术服务费（成交×'+productTbZhiTechRateLabel(p)+'%×0.785）', money2(s.tbZhiTech)],
       ['− 配送费', money2(s.tbZhiShip)],
       p.tbAct>0 ? ['− 活动出资', money2(p.tbAct)] : null,
     ], s.tbZhiNet);
@@ -3921,9 +3924,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.10";
-const CALC_UPDATED = "2026-09-15";
+const CALC_VERSION = "v3.2.11";
+const CALC_UPDATED = "2026-11-02";
 const CALC_CHANGELOG = [
+  {version:"v3.2.11",date:"2026-11-02",items:["淘宝原直营城市技术服务费与平台配送费折扣系数由 75% 调整为 78.5%，其他收费规则不变","同步费用明细、说明书与各测算和导出入口；直营代理综合口径按同一系数计算"]},
   {version:"v3.2.10",date:"2026-09-15",items:["工具入口与弹窗名称统一改为周边套餐测算","重构说明书周边套餐测算板块，按操作步骤、粘贴格式、计算与联动分区展示","优化桌面和移动端说明书排版"]},
   {version:"v3.2.9",date:"2026-09-15",items:["产品×周边模板导出改为冷、热测算在同一工作表左右并排","同一周边的连续分组字段跨产品合并单元格；负外卖毛利和负外卖毛利率使用粉色底提醒","多个赠送周边除分别测算外，末尾新增全部赠品成本合计后的赠送周边汇总；同步说明书"]},
   {version:"v3.2.8",date:"2026-09-15",items:["美团和淘宝减配默认值统一改为 3 元；完整版、汇总版同步，说明书同步更新；保留已有保存输入和历史方案金额"]},
