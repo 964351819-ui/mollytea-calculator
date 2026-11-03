@@ -745,6 +745,7 @@
   .manual-tablewrap{overflow:auto;margin:10px 0}.manual-table{width:100%;min-width:620px;border-collapse:collapse;font-size:12px}.manual-table th,.manual-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.6}.manual-table th{background:var(--field);color:var(--sub);font-weight:600}.manual-table td{color:var(--sub)}.manual-table td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
   .manual-catalog{margin-top:14px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);overflow:hidden}.manual-catalog>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;list-style:none;cursor:pointer;color:var(--ink);font-size:13px;font-weight:650;user-select:none}.manual-catalog>summary::-webkit-details-marker{display:none}.manual-catalog>summary::before{content:"›";display:grid;place-items:center;width:19px;height:19px;flex:none;border-radius:50%;background:var(--glow);color:var(--accent);font-size:17px;line-height:1;transition:transform .16s}.manual-catalog[open]>summary::before{transform:rotate(90deg)}.manual-catalog>summary span{margin-left:auto;color:var(--sub);font-size:11.5px;font-weight:500}.manual-catalog-body{padding:0 14px 12px;border-top:1px solid var(--line)}.manual-catalog .manual-table{min-width:560px}.manual-catalog .manual-table th:nth-child(n+2),.manual-catalog .manual-table td:nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums}
   .manual-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.manual-tags span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--card-2);color:var(--sub);font-size:11.5px}
+  .manual-catalog .manual-table{min-width:760px}.manual-catalog .manual-table th:nth-child(2),.manual-catalog .manual-table td:nth-child(2){text-align:center;white-space:nowrap}
   .manual-combo-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 16px}.manual-combo-intro>div{padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card-2)}.manual-combo-intro b{display:block;margin-bottom:4px;font-size:12.5px}.manual-combo-intro span{display:block;color:var(--sub);font-size:11.5px;line-height:1.6}.manual-format-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.manual-format-card{padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:var(--field)}.manual-format-card b{display:block;margin-bottom:6px;font-size:12.5px}.manual-format-card code{display:block;color:var(--sub);font:600 11.5px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}.manual-rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.manual-rule{padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card-2)}.manual-rule b{display:block;margin-bottom:3px;font-size:12.5px}.manual-rule span{display:block;color:var(--sub);font-size:11.5px;line-height:1.65}.manual-rule.wide{grid-column:1/-1}
   @media(max-width:760px){.manual-overlay{padding:0}.manual-dialog{width:100%;height:100vh;max-height:none;border:0;border-radius:0}.manual-head{padding:17px 18px 14px}.manual-layout{grid-template-columns:1fr}.manual-nav{display:flex;gap:4px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:9px 12px}.manual-nav .manual-nav-title{display:none}.manual-nav a{white-space:nowrap}.manual-content{padding:20px 18px 38px}.manual-steps,.manual-combo-intro,.manual-format-grid,.manual-rule-grid{grid-template-columns:1fr}.manual-rule.wide{grid-column:auto}}
   /* 独立工作流中心：批量导入 / 方案对比 / 校验 / 实际复盘 / 版本 */
@@ -1154,7 +1155,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.11 · 更新于 2026-11-02</span>
+    <span id="calcVersionStamp">计算口径 v3.2.12 · 更新于 2026-11-03</span>
   </div>
 </div>
 
@@ -1194,13 +1195,13 @@
           </tbody></table></div>
           <h4>产品资料自动带出</h4>
           <ol>
-            <li><b>搜索与选择：</b>在完整版或汇总版快速测算的“产品名称”中输入文字，候选框会显示匹配产品及其堂食原价、外卖原价和产品成本；可点击候选，或用方向键选择后按回车确认。</li>
-            <li><b>自动填充：</b>选择或输入一个已收录的完整产品名称后，系统会自动填写堂食原价、外卖原价和产品成本；候选框随后自动收起。</li>
-            <li><b>组合求和：</b>名称中包含两个或更多已收录产品时，各字段分别求和。建议使用“＋”连接产品；输入“＋”后可继续搜索下一个产品。</li>
-            <li><b>缺失与未知：</b>若已匹配组合中的任一产品缺少某个字段，该字段保持空白；若产品名称完全未匹配资料库，则保留用户当前填写的价格与成本。</li>
-            <li><b>允许修改：</b>自动带出的数值只是录入辅助，堂食原价、外卖原价和产品成本都可以继续手动修改；再次输入已收录名称时才会用资料库数值更新。</li>
+            <li><b>搜索与选择：</b>在完整版或汇总版快速测算的“产品名称”中输入文字，候选框显示杯型、堂食原价、外卖原价、产品成本及标注的打包费；可点击候选，或用方向键选择后按回车确认。同名产品未注明杯型时默认中杯，大杯需输入或选择对应杯型。</li>
+            <li><b>自动填充：</b>选择或输入已收录的完整名称后，系统填写堂食原价、外卖原价、产品成本和打包费。综合成本录入为产品成本，价格与成本以 2026-11-03 最新资料为准；本次未列出的旧产品继续保留。</li>
+            <li><b>组合与打包费：</b>使用“＋”连接多个产品，各价格、成本分别求和。打包费按匹配产品的标注金额合计后替换当前值，不与原值重复累加；未标注打包费的小料和保留旧产品不额外加费，仅录入这些产品时打包费为 0。</li>
+            <li><b>缺失与未知：</b>空白、“无”和“/”保存为缺失；匹配产品缺少某个价格或成本时，对应输入框留空，不使用 0 或旧资料补齐。组合中任一产品缺失该字段时，合计也留空，需补齐后再测算。名称完全未匹配时，保留当前手填价格、成本和打包费。</li>
+            <li><b>允许修改：</b>价格、成本和打包费自动带出后均可手动修改；产品名称再次变化并匹配成功时，才按资料库更新。现有清单和历史方案不因资料库更新而被批量改写。</li>
           </ol>
-          <div class="manual-callout"><b>组合示例：</b>输入“针王橘子＋茉莉奶白（中杯）”，自动显示堂食原价 35 元、外卖原价 38 元、产品成本 11.13 元。</div>
+          <div class="manual-callout"><b>组合示例：</b>输入“针王橘子＋茉莉奶白（中杯）”，自动显示堂食原价 35 元、外卖原价 38 元、产品成本 11.13 元、打包费 2 元；再加“黑糖粉粿”后，分别为 38 元、42 元、12.74 元、2 元。</div>
           <details class="manual-catalog" id="manual-catalog">
             <summary>产品价格与成本资料库 <span id="manualCatalogCount">点击展开</span></summary>
             <div class="manual-catalog-body" id="manualCatalogBody"></div>
@@ -1407,7 +1408,7 @@ function renderManualCatalog(){
   if(count) count.textContent=PRODUCT_CATALOG.length+" 款产品 · 点击展开";
   if(host.dataset.rendered==="1") return;
   const money=v=>v==null?"—":Number(v).toFixed(2).replace(/\.00$/,"").replace(/(\.\d)0$/,"$1");
-  host.innerHTML='<div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>产品名称</th><th>堂食原价</th><th>外卖原价</th><th>产品成本</th></tr></thead><tbody>'+PRODUCT_CATALOG.map(item=>'<tr><td>'+escapeHtml(item.name)+'</td><td>'+money(item.dine)+'</td><td>'+money(item.price)+'</td><td>'+money(item.cost)+'</td></tr>').join('')+'</tbody></table></div><div class="manual-callout"><b>说明：</b>“—”表示该产品暂未录入对应价格；资料自动带出后仍可在测算区手动修改。</div>';
+  host.innerHTML='<div class="manual-callout"><b>2026-11-03 最新资料 '+LATEST_PRODUCT_ROWS.length+' 条</b> · 另保留 '+LEGACY_PRODUCT_ROWS.length+' 条本次未列出的旧资料；同名产品以最新价格与成本为准。</div><div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>产品名称</th><th>杯型</th><th>打包费</th><th>综合成本（产品成本）</th><th>堂食原价</th><th>外卖原价</th></tr></thead><tbody>'+PRODUCT_CATALOG.map(item=>'<tr><td>'+escapeHtml(item.productName)+(item.latest?'':'（保留旧资料）')+'</td><td>'+escapeHtml(item.cup||'未标注')+'</td><td>'+money(item.packFee)+'</td><td>'+money(item.cost)+'</td><td>'+money(item.dine)+'</td><td>'+money(item.price)+'</td></tr>').join('')+'</tbody></table></div><div class="manual-callout"><b>说明：</b>“—”表示未提供；空白、“无”和“/”不作为零价格或零成本。未标打包费不额外加费，所有自动带出的数值均可手动修改。</div>';
   host.dataset.rendered="1";
 }
 // 折扣防呆：0.85 / 8.5 / 85 都识别成 0.85；>100 视为无效；返回 {d, bad}
@@ -2521,49 +2522,95 @@ function restore(){
   });
 }
 
-// ---- 产品资料库：输入完整产品名称后自动带出价格与成本；组合名称按字段求和 ----
-const PRODUCT_CATALOG = [
-  ["针王橘子",19,21,6.5],
-  ["针王奶霜橘子",21,23,6.55],
-  ["白兰与树番茄(首创)",20,22,7.02,["白兰与树番茄"]],
-  ["单丛奶霜苹果",20,22,6.47],
-  ["单丛与苹果（奇兰）",15,17,4.6],
-  ["单丛与苹果（凤凰）",15,17,5.76],
-  ["单丛与苹果杏",18,20,5.62],
-  ["针王苹果（中杯）",19,20,7.04],
-  ["针王苹果（大杯）",22,23,7.22],
-  ["针王葡萄（中杯）",19,20,6.58],
-  ["针王葡萄（大杯）",22,23,7.16],
-  ["开心果茉莉椰",20,22,8.02],
-  ["开心加倍茉莉椰",null,22,8.31],
-  ["白兰（中杯）",17,18,6.66],
-  ["白兰（大杯）",21,22,8.61],
-  ["抹茶白兰",23,24,9.59],
-  ["开心小兰花",21,22,8.03],
-  ["抹茶茉莉咸酪乳",21,22,6.92],
-  ["针王香柠",19,21,8.7],
-  ["针王香柠椰",20,22,9.11],
-  ["冰淇淋针王香柠椰",23,25,9.84],
-  ["薄巧碎碎奶昔",19,21,5.66],
-  ["茉莉薄巧",20,22,6.55],
-  ["茉莉薄巧奶芙",22,24,7.66],
-  ["针王蜜桃",19,21,6.26],
-  ["针王芭乐",19,21,6.38],
-  ["抹茶奶油芭乐",22,24,7.18],
-  ["茉莉杨枝甘露",21,22,6.93],
-  ["茉莉奶油芭乐",21,23,7.41],
-  ["针王葡萄咸酪乳",21,22,7.39],
-  ["针王苹果咸酪乳",21,23,6.9],
-  ["针王苹果（热）",19,20,7.78],
-  ["针王葡萄（热）",19,20,7.31],
-  ["栀香龙眼马蹄",null,23,7.39],
-  ["抹茶针王",23,24,9.56],
-  ["抹茶栀子咸酪乳",22,23,7.08],
-  ["抹茶白兰咸酪乳",23,24,8.75],
-  ["茉莉奶白（中杯）",16,17,4.63],
-  ["茉莉奶白（大杯）",20,22,5.82],
-  ["茉莉针王（中杯）",17,18,6.62]
-].map(([name,dine,price,cost,aliases=[]])=>({name,dine,price,cost,aliases}));
+// ---- 产品资料库：2026-11-03 最新资料优先；null 表示未提供，不作为零价格/零成本 ----
+// 列顺序：产品名、杯型、打包费、综合成本、堂食原价、外卖原价。
+const LATEST_PRODUCT_ROWS = [
+  ["单丛粉粿小黄姜","中杯",1,8.21,23,25],
+  ["单丛与小黄姜","中杯",1,7.78,21,23],
+  ["苹果与橄榄","中杯",1,5.77,19,21],
+  ["茉莉与可可","中杯",1,6.65,22,24],
+  ["茉莉熔岩榛巧","中杯",1,8.14,24,26],
+  ["超浓熔岩榛巧","中杯",1,10.05,29,31],
+  ["白兰与柿子","中杯",1,6.11,19,21],
+  ["白兰柿子树番茄","中杯",1,7.31,21,23],
+  ["三朵玉兰","特调杯（400ml）",1,9.32,null,null],
+  ["玉兰花语","特调杯（400ml）",1,8.13,null,null],
+  ["桂花酒酿甜品杯","中杯",1,null,null,null],
+  ["苹果大红袍","中杯",1,null,null,null],
+  ["黑金啤与树番茄","中杯",1,7.32,21,24],
+  ["黑金啤与青苹果","中杯",1,6.09,19,22],
+  ["针王与维也纳","400ml",1,7.46,21,23],
+  ["白兰与维也纳","400ml",1,7.46,21,23],
+  ["针王苹果（首创）","中杯",1,7.04,19,20],
+  ["针王苹果（首创）","大杯",1,7.22,22,23],
+  ["针王葡萄（首创）","中杯",1,6.58,19,20],
+  ["针王葡萄（首创）","大杯",1,7.16,22,23],
+  ["开心果茉莉椰","中杯",1,8.02,20,22],
+  ["开心加倍茉莉椰","中杯",1,8.31,null,22],
+  ["白兰","中杯",1,6.66,17,18],
+  ["白兰","大杯",1,8.61,21,22],
+  ["抹茶白兰","中杯",1,9.59,23,24],
+  ["开心小兰花","中杯",1,8.03,21,22],
+  ["抹茶茉莉咸酪乳","中杯",1,6.92,21,22],
+  ["针王橘子","中杯",1,6.5,19,21],
+  ["针王奶霜橘子","中杯",1,6.55,21,23],
+  ["甜菜莓莓冰奶","中杯",1,7.01,20,22],
+  ["抹茶奶油芭乐","中杯",1,7.18,22,24],
+  ["茉莉杨枝甘露","中杯",1,6.93,21,22],
+  ["茉莉奶油芭乐","中杯",1,7.41,21,23],
+  ["针王葡萄咸酪乳","中杯",1,7.39,21,22],
+  ["针王苹果咸酪乳","中杯",1,6.9,21,23],
+  ["针王橘子（热）","中杯",1,7.22,19,21],
+  ["针王苹果（热）","中杯",1,7.78,19,20],
+  ["针王葡萄（热）","中杯",1,7.31,19,20],
+  ["抹茶针王","中杯",1,9.56,23,24],
+  ["抹茶栀子咸酪乳","中杯",1,7.08,22,23],
+  ["抹茶白兰咸酪乳","中杯",1,8.75,23,24],
+  ["茉莉奶白","中杯",1,4.63,16,17],
+  ["茉莉奶白","大杯",1,5.82,20,22],
+  ["茉莉针王","中杯",1,6.62,17,18],
+  ["茉莉针王","大杯",1,8.56,21,22],
+  ["栀子奶白","中杯",1,4.81,16,17],
+  ["栀子奶白","大杯",1,6.07,20,21],
+  ["单丛与苹果（奇兰）","中杯",1,4.6,15,17],
+  ["单丛与苹果（凤凰）","中杯",1,5.76,15,17],
+  ["白兰与树番茄(首创)","中杯",1,7.02,20,22],
+  ["奇兰葡萄冰茶","中杯",1,4.66,15,17],
+  ["栀子冰茶","中杯",1,2.74,12,13],
+  ["茉莉椰冰茶","中杯",1,5.68,17,18],
+  ["针王冰茶","中杯",1,4.56,13,14],
+  ["黑糖粉粿","小料杯",null,1.61,3,4],
+  ["马蹄粉圆","小料杯",null,1.6,3,4],
+  ["香草芝士","小料杯",null,2.55,7,8],
+  ["加苹果丁","小料杯",null,1.89,3,4],
+  ["西米晶球（分装）","小料杯",null,1.36,2,3],
+  ["寒天（分装）","小料杯",null,1.44,3,4],
+  ["龙眼马蹄银耳（分装）","小料杯",null,null,3,4],
+  ["苹果奶霜（分装）","小料杯",null,1.86,5,6],
+  ["芭乐芝士（分装）","小料杯",null,2.34,7,8],
+  ["开心果芝士（分装）","小料杯",null,3.47,7,8],
+  ["抹茶芝士（分装）","小料杯",null,3.46,7,8]
+];
+// 本次未列出的旧产品继续保留；其未标注打包费，不额外增加打包费。
+const LEGACY_PRODUCT_ROWS = [
+  ["单丛奶霜苹果",20,22,6.47],["单丛与苹果杏",18,20,5.62],
+  ["针王香柠",19,21,8.7],["针王香柠椰",20,22,9.11],
+  ["冰淇淋针王香柠椰",23,25,9.84],["薄巧碎碎奶昔",19,21,5.66],
+  ["茉莉薄巧",20,22,6.55],["茉莉薄巧奶芙",22,24,7.66],
+  ["针王蜜桃",19,21,6.26],["针王芭乐",19,21,6.38],
+  ["栀香龙眼马蹄",null,23,7.39]
+];
+const PRODUCT_CATALOG = LATEST_PRODUCT_ROWS.map(([productName,cup,packFee,cost,dine,price])=>{
+  const variants=LATEST_PRODUCT_ROWS.filter(row=>row[0]===productName).length>1;
+  const shortName=productName.replace(/[（(]首创[）)]/g,"");
+  const name=variants?productName+"（"+cup+"）":productName;
+  const aliases=new Set([productName+"（"+cup+"）",shortName+"（"+cup+"）"]);
+  if(!variants||cup==="中杯"){aliases.add(productName);aliases.add(shortName);}
+  aliases.delete(name);
+  return {name,productName,cup,packFee,cost,dine,price,aliases:[...aliases],latest:true};
+}).concat(LEGACY_PRODUCT_ROWS.map(([name,dine,price,cost])=>({
+  name,productName:name,cup:null,packFee:null,cost,dine,price,aliases:[],latest:false
+})));
 const normalizeProductName = value => String(value||"").normalize("NFKC").toLowerCase().replace(/[\s·•・+＋、,，/／&＆;；:：|｜—–_\-()（）【】\[\]]/g,"");
 const PRODUCT_PATTERNS = PRODUCT_CATALOG.flatMap(item=>[item.name,...item.aliases].map(name=>({item,key:normalizeProductName(name)}))).sort((a,b)=>b.key.length-a.key.length);
 function matchCatalogProducts(value){
@@ -2592,6 +2639,8 @@ function applyProductCatalog(value){
     input.value=matched.length && matched.every(item=>Number.isFinite(item[key]))
       ? catalogNumber(matched.reduce((sum,item)=>sum+item[key],0)) : "";
   });
+  // 按本次匹配结果替换合计；重复输入不累加，未标注打包费的产品不加费。
+  $("packFee").value=catalogNumber(matched.reduce((sum,item)=>sum+(Number.isFinite(item.packFee)?item.packFee:0),0));
   compute(); persist(); syncQuickFromFull();
 }
 let productSuggestInput=null, productSuggestItems=[], productSuggestActive=-1;
@@ -2623,7 +2672,9 @@ function setProductSuggestActive(index){
 function renderProductSuggest(input){
   const host=$("productSuggest"),query=normalizeProductName(productTail(input.value));
   closeSmartSelectPicker();
-  if(!host||!query||PRODUCT_PATTERNS.some(p=>p.key===query)){ closeProductSuggest(); return; }
+  const exact=PRODUCT_PATTERNS.filter(p=>p.key===query);
+  const chooseCup=exact.some(p=>p.item.name!==p.item.productName&&p.item.cup==="中杯"&&normalizeProductName(p.item.name)!==query);
+  if(!host||!query||(exact.length&&!chooseCup)){ closeProductSuggest(); return; }
   const seen=new Set();
   productSuggestItems=PRODUCT_PATTERNS.filter(p=>p.key.includes(query)).sort((a,b)=>{
     const aStart=a.key.startsWith(query)?0:1,bStart=b.key.startsWith(query)?0:1;
@@ -2632,7 +2683,7 @@ function renderProductSuggest(input){
   if(!productSuggestItems.length){ closeProductSuggest(); return; }
   productSuggestInput?.setAttribute("aria-expanded","false"); productSuggestInput=input; productSuggestActive=-1;
   host.innerHTML='<div class="product-suggest-head"><b>匹配产品</b><span>'+productSuggestItems.length+' 条候选</span></div><div class="product-suggest-list">'+
-    productSuggestItems.map((item,i)=>'<button class="product-option" id="productSuggestOption'+i+'" data-index="'+i+'" type="button" role="option"><span class="product-option-name">'+escapeHtml(item.name)+'</span><span class="product-option-meta"><span>堂食 '+(Number.isFinite(item.dine)?'¥'+catalogNumber(item.dine):'—')+'</span><span>外卖 ¥'+catalogNumber(item.price)+'</span><span>成本 ¥'+catalogNumber(item.cost)+'</span></span></button>').join("")+
+    productSuggestItems.map((item,i)=>'<button class="product-option" id="productSuggestOption'+i+'" data-index="'+i+'" type="button" role="option"><span class="product-option-name">'+escapeHtml(item.name)+'</span><span class="product-option-meta"><span>堂食 '+(Number.isFinite(item.dine)?'¥'+catalogNumber(item.dine):'—')+'</span><span>外卖 '+(Number.isFinite(item.price)?'¥'+catalogNumber(item.price):'—')+'</span><span>成本 '+(Number.isFinite(item.cost)?'¥'+catalogNumber(item.cost):'—')+'</span><span>打包 '+(Number.isFinite(item.packFee)?'¥'+catalogNumber(item.packFee):'未标注')+'</span></span></button>').join("")+
     '</div><div class="product-suggest-foot">点击或按回车选择 · 输入“＋”可继续添加组合产品</div>';
   host.classList.add("open"); input.setAttribute("aria-expanded","true"); positionProductSuggest();
 }
@@ -3924,9 +3975,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.11";
-const CALC_UPDATED = "2026-11-02";
+const CALC_VERSION = "v3.2.12";
+const CALC_UPDATED = "2026-11-03";
 const CALC_CHANGELOG = [
+  {version:"v3.2.12",date:"2026-11-03",items:["录入最新 65 条产品、杯型、打包费及价格成本资料，保留本次未列出的 11 条旧产品","同名默认中杯，大杯需明确选择；兼容针王苹果/葡萄旧名称与首创名称","完整版、汇总版名称匹配时自动合计打包费并替换当前值，未标打包费不加费，重复录入不累加","缺失价格与成本保持空白；同步候选信息、说明书资料表和使用示例"]},
   {version:"v3.2.11",date:"2026-11-02",items:["淘宝原直营城市技术服务费与平台配送费折扣系数由 75% 调整为 78.5%，其他收费规则不变","同步费用明细、说明书与各测算和导出入口；直营代理综合口径按同一系数计算"]},
   {version:"v3.2.10",date:"2026-09-15",items:["工具入口与弹窗名称统一改为周边套餐测算","重构说明书周边套餐测算板块，按操作步骤、粘贴格式、计算与联动分区展示","优化桌面和移动端说明书排版"]},
   {version:"v3.2.9",date:"2026-09-15",items:["产品×周边模板导出改为冷、热测算在同一工作表左右并排","同一周边的连续分组字段跨产品合并单元格；负外卖毛利和负外卖毛利率使用粉色底提醒","多个赠送周边除分别测算外，末尾新增全部赠品成本合计后的赠送周边汇总；同步说明书"]},
