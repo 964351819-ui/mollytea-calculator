@@ -109,16 +109,15 @@
     padding:9px 12px 6px;color:var(--sub);font-size:10.5px}
   .product-suggest-head b{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.04em}
   .product-suggest-list{max-height:250px;overflow:auto;padding:3px 6px 6px;overscroll-behavior:contain}
-  .product-option{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;
+  .product-option{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;gap:5px;
     width:100%;padding:9px 10px;border:0;border-radius:9px;background:transparent;color:var(--ink);
     font:inherit;text-align:left;cursor:pointer;transition:background .12s,color .12s}
   .product-option:hover,.product-option.active{background:var(--glow)}
   .product-option.active{box-shadow:inset 2px 0 0 var(--accent)}
-  .product-option-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px;font-weight:650}
-  .product-option-meta{display:flex;align-items:center;gap:8px;color:var(--sub);font-size:10.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
-  .product-option-meta span+span::before{content:"·";margin-right:8px;color:var(--line-strong)}
+  .product-option-name{display:block;min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.5;font-size:13.5px;font-weight:650}
+  .product-option-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:2px 12px;min-width:0;width:100%;color:var(--sub);font-size:10.5px;line-height:1.5;font-variant-numeric:tabular-nums;white-space:normal;overflow-wrap:anywhere}
   .product-suggest-foot{padding:7px 12px;border-top:1px solid var(--line);color:var(--sub);font-size:10.5px;line-height:1.4}
-  @media(max-width:560px){.product-option{grid-template-columns:1fr;gap:2px}.product-option-meta{font-size:10px}.product-suggest-head span{display:none}}
+  @media(max-width:560px){.product-option{gap:4px}.product-option-meta{font-size:10px}.product-suggest-head span{display:none}}
   /* 配送距离 / 下单时段：保留原 select 作为数据源，以统一风格按钮和浮层完成选择。 */
   .smart-select-source{display:none!important}
   .smart-select-button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;height:50px;
@@ -1155,7 +1154,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.12 · 更新于 2026-11-03</span>
+    <span id="calcVersionStamp">计算口径 v3.2.13 · 更新于 2026-11-03</span>
   </div>
 </div>
 
@@ -1195,7 +1194,7 @@
           </tbody></table></div>
           <h4>产品资料自动带出</h4>
           <ol>
-            <li><b>搜索与选择：</b>在完整版或汇总版快速测算的“产品名称”中输入文字，候选框显示杯型、堂食原价、外卖原价、产品成本及标注的打包费；可点击候选，或用方向键选择后按回车确认。同名产品未注明杯型时默认中杯，大杯需输入或选择对应杯型。</li>
+            <li><b>搜索与选择：</b>在完整版或汇总版快速测算的“产品名称”中输入文字，候选框上方完整展示名称与杯型，长名称自动换行，下方分两列显示堂食原价、外卖原价、产品成本及标注的打包费；可点击候选，或用方向键选择后按回车确认。同名产品未注明杯型时默认中杯，大杯需输入或选择对应杯型。</li>
             <li><b>自动填充：</b>选择或输入已收录的完整名称后，系统填写堂食原价、外卖原价、产品成本和打包费。综合成本录入为产品成本，价格与成本以 2026-11-03 最新资料为准；本次未列出的旧产品继续保留。</li>
             <li><b>组合与打包费：</b>使用“＋”连接多个产品，各价格、成本分别求和。打包费按匹配产品的标注金额合计后替换当前值，不与原值重复累加；未标注打包费的小料和保留旧产品不额外加费，仅录入这些产品时打包费为 0。</li>
             <li><b>缺失与未知：</b>空白、“无”和“/”保存为缺失；匹配产品缺少某个价格或成本时，对应输入框留空，不使用 0 或旧资料补齐。组合中任一产品缺失该字段时，合计也留空，需补齐后再测算。名称完全未匹配时，保留当前手填价格、成本和打包费。</li>
@@ -3975,9 +3974,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.12";
+const CALC_VERSION = "v3.2.13";
 const CALC_UPDATED = "2026-11-03";
 const CALC_CHANGELOG = [
+  {version:"v3.2.13",date:"2026-11-03",items:["修复产品候选名称被价格信息挤压截断的问题，名称与杯型单独一行，长名称自动换行","价格、成本及打包费改为下方双列展示，完整版、汇总版和手机端同步；说明书同步更新"]},
   {version:"v3.2.12",date:"2026-11-03",items:["录入最新 65 条产品、杯型、打包费及价格成本资料，保留本次未列出的 11 条旧产品","同名默认中杯，大杯需明确选择；兼容针王苹果/葡萄旧名称与首创名称","完整版、汇总版名称匹配时自动合计打包费并替换当前值，未标打包费不加费，重复录入不累加","缺失价格与成本保持空白；同步候选信息、说明书资料表和使用示例"]},
   {version:"v3.2.11",date:"2026-11-02",items:["淘宝原直营城市技术服务费与平台配送费折扣系数由 75% 调整为 78.5%，其他收费规则不变","同步费用明细、说明书与各测算和导出入口；直营代理综合口径按同一系数计算"]},
   {version:"v3.2.10",date:"2026-09-15",items:["工具入口与弹窗名称统一改为周边套餐测算","重构说明书周边套餐测算板块，按操作步骤、粘贴格式、计算与联动分区展示","优化桌面和移动端说明书排版"]},
