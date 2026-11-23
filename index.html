@@ -962,15 +962,16 @@
       <div class="act"><input type="checkbox" id="a_mt_sh"><span class="nm">美团 · 神会员</span>
         <span class="fee" ><select id="a_mt_sh_lvl" onchange="mtShLevel(this)">
           <option value="">自定义</option>
-          <option value="3.5|3.5">3.5 / 3.5</option>
-          <option value="4|4">4 / 4</option>
-          <option value="5.5|5.5">5.5 / 5.5</option>
-          <option value="7.5|7.5">7.5 / 7.5</option>
-          <option value="8.5|8.5">8.5 / 8.5</option>
-          <option value="10|10">10 / 10</option>
-          <option value="13|13">13 / 13</option>
+          <option value="4|3.5">4 / 3.5</option>
+          <option value="4.5|4">4.5 / 4</option>
+          <option value="6|5.5">6 / 5.5</option>
+          <option value="8|7.5">8 / 7.5</option>
+          <option value="9.5|8.5">9.5 / 8.5</option>
+          <option value="11|10">11 / 10</option>
+          <option value="14|13">14 / 13</option>
+          <option value="15|13">15 / 13</option>
         </select></span>
-        <span class="fee"><input type="number" id="a_mt_sh_v" value="3.5" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">出资</span>
+        <span class="fee"><input type="number" id="a_mt_sh_v" value="4" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">出资</span>
         <span class="fee"><input type="number" id="a_mt_sh_sub_v" value="3.5" step="0.01" min="0" inputmode="decimal" placeholder="补贴"></span><span class="yuan">补贴</span></div>
       <div class="act"><input type="checkbox" id="a_mt_jp"><span class="nm">美团 · 减配</span>
         <span class="fee"><input type="number" id="a_mt_jp_v" value="3" step="0.01" min="0" inputmode="decimal"></span><span class="yuan">元</span></div>
@@ -1082,7 +1083,7 @@
           <div class="qfield"><label><span id="q_disc_tb_label">淘宝折扣</span><button id="q_disc_tb_mode" class="disc-mode" type="button">折后价</button></label><input id="q_disc_tb" type="number" min="0" max="1" step="0.01" inputmode="decimal"></div>
         </div>
         <div class="qbar-row activities">
-          <div class="qact-group"><div class="qact"><input id="q_mt_sh" type="checkbox"><span class="qname">美团·神会员</span><select id="q_mt_sh_lvl"><option value="">自定义</option><option value="3.5|3.5">3.5 / 3.5</option><option value="4|4">4 / 4</option><option value="5.5|5.5">5.5 / 5.5</option><option value="7.5|7.5">7.5 / 7.5</option><option value="8.5|8.5">8.5 / 8.5</option><option value="10|10">10 / 10</option><option value="13|13">13 / 13</option></select><input id="q_mt_sh_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">出资</span><input id="q_mt_sh_sub_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">补贴</span></div><div class="qact"><input id="q_mt_jp" type="checkbox"><span class="qname">美团·减配</span><input id="q_mt_jp_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">元</span></div></div>
+          <div class="qact-group"><div class="qact"><input id="q_mt_sh" type="checkbox"><span class="qname">美团·神会员</span><select id="q_mt_sh_lvl"><option value="">自定义</option><option value="4|3.5">4 / 3.5</option><option value="4.5|4">4.5 / 4</option><option value="6|5.5">6 / 5.5</option><option value="8|7.5">8 / 7.5</option><option value="9.5|8.5">9.5 / 8.5</option><option value="11|10">11 / 10</option><option value="14|13">14 / 13</option><option value="15|13">15 / 13</option></select><input id="q_mt_sh_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">出资</span><input id="q_mt_sh_sub_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">补贴</span></div><div class="qact"><input id="q_mt_jp" type="checkbox"><span class="qname">美团·减配</span><input id="q_mt_jp_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">元</span></div></div>
           <div class="qact-group"><div class="qact"><input id="q_tb_bh" type="checkbox"><span class="qname">淘宝·爆红包</span><select id="q_tb_bh_lvl"><option value="">自定义</option><option value="3|3">3 / 3</option><option value="3.5|3.5">3.5 / 3.5</option><option value="5|5">5 / 5</option><option value="6|6">6 / 6</option><option value="7|7">7 / 7</option><option value="9|9">9 / 9</option><option value="10|10">10 / 10</option><option value="12|12">12 / 12</option></select><input id="q_tb_bh_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">出资</span><input id="q_tb_bh_sub_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">补贴</span></div><div class="qact"><input id="q_tb_jp" type="checkbox"><span class="qname">淘宝·减配</span><input id="q_tb_jp_v" type="number" step="0.01" min="0" inputmode="decimal"><span class="qunit">元</span></div></div>
         </div>
       </div>
@@ -1154,7 +1155,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.13 · 更新于 2026-11-03</span>
+    <span id="calcVersionStamp">计算口径 v3.2.14 · 更新于 2026-11-23</span>
   </div>
 </div>
 
@@ -1283,8 +1284,8 @@
           <div class="manual-formula">商家活动成本 = 折扣出资 + 神会员/爆红包商家出资 + 减配出资</div>
           <p>美团、淘宝减配默认均为 3 元，完整版与汇总版同步，支持手动修改。已有浏览器保存的输入与历史方案继续保留各自金额；组合录入沿用当前页面设置。</p>
           <div class="manual-callout"><b>平台补贴不计入商家活动成本，</b>但会用于计算消费者外卖实付。减配只影响商家到手，不从消费者实付中再次扣除。</div>
-          <div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>门槛金额</th><th>美团神会员商家出资/补贴</th><th>淘宝爆红包商家出资/补贴</th></tr></thead><tbody>
-            <tr><td>20 元以下</td><td>3.5 / 3.5</td><td>3 / 3</td></tr><tr><td>20（含）–28 元</td><td>4 / 4</td><td>3.5 / 3.5</td></tr><tr><td>28（含）–38 元</td><td>5.5 / 5.5</td><td>5 / 5</td></tr><tr><td>38（含）–48 元</td><td>7.5 / 7.5</td><td>6 / 6</td></tr><tr><td>48（含）–58 元</td><td>8.5 / 8.5</td><td>7 / 7</td></tr><tr><td>58（含）–68 元</td><td>10 / 10</td><td>9 / 9</td></tr><tr><td>68（含）–88 元</td><td>10 / 10</td><td>10 / 10</td></tr><tr><td>88 元及以上</td><td>13 / 13</td><td>12 / 12</td></tr>
+          <div class="manual-tablewrap"><table class="manual-table"><thead><tr><th>门槛金额</th><th>美团神会员 A 档商家出资/补贴</th><th>淘宝爆红包商家出资/补贴</th></tr></thead><tbody>
+            <tr><td>20 元以下</td><td>4 / 3.5</td><td>3 / 3</td></tr><tr><td>20（含）–28 元</td><td>4.5 / 4</td><td>3.5 / 3.5</td></tr><tr><td>28（含）–38 元</td><td>6 / 5.5</td><td>5 / 5</td></tr><tr><td>38（含）–48 元</td><td>8 / 7.5</td><td>6 / 6</td></tr><tr><td>48（含）–58 元</td><td>9.5 / 8.5</td><td>7 / 7</td></tr><tr><td>58（含）–68 元</td><td>11 / 10</td><td>9 / 9</td></tr><tr><td>68（含）–88 元</td><td>11 / 10</td><td>10 / 10</td></tr><tr><td>88（含）–128 元</td><td>14 / 13</td><td>12 / 12</td></tr><tr><td>128 元及以上</td><td>15 / 13</td><td>12 / 12</td></tr>
           </tbody></table></div>
         </section>
 
@@ -1670,7 +1671,6 @@ function syncQuickAutoActivityLevels(){
 
 function compute(){
   const P = num($("price").value);
-  const g = globalParams();
   const pMT = readDiscount("mt"), pTB = readDiscount("tb");
   const discHint = (el, p) => {
     el.textContent = p.bad ? "输入无效，按不打折" : (p.d>=1 ? "不打折" : "打"+(p.d*10).toFixed(1).replace(/\.0$/,"")+"折");
@@ -1682,15 +1682,6 @@ function compute(){
   // 按「外卖原价 × 折扣 + 打包费」自动匹配神会员/爆红包档位。
   const thresholdBase = num($("packFee").value);
   const mtDeal = P * pMT.d + thresholdBase, tbDeal = P * pTB.d + thresholdBase;
-  const mtLevel = (dp) => {
-    if(dp < 20) return 3.5;
-    if(dp < 28) return 4;
-    if(dp < 38) return 5.5;
-    if(dp < 48) return 7.5;
-    if(dp < 58) return 8.5;
-    if(dp < 88) return 10;
-    return 13;
-  };
   const tbLevel = (dp) => {
     if(dp < 20) return 3;
     if(dp < 28) return 3.5;
@@ -1702,10 +1693,10 @@ function compute(){
     return 12;
   };
   if($("a_mt_sh").checked && $("a_mt_sh_lvl").value){
-    const v = mtLevel(mtDeal);
+    const v = mtAutoLevel(mtDeal), sub = mtAutoSub(mtDeal);
     $("a_mt_sh_v").value = v;
-    $("a_mt_sh_sub_v").value = v;
-    const val = v + "|" + v;
+    $("a_mt_sh_sub_v").value = sub;
+    const val = v + "|" + sub;
     [...$("a_mt_sh_lvl").options].forEach(opt => opt.selected = opt.value === val);
   }
   if($("a_tb_bh").checked && $("a_tb_bh_lvl").value){
@@ -1716,6 +1707,7 @@ function compute(){
     [...$("a_tb_bh_lvl").options].forEach(opt => opt.selected = opt.value === val);
   }
   syncQuickAutoActivityLevels();
+  const g = globalParams();
 
   const pkf = num($("packFee").value);
   const s = calcScenario(P, pMT.d, pTB.d, pkf, g.dist, g.t, g.mtAct, g.tbAct);
@@ -1837,9 +1829,9 @@ function rematchAutoActivity(p){
   let changed=false;
   const packFee=p.packFee||0;
   if(p.mtActivityAuto){
-    const oldPay=p.mtShPay||0,reduce=Math.max(0,(p.mtAct||0)-oldPay),next=mtAutoLevel(p.price*(p.dMT||1)+packFee);
-    if(oldPay!==next||p.mtSub!==next||p.mtAct!==next+reduce)changed=true;
-    p.mtShPay=next;p.mtSub=next;p.mtAct=next+reduce;
+    const oldPay=p.mtShPay||0,reduce=Math.max(0,(p.mtAct||0)-oldPay),deal=p.price*(p.dMT??1)+packFee,next=mtAutoLevel(deal),sub=mtAutoSub(deal);
+    if(oldPay!==next||p.mtSub!==sub||p.mtAct!==next+reduce)changed=true;
+    p.mtShPay=next;p.mtSub=sub;p.mtAct=next+reduce;
   }
   if(p.tbActivityAuto){
     const oldPay=p.tbBhPay||0,reduce=Math.max(0,(p.tbAct||0)-oldPay),next=tbAutoLevel(p.price*(p.dTB||1)+packFee);
@@ -2517,6 +2509,7 @@ function restore(){
   document.querySelectorAll("input,select").forEach(el=>{
     if(!el.id || !(el.id in d)) return;
     if(el.type==="checkbox") el.checked = !!d[el.id];
+    else if((el.id==="a_mt_sh_lvl"||el.id==="q_mt_sh_lvl") && d[el.id] && !Array.from(el.options).some(o=>o.value===d[el.id])) el.value="4|3.5";
     else el.value = d[el.id];
   });
 }
@@ -3974,9 +3967,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.13";
-const CALC_UPDATED = "2026-11-03";
+const CALC_VERSION = "v3.2.14";
+const CALC_UPDATED = "2026-11-23";
 const CALC_CHANGELOG = [
+  {version:"v3.2.14",date:"2026-11-23",items:["调整美团神会员 A 档九个价格带商家出资；平台补贴、淘宝档位及减配不变"]},
   {version:"v3.2.13",date:"2026-11-03",items:["修复产品候选名称被价格信息挤压截断的问题，名称与杯型单独一行，长名称自动换行","价格、成本及打包费改为下方双列展示，完整版、汇总版和手机端同步；说明书同步更新"]},
   {version:"v3.2.12",date:"2026-11-03",items:["录入最新 65 条产品、杯型、打包费及价格成本资料，保留本次未列出的 11 条旧产品","同名默认中杯，大杯需明确选择；兼容针王苹果/葡萄旧名称与首创名称","完整版、汇总版名称匹配时自动合计打包费并替换当前值，未标打包费不加费，重复录入不累加","缺失价格与成本保持空白；同步候选信息、说明书资料表和使用示例"]},
   {version:"v3.2.11",date:"2026-11-02",items:["淘宝原直营城市技术服务费与平台配送费折扣系数由 75% 调整为 78.5%，其他收费规则不变","同步费用明细、说明书与各测算和导出入口；直营代理综合口径按同一系数计算"]},
@@ -4071,7 +4065,8 @@ function parseDelimited(text,sep){
   row.push(cell.trim());if(row.some(Boolean))rows.push(row);if(!rows.length)return[];const head=rows.shift();return rows.map(r=>Object.fromEntries(head.map((h,i)=>[String(h).trim(),r[i]??""])));
 }
 const rowVal=(row,names,fallback="")=>{for(const n of names){if(row[n]!==undefined&&String(row[n]).trim()!=="")return row[n];}return fallback;};
-const mtAutoLevel=dp=>dp<20?3.5:dp<28?4:dp<38?5.5:dp<48?7.5:dp<58?8.5:dp<88?10:13;
+function mtAutoLevel(dp){return dp<20?4:dp<28?4.5:dp<38?6:dp<48?8:dp<58?9.5:dp<88?11:dp<128?14:15;}
+function mtAutoSub(dp){return dp<20?3.5:dp<28?4:dp<38?5.5:dp<48?7.5:dp<58?8.5:dp<88?10:13;}
 const tbAutoLevel=dp=>dp<20?3:dp<28?3.5:dp<38?5:dp<48?6:dp<58?7:dp<68?9:dp<88?10:12;
 function buildImportedProduct(row){
   const P=num(rowVal(row,["外卖原价","原价","价格"]));if(!(P>0))return null;
@@ -4082,7 +4077,7 @@ function buildImportedProduct(row){
   const timeKey=TIME[time]?time:({"日间":"day","21:00–24:00":"t21","00:00–02:00":"t0_2","02:00–03:00":"t2_3","03:00–06:00":"t3_6"}[time]||"day");
   const currentMtStandard=$("a_mt_sh").checked&&$("a_mt_sh_lvl").value,currentTbStandard=$("a_tb_bh").checked&&$("a_tb_bh_lvl").value;
   let mtShPay=num(rowVal(row,["美团神会员出资","神会员出资"],currentMtStandard?mtAutoLevel(P*dMT+packFee):($("a_mt_sh").checked?$("a_mt_sh_v").value:0)));
-  let mtSub=num(rowVal(row,["美团神会员补贴","神会员补贴"],currentMtStandard?mtShPay:($("a_mt_sh").checked?$("a_mt_sh_sub_v").value:0)));
+  let mtSub=num(rowVal(row,["美团神会员补贴","神会员补贴"],currentMtStandard?mtAutoSub(P*dMT+packFee):($("a_mt_sh").checked?$("a_mt_sh_sub_v").value:0)));
   let tbBhPay=num(rowVal(row,["淘宝爆红包出资","爆红包出资"],currentTbStandard?tbAutoLevel(P*dTB+packFee):($("a_tb_bh").checked?$("a_tb_bh_v").value:0)));
   let tbSub=num(rowVal(row,["淘宝爆红包补贴","爆红包补贴"],currentTbStandard?tbBhPay:($("a_tb_bh").checked?$("a_tb_bh_sub_v").value:0)));
   const mtJp=num(rowVal(row,["美团减配"],$("a_mt_jp").checked?$("a_mt_jp_v").value:0)),tbJp=num(rowVal(row,["淘宝减配"],$("a_tb_jp").checked?$("a_tb_jp_v").value:0));
@@ -4147,7 +4142,7 @@ function buildComboProducts(productRows,peripheralRows){
       "产品成本":product.cost,
       "周边订货价":peripheral.cost,
       "美团神会员出资":mtLevel,
-      "美团神会员补贴":mtLevel,
+      "美团神会员补贴":mtOn?mtAutoSub(comboPrice*dMT+packFee):0,
       "淘宝爆红包出资":tbLevel,
       "淘宝爆红包补贴":tbLevel
     };
@@ -4171,7 +4166,7 @@ function comboTemplateMetrics(p,mode,dist,regionAdd,cost){
   const price=(p.price||0)+regionAdd,pack=p.packFee||0,dMT=p.dMT??1,dTB=p.dTB??1;
   const mtReduce=Math.max(0,(p.mtAct||0)-(p.mtShPay||0)),tbReduce=Math.max(0,(p.tbAct||0)-(p.tbBhPay||0));
   const mtMember=p.mtActivityAuto?mtAutoLevel(price*dMT+pack):(p.mtShPay||0),tbMember=p.tbActivityAuto?tbAutoLevel(price*dTB+pack):(p.tbBhPay||0);
-  const mtSub=p.mtActivityAuto?mtMember:(p.mtSub||0),tbSub=p.tbActivityAuto?tbMember:(p.tbSub||0);
+  const mtSub=p.mtActivityAuto?mtAutoSub(price*dMT+pack):(p.mtSub||0),tbSub=p.tbActivityAuto?tbMember:(p.tbSub||0);
   const mtAct=mtMember+mtReduce,tbAct=tbMember+tbReduce,s=calcScenario(price,dMT,dTB,pack,dist,TIME[p.time]||TIME.day,mtAct,tbAct,productTbZhiTechRate(p));
   const byPlatform=(mt,tb)=>platFilter==="mt"?mt:platFilter==="tb"?tb:(mt+tb)/2;
   const mtFee=mode==="zhi"?s.mtZhiTech+s.mtZhiShip:s.mtDaiOp+s.mtDaiShip;
