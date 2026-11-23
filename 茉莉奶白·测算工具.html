@@ -1155,7 +1155,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.15 · 更新于 2026-11-23</span>
+    <span id="calcVersionStamp">计算口径 v3.2.16 · 更新于 2026-11-23</span>
   </div>
 </div>
 
@@ -1210,7 +1210,7 @@
 
         <section class="manual-section" id="manual-combo">
           <h3>3. 周边套餐测算</h3>
-          <p>周边套餐测算顶部显示当前导出平台，以及生成预览所用的折扣、红包开关、减配和打包费等设置。需修改时，返回看板调整后重新生成预览；导出仍按当前平台口径，直营与代理均保留。</p>
+          <p>在周边套餐测算顶部可直接修改平台、折扣、活动和费用。打开时带入看板配置，修改仅用于本次套餐，不反写看板；改动后须重新生成预览才能导出或追加。</p>
           <p>批量组合产品与周边，统一核对价格、成本、活动及外卖毛利，再导出标准 Excel 或追加到汇总版。</p>
           <div class="manual-combo-intro">
             <div><b>① 粘贴资料</b><span>在“工具 → 周边套餐测算”中录入产品、周边和可选赠品。</span></div>
@@ -3968,9 +3968,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.15";
+const CALC_VERSION = "v3.2.16";
 const CALC_UPDATED = "2026-11-23";
 const CALC_CHANGELOG = [
+  {version:"v3.2.16",date:"2026-11-23",items:["周边套餐测算支持直接修改本次配置，说明书同步更新"]},
   {version:"v3.2.15",date:"2026-11-23",items:["周边套餐测算新增配置核对区，展示导出平台及折扣、活动和费用设置，说明书同步更新"]},
   {version:"v3.2.14",date:"2026-11-23",items:["调整美团神会员 A 档九个价格带商家出资；平台补贴、淘宝档位及减配不变"]},
   {version:"v3.2.13",date:"2026-11-03",items:["修复产品候选名称被价格信息挤压截断的问题，名称与杯型单独一行，长名称自动换行","价格、成本及打包费改为下方双列展示，完整版、汇总版和手机端同步；说明书同步更新"]},
@@ -4132,11 +4133,13 @@ function parseComboData(text,type){
   });
   return {items,errors};
 }
-function buildComboProducts(productRows,peripheralRows){
+function buildComboProducts(productRows,peripheralRows,cfg){
   return peripheralRows.flatMap(peripheral=>productRows.map(product=>{
-    const comboPrice=product.price+peripheral.price,packFee=num($("packFee").value),dMT=readDiscount("mt").d,dTB=readDiscount("tb").d;
-    const mtOn=$("a_mt_sh").checked,tbOn=$("a_tb_bh").checked,mtLevel=mtOn?mtAutoLevel(comboPrice*dMT+packFee):0,tbLevel=tbOn?tbAutoLevel(comboPrice*dTB+packFee):0;
+    const comboPrice=product.price+peripheral.price,packFee=cfg.pack,dMT=cfg.mtDisc/100,dTB=cfg.tbDisc/100;
+    const mtOn=cfg.mtOn,tbOn=cfg.tbOn,mtLevel=mtOn?mtAutoLevel(comboPrice*dMT+packFee):0,tbLevel=tbOn?tbAutoLevel(comboPrice*dTB+packFee):0;
+    const settings={"打包费":packFee,"美团折扣":dMT,"淘宝折扣":dTB,"美团减配":cfg.mtReduceOn?cfg.mtReduce:0,"淘宝减配":cfg.tbReduceOn?cfg.tbReduce:0,"淘宝直营技术费率":cfg.tech,"下单时段":cfg.time};
     const row={
+      ...settings,
       "产品名称":product.name+"＋"+peripheral.name,
       "标签":"产品×周边",
       "外卖原价":comboPrice,
@@ -4164,13 +4167,13 @@ function ensureExcelJS(){
   if(window.ExcelJS)return Promise.resolve();
   return new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js";s.onload=res;s.onerror=()=>rej(new Error("无法加载模板导出组件"));document.head.appendChild(s);setTimeout(()=>rej(new Error("模板导出组件加载超时")),12000);});
 }
-function comboTemplateMetrics(p,mode,dist,regionAdd,cost){
+function comboTemplateMetrics(p,mode,dist,regionAdd,cost,platform){
   const price=(p.price||0)+regionAdd,pack=p.packFee||0,dMT=p.dMT??1,dTB=p.dTB??1;
   const mtReduce=Math.max(0,(p.mtAct||0)-(p.mtShPay||0)),tbReduce=Math.max(0,(p.tbAct||0)-(p.tbBhPay||0));
   const mtMember=p.mtActivityAuto?mtAutoLevel(price*dMT+pack):(p.mtShPay||0),tbMember=p.tbActivityAuto?tbAutoLevel(price*dTB+pack):(p.tbBhPay||0);
   const mtSub=p.mtActivityAuto?mtAutoSub(price*dMT+pack):(p.mtSub||0),tbSub=p.tbActivityAuto?tbMember:(p.tbSub||0);
   const mtAct=mtMember+mtReduce,tbAct=tbMember+tbReduce,s=calcScenario(price,dMT,dTB,pack,dist,TIME[p.time]||TIME.day,mtAct,tbAct,productTbZhiTechRate(p));
-  const byPlatform=(mt,tb)=>platFilter==="mt"?mt:platFilter==="tb"?tb:(mt+tb)/2;
+  const byPlatform=(mt,tb)=>platform==="mt"?mt:platform==="tb"?tb:(mt+tb)/2;
   const mtFee=mode==="zhi"?s.mtZhiTech+s.mtZhiShip:s.mtDaiOp+s.mtDaiShip;
   const tbFee=mode==="zhi"?s.tbZhiTech+s.tbZhiShip:s.tbDaiPack;
   const mtNet=mode==="zhi"?s.mtZhiNet:s.mtDaiNet,tbNet=mode==="zhi"?s.tbZhiNet:s.tbDaiNet;
@@ -4194,7 +4197,7 @@ function comboPeripheralKey(p,index=0){
   const name=String(p.comboPeripheralName||"").trim()||String(p.name||"").replace(/^[^＋+]*[＋+]\s*/,"").trim();
   return name?name.replace(/\s+/g,"").replace(/＋/g,"+"):"unknown:"+index;
 }
-function styleComboTemplateSheet(ws,title,comboRows,costKey,startCol=1){
+function styleComboTemplateSheet(ws,title,comboRows,costKey,startCol,platform){
   const headers=["周边加价","范围","活动距离","套餐内容","外卖原价","堂食原价","平台扣点","活动支出","到手价","到手率","外卖实付","堂食实付","产品成本","周边订货价","外卖毛利","外卖毛利率"];
   const first=comboRows.find(p=>p.comboGifts?.length||p.comboGiftName);const gifts=first?(first.comboGifts||[{name:first.comboGiftName,cost:first.comboGiftCost||0}]):[];
   const giftGroups=gifts.map(g=>({name:g.name,cost:g.cost}));
@@ -4220,7 +4223,7 @@ function styleComboTemplateSheet(ws,title,comboRows,costKey,startCol=1){
       group.items.forEach(p=>{
         const productStart=row;
         [["全国",3,0],["全国",4,0],["北上新藏",3,1],["北上新藏",4,1]].forEach(([area,dist,add],idx)=>{
-          const m=comboTemplateMetrics(p,mode,dist,add,p[costKey]??p.cost??0),r=ws.getRow(row),values=[null,(idx===0||idx===2)?area:null,dist+"km",idx===0?p.name:null,m.price,m.dine,m.fee,m.activity,m.net,m.rate,m.pay,m.dine,m.cost,m.wholesale,m.profit,m.margin];
+          const m=comboTemplateMetrics(p,mode,dist,add,p[costKey]??p.cost??0,platform),r=ws.getRow(row),values=[null,(idx===0||idx===2)?area:null,dist+"km",idx===0?p.name:null,m.price,m.dine,m.fee,m.activity,m.net,m.rate,m.pay,m.dine,m.cost,m.wholesale,m.profit,m.margin];
           values.forEach((value,i)=>r.getCell(startCol+i).value=value);r.height=Math.max(r.height||0,22);
           giftGroups.forEach((gift,i)=>{const profit=m.profit-gift.cost;r.getCell(startCol+16+i*2).value=profit;r.getCell(startCol+17+i*2).value=m.net>0?profit/m.net:0;});
           for(let i=0;i<headers.length;i++){const col=startCol+i,c=r.getCell(col),relative=i+1;c.font={name:"Arial",size:10,bold:[9,10,11,15,16].includes(relative),color:{argb:"FF3A3734"}};c.alignment={vertical:"middle",horizontal:relative===4?"left":"center",wrapText:relative===4};c.border={top:thin,bottom:idx===3?medium:thin,left:thin,right:thin};}
@@ -4238,18 +4241,19 @@ function styleComboTemplateSheet(ws,title,comboRows,costKey,startCol=1){
   return startCol+headers.length-1;
 }
 async function exportComboTemplate(){
-  if(!comboPending.length)return;
+  if(!comboPending.length||comboStale)return;
+  const rows=comboPending.slice(),platform=comboConfig.platform;
   const btn=$("comboExport");if(btn){btn.disabled=true;btn.textContent="正在生成…";}
   try{
     await ensureExcelJS();const wb=new ExcelJS.Workbook();wb.creator="茉莉奶白·测算工具";wb.created=new Date();
-    const platformLabel=platFilter==="mt"?"美团":platFilter==="tb"?"淘宝闪购":"美团＋淘宝综合",ws=wb.addWorksheet("测算格式");
-    const coldEnd=styleComboTemplateSheet(ws,"外卖周边套餐（冷） · "+platformLabel,comboPending,"comboColdCost",1);
+    const platformLabel=platform==="mt"?"美团":platform==="tb"?"淘宝闪购":"美团＋淘宝综合",ws=wb.addWorksheet("测算格式");
+    const coldEnd=styleComboTemplateSheet(ws,"外卖周边套餐（冷） · "+platformLabel,rows,"comboColdCost",1,platform);
     ws.getColumn(coldEnd+1).width=3;
-    styleComboTemplateSheet(ws,"外卖周边套餐（热） · "+platformLabel,comboPending,"comboHotCost",coldEnd+2);
+    styleComboTemplateSheet(ws,"外卖周边套餐（热） · "+platformLabel,rows,"comboHotCost",coldEnd+2,platform);
     const buffer=await wb.xlsx.writeBuffer(),url=URL.createObjectURL(new Blob([buffer],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})),a=document.createElement("a");
     a.href=url;a.download="外卖周边套餐_图片模板版_"+new Date().toISOString().slice(0,10)+".xlsx";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
     if(btn){btn.textContent="已导出 ✓";setTimeout(()=>{if($("comboExport"))$("comboExport").textContent="导出图片模板版 Excel";},1800);}
-  }catch(e){if(btn)btn.textContent="导出失败，请联网重试";}finally{if(btn)btn.disabled=false;}
+  }catch(e){if(btn)btn.textContent="导出失败，请联网重试";}finally{if(btn)btn.disabled=comboStale;}
 }
 function comboExportHelpHtml(){
   return '<details class="combo-export-help"><summary>导出说明与示例</summary><div class="combo-export-help-body"><p>点击导出后会下载一个 Excel 文件，“冷”和“热”两套测算在同一个“测算格式”工作表中左右并排。每套表按直营、代理分区，同一周边的产品集中排列，连续一致的周边字段自动合并单元格。赠品分别输出外卖毛利和外卖毛利率；有多个赠品时，末尾增加全部赠品成本合计后的“赠送周边汇总”。负外卖毛利或负外卖毛利率显示粉色底。每个组合生成全国与北上新藏的 3km、4km 测算行；北上新藏外卖原价自动加 1 元，活动档位随新价格重新匹配。</p><div class="combo-export-demo" role="img" aria-label="Excel 导出示例：冷和热测算左右并排，包含范围、活动距离、套餐内容、价格、成本、到手价及外卖毛利"><div class="combo-export-tabs"><span>冷</span><span>热</span></div><div class="combo-export-sheet"><table><thead><tr><th>范围</th><th>活动距离</th><th>套餐内容</th><th>外卖原价</th><th>活动支出</th><th>到手价</th><th>产品成本</th><th>周边订货价</th><th>外卖毛利</th></tr></thead><tbody><tr><td>全国</td><td>3km</td><td>示例饮品＋示例周边</td><td>¥39.00</td><td>自动匹配</td><td>自动计算</td><td>冷成本</td><td>周边成本</td><td>自动计算</td></tr><tr><td>北上新藏</td><td>4km</td><td>示例饮品＋示例周边</td><td>¥40.00</td><td>重新匹配</td><td>自动计算</td><td>冷成本</td><td>周边成本</td><td>自动计算</td></tr></tbody></table></div><div class="combo-export-caption">示例仅展示主要字段；实际文件还会包含堂食原价、平台扣点、到手率、实付、外卖毛利率及赠送周边汇总。</div></div></div></details>';
@@ -4263,15 +4267,23 @@ function parseComboGifts(text){
     items.push({name:cells[0],cost});
   });return {items,errors};
 }
-let comboPreviewConfig=null;
+let comboConfig=null,comboStale=false;
 function readComboConfig(){
-  const discount=key=>{const d=readDiscount(key);return d.bad?"输入无效，按不打折":discLabel(d);};
-  const reduced=key=>$("a_"+key+"_jp").checked?fmtY(num($("a_"+key+"_jp_v").value)):"关闭";
-  return [
-    "美团：折扣 "+discount("mt")+" · 神会员 "+($("a_mt_sh").checked?"开启（A 档自动匹配）":"关闭")+" · 减配 "+reduced("mt"),
-    "淘宝：折扣 "+discount("tb")+" · 爆红包 "+($("a_tb_bh").checked?"开启（自动匹配）":"关闭")+" · 减配 "+reduced("tb"),
-    "打包费 "+fmtY(num($("packFee").value))+" · 淘宝直营技术费率 "+Math.max(0,num($("tbZhiTechRate").value))+"% · 下单时段 "+(TIME_LABEL[$("timeSel").value]||"日间")
-  ];
+  return {platform:platFilter,time:$("timeSel").value,pack:num($("packFee").value),tech:num($("tbZhiTechRate").value),
+    mtDisc:readDiscount("mt").d*100,tbDisc:readDiscount("tb").d*100,mtOn:$("a_mt_sh").checked,tbOn:$("a_tb_bh").checked,
+    mtReduceOn:$("a_mt_jp").checked,tbReduceOn:$("a_tb_jp").checked,mtReduce:num($("a_mt_jp_v").value),tbReduce:num($("a_tb_jp_v").value)};
+}
+function comboConfigHtml(c){
+  const sel=(k,label,opts)=>'<label class="wf-field">'+label+'<select data-key="'+k+'">'+Object.entries(opts).map(([v,t])=>'<option value="'+v+'"'+(v===c[k]?' selected':'')+'>'+t+'</option>').join('')+'</select></label>';
+  const val=(k,label,min=0,max="")=>'<label class="wf-field">'+label+'<input data-key="'+k+'" type="number" required step="any" min="'+min+'" max="'+max+'" value="'+(Number.isFinite(c[k])?c[k]:"")+'"></label>';
+  const chk=(k,label)=>'<label><input type="checkbox" data-key="'+k+'"'+(c[k]?' checked':'')+'> '+label+'</label>';
+  return '<section class="wf-note" id="comboConfig"><strong>本次测算配置</strong><div class="wf-grid">'+
+    sel("platform","导出平台",{both:"美团＋淘宝综合（各占 50%）",mt:"美团",tb:"淘宝闪购"})+sel("time","下单时段",TIME_LABEL)+
+    val("mtDisc","美团折扣（%，90 = 9 折）",0.01,100)+val("tbDisc","淘宝折扣（%）",0.01,100)+
+    '<div>'+chk("mtOn","神会员（A 档自动匹配）")+' · '+chk("mtReduceOn","美团减配")+val("mtReduce","美团减配（元）")+'</div>'+
+    '<div>'+chk("tbOn","爆红包（自动匹配）")+' · '+chk("tbReduceOn","淘宝减配")+val("tbReduce","淘宝减配（元）")+'</div>'+
+    val("pack","打包费（元）")+val("tech","淘宝直营技术费率（%）",0,100)+
+    '</div><small>仅用于本次套餐，不修改主看板。导出包含直营／代理及 3 km／4 km。</small><div id="comboConfigStatus" role="status"></div></section>';
 }
 function renderComboBuilder(status=""){
   comboPending=groupComboRowsByPeripheral(comboPending);
@@ -4280,11 +4292,18 @@ function renderComboBuilder(status=""){
   const previewRows=comboPending.slice(0,20).map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(p.name)+'</td><td>'+fmtY(p.price)+'</td><td>'+(p.priceDine?fmtY(p.priceDine):'—')+'</td><td>'+fmtY(p.comboColdCost??p.cost??0)+'</td><td>'+fmtY(p.comboHotCost??p.cost??0)+'</td><td>'+fmtY(p.wholesale||0)+'</td><td>'+fmtY(p.mtAct||0)+'</td><td>'+fmtY(p.tbAct||0)+'</td></tr>').join('');
   const preview=hasPreview?'<section class="combo-preview-section"><div class="combo-preview-head"><span class="combo-step-num">2</span><div class="combo-preview-copy"><h3>核对组合预览</h3><p>'+escapeHtml(status||'组合已生成，请核对价格、成本和活动。')+'</p></div><div class="combo-summary"><span>产品 <b>'+comboCounts.products+'</b></span><span>周边 <b>'+comboCounts.peripherals+'</b></span><span>组合 <b>'+comboPending.length+'</b></span></div></div><div class="combo-rule-note">按相同周边集中排列；原价分别相加，冷/热产品成本与周边成本分开保存；北上新藏导出价自动加 1 元，并按新价格重新匹配活动。</div><div class="wf-tablewrap combo-tablewrap"><table class="wf-table"><thead><tr><th>#</th><th>组合名称</th><th>外卖原价</th><th>堂食原价</th><th>冷成本</th><th>热成本</th><th>周边成本</th><th>美团活动</th><th>淘宝活动</th></tr></thead><tbody>'+previewRows+'</tbody></table></div>'+(comboPending.length>20?'<div class="combo-rule-note">当前展示前 20 条，导出和追加会处理全部 '+comboPending.length+' 条。</div>':'')+comboExportHelpHtml()+'<div class="combo-actionbar"><div class="combo-action-title"><span class="combo-step-num">3</span><b>选择下一步</b></div><div class="workflow-actions"><button class="wf-btn primary" id="comboExport" type="button">导出图片模板版 Excel</button><button class="wf-btn" id="comboConfirm" type="button">追加 '+comboPending.length+' 个组合到汇总版</button><button class="wf-btn" id="comboClear" type="button">清除预览</button></div></div></section>':'';
   const notice=!hasPreview&&status?'<div class="wf-note">'+escapeHtml(status)+'</div>':'';
-  const config=hasPreview&&comboPreviewConfig?comboPreviewConfig:readComboConfig();
-  const platform=platFilter==="mt"?"美团":platFilter==="tb"?"淘宝闪购":"美团＋淘宝综合（各占 50%）";
-  const configPanel='<section class="wf-note" aria-label="测算配置"><strong>测算配置 · 导出平台：'+platform+'</strong><br>'+config.map(escapeHtml).join('<br>')+'<br><small>导出包含直营／代理及 3 km／4 km。'+(hasPreview?'以上折扣及活动为本次预览使用的配置。':'生成预览时读取看板配置。')+'如需调整，请返回看板修改后重新生成预览。</small></section>';
+  const configPanel=comboConfigHtml(comboConfig);
   openWorkflow("周边套餐测算","三步完成批量组合：粘贴资料、核对预览、导出模板或追加到汇总版。",'<div class="combo-workflow">'+configPanel+inputPanel+notice+preview+'</div>');
+  $("comboConfig").oninput=e=>{
+    const el=e.target,key=el.dataset.key;if(!key)return;
+    comboConfig[key]=el.type==="checkbox"?el.checked:el.type==="number"?el.valueAsNumber:el.value;
+    if(!hasPreview)return;
+    comboStale=true;
+    $("comboConfigStatus").textContent="配置已修改，请展开录入区重新生成预览后再导出或追加。";
+    $("comboExport").disabled=true;$("comboConfirm").disabled=true;
+  };
   $("comboGenerate").onclick=()=>{
+    const invalid=$("comboConfig").querySelector(":invalid");if(invalid){invalid.reportValidity();return;}
     comboDraft={products:$("comboProducts").value,peripherals:$("comboPeripherals").value,giftText:$("comboGifts").value,gifts:[]};
     const result=parseComboGifts(comboDraft.giftText);comboDraft.gifts=result.items;
     if(result.errors.length){comboPending=[];renderComboBuilder(result.errors.join("；"));return;}
@@ -4292,13 +4311,13 @@ function renderComboBuilder(status=""){
     comboCounts={products:productResult.items.length,peripherals:peripheralResult.items.length};
     if(!productResult.items.length||!peripheralResult.items.length){comboPending=[];renderComboBuilder([...productResult.errors,...peripheralResult.errors,"请至少录入 1 个有效产品和 1 个有效周边。"].join("；"));return;}
     if(total>1000){comboPending=[];renderComboBuilder("本次将生成 "+total+" 个组合，超过单次 1000 条上限，请拆分后再录入。");return;}
-    comboPreviewConfig=readComboConfig();
-    comboPending=buildComboProducts(productResult.items,peripheralResult.items);
+    comboStale=false;
+    comboPending=buildComboProducts(productResult.items,peripheralResult.items,comboConfig);
     const skipped=productResult.errors.length+peripheralResult.errors.length;
     renderComboBuilder(skipped?"已跳过 "+skipped+" 行无效资料；请核对预览后再确认。":"组合预览生成完成，请核对后确认追加。");
   };
   if($("comboExport"))$("comboExport").onclick=exportComboTemplate;
-  if($("comboConfirm"))$("comboConfirm").onclick=()=>{const added=comboPending.slice();products.push(...added);if(!saveProducts()){products.splice(products.length-added.length,added.length);return;}comboPending=[];renderExec();closeWorkflow();};
+  if($("comboConfirm"))$("comboConfirm").onclick=()=>{if(comboStale)return;const added=comboPending.slice();products.push(...added);if(!saveProducts()){products.splice(products.length-added.length,added.length);return;}comboPending=[];renderExec();closeWorkflow();};
   if($("comboClear"))$("comboClear").onclick=()=>{comboPending=[];comboCounts={products:0,peripherals:0};renderComboBuilder();};
 }
 
@@ -4331,7 +4350,7 @@ function updateValidationBadge(){
   btn.title=errors?errors+" 个问题需要修正":issues.length?issues.length+" 项需要复核":"当前检查通过";
 }
 $("batchImportBtn").addEventListener("click",()=>{closeToolPanel();renderBatchImport();});
-$("comboImportBtn").addEventListener("click",()=>{closeToolPanel();renderComboBuilder();});
+$("comboImportBtn").addEventListener("click",()=>{closeToolPanel();comboConfig=readComboConfig();comboPending=[];comboStale=false;renderComboBuilder();});
 $("validateMainBtn").addEventListener("click",renderValidation);
 $("archiveScenarioBtn").addEventListener("click",renderScenarioCenter);
 
