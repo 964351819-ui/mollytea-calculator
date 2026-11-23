@@ -769,6 +769,16 @@
   .combo-generate-row{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
   @media(max-width:760px){.workflow-overlay{padding:0}.workflow-dialog,.workflow-dialog:has(.combo-workflow){width:100%;height:100vh;max-height:none;border:0;border-radius:0}.workflow-body{padding:18px}.wf-grid,.combo-grid{grid-template-columns:1fr}.combo-input-panel>summary{padding:12px}.combo-input-body{padding:11px}.combo-preview-head{align-items:flex-start;flex-wrap:wrap}.combo-summary{width:100%;margin-left:36px}.combo-actionbar{position:static;align-items:flex-start;flex-direction:column;margin:0 -18px -18px;padding:12px 18px}.combo-actionbar .workflow-actions{width:100%}.combo-actionbar .wf-btn{flex:1}.combo-actionbar .wf-btn.primary{min-width:160px}.combo-generate-row{flex-wrap:wrap}.combo-generate-row .wf-btn{width:100%}}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"])[data-has-background][data-bg-treatment="soft"] body::before{background:rgba(18,17,17,.38)}:root:not([data-theme="light"])[data-has-background][data-bg-treatment="deep"] body::before{background:rgba(18,17,17,.62)}}
+#comboConfig{padding:16px;border:1px solid var(--line);border-radius:13px;background:var(--card);display:grid;gap:12px}
+#comboConfig strong,#comboConfigStatus{color:var(--accent)}#comboConfigStatus:empty{display:none}
+.cc-fields,.cc-acts{display:grid;gap:10px}.cc-fields{grid-template-columns:minmax(180px,1.6fr) repeat(5,minmax(0,1fr))}.cc-acts{grid-template-columns:repeat(2,minmax(0,1fr))}
+#comboConfig .wf-field{display:grid;align-content:start;gap:5px;margin:0;min-width:0;font-size:12px;color:var(--sub)}
+#comboConfig .wf-field :is(input,select){height:36px;box-sizing:border-box;margin:0;font:inherit;color:var(--ink)}
+.cc-group{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;padding:9px 12px;background:var(--card-2);border:1px solid var(--line);border-radius:9px;font-size:13px}
+#comboConfig .cc-group label{display:inline-flex;align-items:center;gap:5px;margin:0;white-space:nowrap}
+#comboConfig .cc-group input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:var(--accent)}
+#comboConfig .cc-group input[type=number]{width:70px;height:30px}#comboConfig small{color:var(--sub)}
+@media(max-width:980px){.cc-fields{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.cc-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.cc-acts{grid-template-columns:1fr}}
 </style>
 
 <div id="frontAccessGate" role="dialog" aria-modal="true" aria-labelledby="frontGateTitle">
@@ -1155,7 +1165,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.16 · 更新于 2026-11-23</span>
+    <span id="calcVersionStamp">计算口径 v3.2.17 · 更新于 2026-11-23</span>
   </div>
 </div>
 
@@ -1210,7 +1220,7 @@
 
         <section class="manual-section" id="manual-combo">
           <h3>3. 周边套餐测算</h3>
-          <p>在周边套餐测算顶部可直接修改平台、折扣、活动和费用。打开时带入看板配置，修改仅用于本次套餐，不反写看板；改动后须重新生成预览才能导出或追加。</p>
+          <p>基础参数在上，美团和淘宝活动分组在下。在周边套餐测算顶部可直接修改平台、折扣、活动和费用。打开时带入看板配置，修改仅用于本次套餐，不反写看板；改动后须重新生成预览才能导出或追加。</p>
           <p>批量组合产品与周边，统一核对价格、成本、活动及外卖毛利，再导出标准 Excel 或追加到汇总版。</p>
           <div class="manual-combo-intro">
             <div><b>① 粘贴资料</b><span>在“工具 → 周边套餐测算”中录入产品、周边和可选赠品。</span></div>
@@ -3968,9 +3978,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.16";
+const CALC_VERSION = "v3.2.17";
 const CALC_UPDATED = "2026-11-23";
 const CALC_CHANGELOG = [
+  {version:"v3.2.17",date:"2026-11-23",items:["套餐配置按基础参数和双平台活动分组，统一控件高度和窄屏布局"]},
   {version:"v3.2.16",date:"2026-11-23",items:["周边套餐测算支持直接修改本次配置，说明书同步更新"]},
   {version:"v3.2.15",date:"2026-11-23",items:["周边套餐测算新增配置核对区，展示导出平台及折扣、活动和费用设置，说明书同步更新"]},
   {version:"v3.2.14",date:"2026-11-23",items:["调整美团神会员 A 档九个价格带商家出资；平台补贴、淘宝档位及减配不变"]},
@@ -4277,13 +4288,10 @@ function comboConfigHtml(c){
   const sel=(k,label,opts)=>'<label class="wf-field">'+label+'<select data-key="'+k+'">'+Object.entries(opts).map(([v,t])=>'<option value="'+v+'"'+(v===c[k]?' selected':'')+'>'+t+'</option>').join('')+'</select></label>';
   const val=(k,label,min=0,max="")=>'<label class="wf-field">'+label+'<input data-key="'+k+'" type="number" required step="any" min="'+min+'" max="'+max+'" value="'+(Number.isFinite(c[k])?c[k]:"")+'"></label>';
   const chk=(k,label)=>'<label><input type="checkbox" data-key="'+k+'"'+(c[k]?' checked':'')+'> '+label+'</label>';
-  return '<section class="wf-note" id="comboConfig"><strong>本次测算配置</strong><div class="wf-grid">'+
-    sel("platform","导出平台",{both:"美团＋淘宝综合（各占 50%）",mt:"美团",tb:"淘宝闪购"})+sel("time","下单时段",TIME_LABEL)+
-    val("mtDisc","美团折扣（%，90 = 9 折）",0.01,100)+val("tbDisc","淘宝折扣（%）",0.01,100)+
-    '<div>'+chk("mtOn","神会员（A 档自动匹配）")+' · '+chk("mtReduceOn","美团减配")+val("mtReduce","美团减配（元）")+'</div>'+
-    '<div>'+chk("tbOn","爆红包（自动匹配）")+' · '+chk("tbReduceOn","淘宝减配")+val("tbReduce","淘宝减配（元）")+'</div>'+
-    val("pack","打包费（元）")+val("tech","淘宝直营技术费率（%）",0,100)+
-    '</div><small>仅用于本次套餐，不修改主看板。导出包含直营／代理及 3 km／4 km。</small><div id="comboConfigStatus" role="status"></div></section>';
+  const group=(key,name,activity)=>'<div class="cc-group"><b>'+name+'</b>'+chk(key+"On",activity)+chk(key+"ReduceOn","减配")+val(key+"Reduce","金额（元）")+'</div>';
+  return '<section id="comboConfig"><strong>本次测算配置</strong><div class="cc-fields">'+
+    sel("platform","导出平台",{both:"美团＋淘宝（各 50%）",mt:"美团",tb:"淘宝闪购"})+sel("time","下单时段",TIME_LABEL)+val("pack","打包费（元）")+val("tech","淘宝直营技术费率（%）",0,100)+
+    val("mtDisc","美团折扣（%）",0.01,100)+val("tbDisc","淘宝折扣（%）",0.01,100)+'</div><div class="cc-acts">'+group("mt","美团","神会员 · A 档")+group("tb","淘宝","爆红包")+'</div><small>折扣填 90 表示 9 折；红包按门槛自动匹配。配置仅用于本次套餐，导出含直营／代理及 3 km／4 km。</small><div id="comboConfigStatus" role="status"></div></section>';
 }
 function renderComboBuilder(status=""){
   comboPending=groupComboRowsByPeripheral(comboPending);
