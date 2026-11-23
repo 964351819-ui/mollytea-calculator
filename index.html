@@ -1155,7 +1155,7 @@
   </div>
 
   <div class="foot">
-    <span id="calcVersionStamp">计算口径 v3.2.14 · 更新于 2026-11-23</span>
+    <span id="calcVersionStamp">计算口径 v3.2.15 · 更新于 2026-11-23</span>
   </div>
 </div>
 
@@ -1210,6 +1210,7 @@
 
         <section class="manual-section" id="manual-combo">
           <h3>3. 周边套餐测算</h3>
+          <p>周边套餐测算顶部显示当前导出平台，以及生成预览所用的折扣、红包开关、减配和打包费等设置。需修改时，返回看板调整后重新生成预览；导出仍按当前平台口径，直营与代理均保留。</p>
           <p>批量组合产品与周边，统一核对价格、成本、活动及外卖毛利，再导出标准 Excel 或追加到汇总版。</p>
           <div class="manual-combo-intro">
             <div><b>① 粘贴资料</b><span>在“工具 → 周边套餐测算”中录入产品、周边和可选赠品。</span></div>
@@ -3967,9 +3968,10 @@ function initFullModuleLayout(){
 }
 
 // ===== 独立工作流中心 =====
-const CALC_VERSION = "v3.2.14";
+const CALC_VERSION = "v3.2.15";
 const CALC_UPDATED = "2026-11-23";
 const CALC_CHANGELOG = [
+  {version:"v3.2.15",date:"2026-11-23",items:["周边套餐测算新增配置核对区，展示导出平台及折扣、活动和费用设置，说明书同步更新"]},
   {version:"v3.2.14",date:"2026-11-23",items:["调整美团神会员 A 档九个价格带商家出资；平台补贴、淘宝档位及减配不变"]},
   {version:"v3.2.13",date:"2026-11-03",items:["修复产品候选名称被价格信息挤压截断的问题，名称与杯型单独一行，长名称自动换行","价格、成本及打包费改为下方双列展示，完整版、汇总版和手机端同步；说明书同步更新"]},
   {version:"v3.2.12",date:"2026-11-03",items:["录入最新 65 条产品、杯型、打包费及价格成本资料，保留本次未列出的 11 条旧产品","同名默认中杯，大杯需明确选择；兼容针王苹果/葡萄旧名称与首创名称","完整版、汇总版名称匹配时自动合计打包费并替换当前值，未标打包费不加费，重复录入不累加","缺失价格与成本保持空白；同步候选信息、说明书资料表和使用示例"]},
@@ -4261,6 +4263,16 @@ function parseComboGifts(text){
     items.push({name:cells[0],cost});
   });return {items,errors};
 }
+let comboPreviewConfig=null;
+function readComboConfig(){
+  const discount=key=>{const d=readDiscount(key);return d.bad?"输入无效，按不打折":discLabel(d);};
+  const reduced=key=>$("a_"+key+"_jp").checked?fmtY(num($("a_"+key+"_jp_v").value)):"关闭";
+  return [
+    "美团：折扣 "+discount("mt")+" · 神会员 "+($("a_mt_sh").checked?"开启（A 档自动匹配）":"关闭")+" · 减配 "+reduced("mt"),
+    "淘宝：折扣 "+discount("tb")+" · 爆红包 "+($("a_tb_bh").checked?"开启（自动匹配）":"关闭")+" · 减配 "+reduced("tb"),
+    "打包费 "+fmtY(num($("packFee").value))+" · 淘宝直营技术费率 "+Math.max(0,num($("tbZhiTechRate").value))+"% · 下单时段 "+(TIME_LABEL[$("timeSel").value]||"日间")
+  ];
+}
 function renderComboBuilder(status=""){
   comboPending=groupComboRowsByPeripheral(comboPending);
   const hasPreview=comboPending.length>0,inputSummary=hasPreview?'已录入 '+comboCounts.products+' 个产品、'+comboCounts.peripherals+' 个周边；需要调整时展开修改。':'粘贴产品表和周边表，支持从 Excel 直接复制。';
@@ -4268,7 +4280,10 @@ function renderComboBuilder(status=""){
   const previewRows=comboPending.slice(0,20).map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(p.name)+'</td><td>'+fmtY(p.price)+'</td><td>'+(p.priceDine?fmtY(p.priceDine):'—')+'</td><td>'+fmtY(p.comboColdCost??p.cost??0)+'</td><td>'+fmtY(p.comboHotCost??p.cost??0)+'</td><td>'+fmtY(p.wholesale||0)+'</td><td>'+fmtY(p.mtAct||0)+'</td><td>'+fmtY(p.tbAct||0)+'</td></tr>').join('');
   const preview=hasPreview?'<section class="combo-preview-section"><div class="combo-preview-head"><span class="combo-step-num">2</span><div class="combo-preview-copy"><h3>核对组合预览</h3><p>'+escapeHtml(status||'组合已生成，请核对价格、成本和活动。')+'</p></div><div class="combo-summary"><span>产品 <b>'+comboCounts.products+'</b></span><span>周边 <b>'+comboCounts.peripherals+'</b></span><span>组合 <b>'+comboPending.length+'</b></span></div></div><div class="combo-rule-note">按相同周边集中排列；原价分别相加，冷/热产品成本与周边成本分开保存；北上新藏导出价自动加 1 元，并按新价格重新匹配活动。</div><div class="wf-tablewrap combo-tablewrap"><table class="wf-table"><thead><tr><th>#</th><th>组合名称</th><th>外卖原价</th><th>堂食原价</th><th>冷成本</th><th>热成本</th><th>周边成本</th><th>美团活动</th><th>淘宝活动</th></tr></thead><tbody>'+previewRows+'</tbody></table></div>'+(comboPending.length>20?'<div class="combo-rule-note">当前展示前 20 条，导出和追加会处理全部 '+comboPending.length+' 条。</div>':'')+comboExportHelpHtml()+'<div class="combo-actionbar"><div class="combo-action-title"><span class="combo-step-num">3</span><b>选择下一步</b></div><div class="workflow-actions"><button class="wf-btn primary" id="comboExport" type="button">导出图片模板版 Excel</button><button class="wf-btn" id="comboConfirm" type="button">追加 '+comboPending.length+' 个组合到汇总版</button><button class="wf-btn" id="comboClear" type="button">清除预览</button></div></div></section>':'';
   const notice=!hasPreview&&status?'<div class="wf-note">'+escapeHtml(status)+'</div>':'';
-  openWorkflow("周边套餐测算","三步完成批量组合：粘贴资料、核对预览、导出模板或追加到汇总版。",'<div class="combo-workflow">'+inputPanel+notice+preview+'</div>');
+  const config=hasPreview&&comboPreviewConfig?comboPreviewConfig:readComboConfig();
+  const platform=platFilter==="mt"?"美团":platFilter==="tb"?"淘宝闪购":"美团＋淘宝综合（各占 50%）";
+  const configPanel='<section class="wf-note" aria-label="测算配置"><strong>测算配置 · 导出平台：'+platform+'</strong><br>'+config.map(escapeHtml).join('<br>')+'<br><small>导出包含直营／代理及 3 km／4 km。'+(hasPreview?'以上折扣及活动为本次预览使用的配置。':'生成预览时读取看板配置。')+'如需调整，请返回看板修改后重新生成预览。</small></section>';
+  openWorkflow("周边套餐测算","三步完成批量组合：粘贴资料、核对预览、导出模板或追加到汇总版。",'<div class="combo-workflow">'+configPanel+inputPanel+notice+preview+'</div>');
   $("comboGenerate").onclick=()=>{
     comboDraft={products:$("comboProducts").value,peripherals:$("comboPeripherals").value,giftText:$("comboGifts").value,gifts:[]};
     const result=parseComboGifts(comboDraft.giftText);comboDraft.gifts=result.items;
@@ -4277,6 +4292,7 @@ function renderComboBuilder(status=""){
     comboCounts={products:productResult.items.length,peripherals:peripheralResult.items.length};
     if(!productResult.items.length||!peripheralResult.items.length){comboPending=[];renderComboBuilder([...productResult.errors,...peripheralResult.errors,"请至少录入 1 个有效产品和 1 个有效周边。"].join("；"));return;}
     if(total>1000){comboPending=[];renderComboBuilder("本次将生成 "+total+" 个组合，超过单次 1000 条上限，请拆分后再录入。");return;}
+    comboPreviewConfig=readComboConfig();
     comboPending=buildComboProducts(productResult.items,peripheralResult.items);
     const skipped=productResult.errors.length+peripheralResult.errors.length;
     renderComboBuilder(skipped?"已跳过 "+skipped+" 行无效资料；请核对预览后再确认。":"组合预览生成完成，请核对后确认追加。");
